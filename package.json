@@ -1,4 +1,4 @@
- {
+{
   "name": "dakepel",
   "private": true,
   "version": "0.0.0",
@@ -11,6 +11,7 @@
   "dependencies": {
     "@quasar/extras": "^1.16.9",
     "quasar": "^2.14.6",
+    "three": "^0.162.0",
     "vue": "^3.4.19",
     "vue-router": "^4.0.12"
   },
