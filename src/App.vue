@@ -1,9 +1,12 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import * as THREE from 'three'
 </script>
 
 <template>
-
+<main>
+    
+</main>
 </template>
 
 
