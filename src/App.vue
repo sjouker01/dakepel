@@ -1,7 +1,7 @@
 
 
 <template>
-  <div id="app">
+    <div id="app" class="background-gradient">
     <Header/>
     </div>
     </template>
@@ -17,3 +17,11 @@ export default {
 
 
 </script>./header.vue
+
+
+<style scoped>
+.background-gradient {
+  height: 100vh;
+  background: linear-gradient(to bottom, black, blue);
+}
+</style>

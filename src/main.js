@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { Quasar } from 'quasar'
 
 // Import icon libraries
+import 'quasar/src/css/index.sass';
 import '@quasar/extras/material-icons/material-icons.css'
 import '@quasar/extras/material-icons-outlined/material-icons-outlined.css'
 import '@quasar/extras/material-icons-round/material-icons-round.css'
@@ -19,11 +20,13 @@ import '@quasar/extras/line-awesome/line-awesome.css'
 import '@quasar/extras/bootstrap-icons/bootstrap-icons.css'
 
 // Import Quasar css
-// import './quasar-variables.sass'
+
 
 // Assumes your root component is App.vue
 // and placed in same folder as main.js
 import App from './App.vue'
+
+// import style from '../src/assets/style/header.'
 
 const myApp = createApp(App)
 
