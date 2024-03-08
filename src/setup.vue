@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import  from '../Experience/Experience';
+
 
 export default {
     setup() {

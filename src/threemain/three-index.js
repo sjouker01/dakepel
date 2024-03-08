@@ -1,5 +1,1 @@
-import *  as THREE from 'three'
-
-const Scene = new THREE.Scene();
-
-    
+import * as THREE from 'three';
