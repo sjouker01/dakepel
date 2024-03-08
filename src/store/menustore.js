@@ -1,10 +1,42 @@
-import {createApp} from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-
-const pinia = createPinia()
-const createApp = createApp()
+import { defineStore } from 'pinia'
 
 
-App.use(pinia)
-App.mount('#app')
+export const useMenuStore = defineStore('henk', {
+
+    state: () => {
+        return {
+          // all these properties will have their type inferred automatically
+
+          hoogte: 0,
+          breedte: 0,
+          graden: 0,
+          
+          
+        }
+      },
+
+    
+    
+  })
+
+
+
+//   export default {
+//     name: 'Header',
+//     data() {
+//       return {
+//         showFirstHeader: false,
+//         showSecondHeader: false,
+//       }
+//     },
+//     methods: {
+//       toggleHeaders(showFirst, showSecond) {
+//         this.showFirstHeader = showFirst;
+//         this.showSecondHeader = showSecond;
+//       },
+//       hideHeaders() {
+//         this.showFirstHeader = false;
+//         this.showSecondHeader = false;
+//       }
+//     }
+//   }

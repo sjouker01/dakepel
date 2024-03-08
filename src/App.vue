@@ -6,14 +6,11 @@
     </div>
     </template>
 
-<script>
+<script setup>
 import Header from './routers/header.vue'
-export default {
-  name: 'App',
-  components: {
-    Header
-  }
-}
+import { useMenuStore} from './store/menustore'
+const henk = useMenuStore();
+
 
 
 </script>./header.vue
