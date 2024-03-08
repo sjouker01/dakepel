@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+    
+}
+.test{
+    position: relative;
+    left: 5vw;
+}
+.header1
+  .row > div{
+    padding: 10px 15px;
+    background: rgba(#999,.15);
+    border: 1px solid rgba(#999,.2);
+  }
+  .row +.row{
+    margin-top: 1rem;
+  }
+  
