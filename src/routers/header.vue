@@ -15,12 +15,12 @@
           </q-toolbar>
         </div>
         <div v-if="showSecondHeader" class="sub-header q-mt-md rounded-borders">
-    <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
-      <q-btn-dropdown
-        color="blue"
-        rounded
-        label="Go to Docs Index"
-        class="dropdown-btn"
+      <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
+        <q-btn-dropdown
+          color="blue"
+          rounded
+          label="Go to Docs Index"
+          class="dropdown-btn"
       >
               <q-list>
                 <q-item clickable v-close-popup>
