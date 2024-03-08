@@ -1,2 +1,8 @@
-# dakepel
-dit is mijn stage opdracht
+## 0.0.0
+begin van project 
+
+
+----------
+
+
+## prolemen
