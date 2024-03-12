@@ -3,7 +3,7 @@
 </template>
 
 <script>
-
+import {Experience} from './threemain/three-index';
 
 export default {
     setup() {
