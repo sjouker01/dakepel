@@ -1,5 +1,5 @@
 <template>
-  <q-layout @click.self="showHeader(0)">
+  <div @click.self="showHeader(0)">
     <q-header class="fixed-top q-pa-md rounded-borders" >
   <q-toolbar class="flex justify-center">
     <q-btn color="blue" class="q-mr-lg" @click="showHeader(1)" label="afmetingen" />
@@ -78,11 +78,12 @@
     </q-toolbar>          
     </div>
    </q-page-container>
- </q-layout>
+ </div>
 </template>
 
    
    <style scoped>
+
    .rounded-borders {
      background-color: white;
      border: none;
@@ -112,7 +113,7 @@
 
 
 
-s
+
 <script setup>
 import { useMenuStore } from '../store/menustore';
 import { ref } from 'vue'

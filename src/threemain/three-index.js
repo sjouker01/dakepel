@@ -1,17 +1,23 @@
 import * as THREE from 'three';
 
-const MAX_WIDTH = 750;  // Maximale breedte
-const MAX_HEIGHT = 600; // Maximale hoogte
+export class ThreeJs {
+  constructor(container, canvas) {
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+    this.camera.position.z = 5;
 
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(MAX_WIDTH, MAX_HEIGHT);
+    this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    this.renderer.setSize(container.offsetWidth, container.offsetHeight);
 
-class Experience {
-  constructor() {
-    this.scene = scene;
-    this.renderer = renderer;
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    this.cube = new THREE.Mesh(geometry, material);
+    this.scene.add(this.cube);
+
+    this.render();
+  }
+
+  render() {
+    this.renderer.render(this.scene, this.camera);
   }
 }
-
-export { Experience };
