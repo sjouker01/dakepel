@@ -12,7 +12,7 @@
   const webglCanvas = ref(null);
   
   onMounted(() => {
-    new ThreeJs(threejsContainer.value, webglCanvas.value);
+    new ThreeJs(threejsContainer.value, webglCanvas.value );
   });
   </script>
   
