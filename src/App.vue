@@ -1,15 +1,14 @@
 
 
 <template>
-<div id="app" class="background-gradient">
-  <q-layout>
-      <Header />
- 
-      <SetupComponent />
-   </q-layout>
+  <div id="app" class="bg-dark ">
+    <!-- <q-layout  id="app" class="background-gradient"> -->
+    <Header class="z-top" ></Header>
+
+    <!-- <SetupComponent /> -->
+
 </div>
 </template>
-
 
 
 <script setup>
@@ -21,8 +20,6 @@ const henk = useMenuStore();
 
 
 <style scoped>
-
-
 .background-gradient {
   background: linear-gradient(to bottom, black, blue);
 }

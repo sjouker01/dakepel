@@ -1,21 +1,24 @@
+
+
+
 <template>
-  <div @click.self="showHeader(0)">
-    <q-header class="fixed-top q-pa-md rounded-borders" >
+  <div @click.self="showHeader(0)" class="z-top">
+    <header class="fixed-top q-pa-md rounded-borders" >
   <q-toolbar class="flex justify-center">
     <q-btn color="blue" class="q-mr-lg" @click="showHeader(1)" label="afmetingen" />
     <img src="../assets/img/logo.jpeg" alt="Logo" class="logo" />
     <q-btn color="blue" @click="showHeader(2)" label="materialen" />
   </q-toolbar>
-</q-header>
-    <q-page-container>
-      <div v-if="herman === 1" class="sub-header q-mt-md rounded-borders">
+</header>
+    <div class="container69">
+      <div v-if="herman === 1" class="sub-header q-mt-md rounded-borders bg-white">
         <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
           <q-input v-model="bier.breedte" label="Breedte" />
           <q-input v-model="bier.hoogte" label="Hoogte" />
           <q-input v-model="bier.graden" label="Graden" />
         </q-toolbar>
       </div>
-<div v-if="herman === 2" class="sub-header q-mt-md rounded-borders">
+<div v-if="herman === 2" class="sub-header q-mt-md rounded-borders bg-white">
     <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
       <q-btn-dropdown
         color="blue"
@@ -77,7 +80,7 @@
       </q-btn-dropdown>
     </q-toolbar>          
     </div>
-   </q-page-container>
+   </div>
  </div>
 </template>
 
@@ -115,6 +118,11 @@
 
 
 <script setup>
+
+
+/**
+ *  
+ */
 import { useMenuStore } from '../store/menustore';
 import { ref } from 'vue'
 const bier = useMenuStore();
