@@ -85,35 +85,36 @@
 </template>
 
    
-   <style scoped>
-
-   .rounded-borders {
-     background-color: white;
-     border: none;
-     margin-left: auto;
-     margin-right: auto;
-     border-radius: 10px;
-   }
-   .q-header{
-     width: 70vw;
-     margin-top: 5vh;
-   }
-   .sub-header{
-     width: 40vw;
-     margin-top: 7vh;
-   }
-   .q-toolbar > .q-btn, .q-toolbar > .q-btn-dropdown {
-   margin: 0 5vw;
-   }
-   .logo {
-     position: absolute;
-     width: 50px;  
-     height: 50px;  
-     object-fit: contain; /* keeps aspect ratio */
-   }
-   
-   </style>
-
+<style scoped>
+  .rounded-borders {
+    background-color: white;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    max-width: 90vw; /* Add a maximum width */
+    margin-top: 20px; /* Add a top margin */
+  }
+  .q-header{
+    width: 70vw;
+    max-width: 90vw; /* Add a maximum width */
+    margin-top: 5vh;
+  }
+  .sub-header{
+    width: 40vw;
+    max-width: 90vw; /* Add a maximum width */
+    margin-top: 7vh;
+  }
+  .q-toolbar > .q-btn, .q-toolbar > .q-btn-dropdown {
+    margin: 0 5vw;
+  }
+  .logo {
+    position: absolute;
+    width: 50px;  
+    height: 50px;  
+    object-fit: contain; /* keeps aspect ratio */
+  }
+</style>
 
 
 
