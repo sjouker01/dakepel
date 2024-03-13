@@ -19,7 +19,7 @@ export class ThreeJs {
   }
 
   render() {
-    requestAnimationFrame(() => this.render());
+    requestAnimationFrame(() => this.render()); 
 
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
