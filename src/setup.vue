@@ -18,17 +18,21 @@ onMounted(() => {
   const threeJsInstance = new ThreeJs(webglCanvas.value);
 });
 </script>
-  
+
 <style scoped>
 #threejs-container {
-  width: 70%; /* Veranderd naar 100% voor volledige breedte */
-  height: 70%; /* Veranderd naar 100vh voor volledige hoogte */
-  margin: 0 auto; /* Gecombineerd margin-left en margin-right */
+  width: 70%;
+  /* Veranderd naar 100% voor volledige breedte */
+  height: 70%;
+  /* Veranderd naar 100vh voor volledige hoogte */
+  margin: 0 auto;
+  /* Gecombineerd margin-left en margin-right */
 }
 
 canvas {
-  position: fixed; /* Toegevoegd om canvas te centreren */
+  position: fixed;
+  /* Toegevoegd om canvas te centreren */
   top: 0;
-  left:0;
+  left: 0;
 }
 </style>

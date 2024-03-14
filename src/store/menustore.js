@@ -1,28 +1,22 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
+export const useMenuStore = defineStore("henk", {
+  state: () => {
+    return {
+      // all these properties will have their type inferred automatically
 
-export const useMenuStore = defineStore('henk', {
+      hoogte: 0,
+      breedte: 0,
+      graden: 0,
 
-    state: () => {
-        return {
-          // all these properties will have their type inferred automatically
+      header: 0,
+    };
+  },
 
-          hoogte: 0,
-          breedte: 0,
-          graden: 0,
-          
-          header: 0
-        }
-      },
-
-    
-    actions: {
-
-       showHeader(NewHeader) {
-        this.header = NewHeader;
-        console.log(NewHeader)
-      }
-    }
-  })
-
-
+  actions: {
+    showHeader(NewHeader) {
+      this.header = NewHeader;
+      console.log(NewHeader);
+    },
+  },
+});

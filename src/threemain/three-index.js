@@ -11,6 +11,7 @@ export class ThreeJs {
       window.innerWidth / window.innerHeight
     );
 
+    window.addEventListener("resize", () => this.onWindowResize(), false);
     this.renderer = new THREE.WebGLRenderer({ canvas: container });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
@@ -18,9 +19,6 @@ export class ThreeJs {
     const newfloor = new floorObject(this.scene);
 
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
-
-    console.log(newfloor);
-    console.log(newfloor.mesh);
 
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
@@ -33,5 +31,11 @@ export class ThreeJs {
     this.controls.update();
 
     this.renderer.render(this.scene, this.camera);
+  }
+  onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 }

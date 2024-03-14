@@ -1,5 +1,5 @@
 <template>
-  <div  class="z-top">
+  <div class="z-top">
     <header class=" q-pa-md rounded-borders">
       <q-toolbar class="flex justify-center">
         <q-btn color="blue" class="q-mr-lg" @click="bier.showHeader(1)" label="afmetingen" />
