@@ -3,9 +3,9 @@
 <template>
   <div id="app" class="bg-dark ">
     <!-- <q-layout  id="app" class="background-gradient"> -->
-    <Header class="z-top" ></Header>
+    <Header class=" fixed-top z-top" ></Header>
 
-    <!-- <SetupComponent /> -->
+    <SetupComponent />
 
 </div>
 </template>

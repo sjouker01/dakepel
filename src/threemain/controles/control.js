@@ -1,15 +1,26 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+export class OrbitControlsClass {
+  constructor(camera, renderer) {
+    this.controls = new OrbitControls(camera, renderer.domElement);
 
-export class OrbitControlsthree{
-    constructor(container , canvas){
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-        this.camera.position.z = 5;
+    // Hiermee kan de camera rond het doel draaien
+    this.controls.enableDamping = true; 
+    this.controls.dampingFactor = 0.05;
 
-        this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
-        this.renderer.setSize(container.offsetWidth, container.offsetHeight);
-    
-    }
+    // Hiermee kan de camera in- en uitzoomen
+    this.controls.screenSpacePanning = false;
+
+    // Hiermee kan de camera op en neer bewegen
+    this.controls.minDistance = 100;
+    this.controls.maxDistance = 500;
+
+    // Hiermee kan de camera links en rechts bewegen
+    this.controls.maxPolarAngle = Math.PI / 2;
+  }
+
+  update() {
+    // Je moet deze functie aanroepen na elke verandering van de camera
+    this.controls.update();
+  }
 }

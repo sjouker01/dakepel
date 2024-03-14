@@ -11,32 +11,18 @@ export const useMenuStore = defineStore('henk', {
           breedte: 0,
           graden: 0,
           
-          
+          header: 0
         }
       },
 
     
-    
+    actions: {
+
+       showHeader(NewHeader) {
+        this.header = NewHeader;
+        console.log(NewHeader)
+      }
+    }
   })
 
 
-
-//   export default {
-//     name: 'Header',
-//     data() {
-//       return {
-//         showFirstHeader: false,
-//         showSecondHeader: false,
-//       }
-//     },
-//     methods: {
-//       toggleHeaders(showFirst, showSecond) {
-//         this.showFirstHeader = showFirst;
-//         this.showSecondHeader = showSecond;
-//       },
-//       hideHeaders() {
-//         this.showFirstHeader = false;
-//         this.showSecondHeader = false;
-//       }
-//     }
-//   }
