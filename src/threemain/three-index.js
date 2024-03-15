@@ -15,23 +15,29 @@ export class ThreeJs {
     window.addEventListener("resize", () => this.onWindowResize(), false);
     this.renderer = new THREE.WebGLRenderer({ canvas: container });
 
-
-
     this.renderer.setSize(this.size.width, this.size.height);
     document.body.appendChild(this.renderer.domElement);
 
+    const floor = new floorObject(this.scene);
 
+    floor.mesh.visible = false;
 
-    const newfloor = new floorObject(this.scene);
     const newraam = new raamObject(this.scene);
-    
+
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
-    
+
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
     const axesHelper = new THREE.AxesHelper(5);
     this.scene.add(axesHelper);
     this.render();
+
+    window.addEventListener('keydown', function(event) {
+      if (event.shiftKey && event.altKey && event.keyCode == 48) {
+      console.log("test")
+      }
+      })
+  
   }
 
   render() {

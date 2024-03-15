@@ -8,13 +8,14 @@
 import { onMounted, ref } from 'vue';
 import { ThreeJs } from './threemain/three-index';
 import { GUI } from 'lil-gui'
+// import { useFloorStore } from './server/threeStore';
 
 
 
 
 const webglCanvas = ref(null);
 
-let gui = null;
+
 
 
 onMounted(() => {
@@ -39,11 +40,5 @@ canvas {
   left: 0;
 }
 
-.dg.ac {
-  position: fixed !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  top: 10vh !important;
-  left: auto !important;
-}
+
 </style>./server/menustore
