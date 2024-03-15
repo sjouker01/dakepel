@@ -117,9 +117,9 @@
 
 <script setup>
 
-import { useMenuStore } from '../store/menustore';
+import { useMenuStore } from '../server/menustore';
 import { ref } from 'vue'
 const bier = useMenuStore();
-let herman = ref(0)
+
 
 </script>

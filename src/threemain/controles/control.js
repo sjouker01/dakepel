@@ -1,8 +1,11 @@
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+
 export class OrbitControlsClass {
   constructor(camera, renderer) {
-    this.controls = new OrbitControls(camera, renderer.domElement);
+    console.log(camera)
+    console.log(camera.instand)
+    this.controls = new OrbitControls(camera.instand, renderer.domElement);
 
     // Hiermee kan de camera rond het doel draaien
     this.controls.enableDamping = true;

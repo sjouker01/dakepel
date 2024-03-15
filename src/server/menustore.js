@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 
+
 export const useMenuStore = defineStore("henk", {
   state: () => {
     return {

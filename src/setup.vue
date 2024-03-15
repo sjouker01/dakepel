@@ -7,12 +7,15 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { ThreeJs } from './threemain/three-index';
-import { useMenuStore } from './store/menustore';
-const store = useMenuStore();
+import { GUI } from 'lil-gui'
+
 
 
 
 const webglCanvas = ref(null);
+
+let gui = null;
+
 
 onMounted(() => {
   const threeJsInstance = new ThreeJs(webglCanvas.value);
@@ -22,17 +25,25 @@ onMounted(() => {
 <style scoped>
 #threejs-container {
   width: 70%;
-  /* Veranderd naar 100% voor volledige breedte */
+
   height: 70%;
-  /* Veranderd naar 100vh voor volledige hoogte */
+
   margin: 0 auto;
-  /* Gecombineerd margin-left en margin-right */
+
 }
 
 canvas {
   position: fixed;
-  /* Toegevoegd om canvas te centreren */
+
   top: 0;
   left: 0;
 }
-</style>
+
+.dg.ac {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: 10vh !important;
+  left: auto !important;
+}
+</style>./server/menustore

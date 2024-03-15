@@ -12,7 +12,7 @@
 <script setup>
 import SetupComponent from './setup.vue';
 import Header from './routers/header.vue'
-import { useMenuStore } from './store/menustore'
+import { useMenuStore } from './server/menustore'
 const henk = useMenuStore();
 </script>
 
