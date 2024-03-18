@@ -17,7 +17,7 @@ export const useMenuStore = defineStore("henk", {
   actions: {
     showHeader(NewHeader) {
       this.header = NewHeader;
-      console.log(NewHeader);
+      // .consolelog(NewHeader);
     },
   },
 });

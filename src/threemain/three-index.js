@@ -5,6 +5,7 @@ import { OrbitControlsClass } from "./controles/control";
 import { raamObject } from "./objecten/raam";
 import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
+// import { floorObject } from "./world/floor";
 
 export class ThreeJs {
   constructor(container) {
@@ -28,7 +29,7 @@ export class ThreeJs {
 
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
-    const axesHelper = new THREE.AxesHelper(5);
+    const axesHelper = new THREE.AxesHelper(100);
     this.scene.add(axesHelper);
     this.render();
 
