@@ -2,16 +2,19 @@ import * as THREE from "three";
 import { floorObject } from "./world/floor";
 import { BackgroundColor } from "./world/background";
 import { OrbitControlsClass } from "./controles/control";
-import { raamObject } from "./objecten/raam";
+import { ImportRaamObject } from "./objecten/raamobjec";
 import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
-// import { floorObject } from "./world/floor";
+
 
 export class ThreeJs {
   constructor(container) {
     this.scene = new THREE.Scene();
     this.size = new Sizes();
     this.camera = new Camera(this.size.width, this.size.height);
+
+    // Verplaats de camera een beetje naar achteren
+    this.camera.instand.position.z = 5;
 
     window.addEventListener("resize", () => this.onWindowResize(), false);
     this.renderer = new THREE.WebGLRenderer({ canvas: container });
@@ -20,12 +23,17 @@ export class ThreeJs {
     document.body.appendChild(this.renderer.domElement);
 
     const floor = new floorObject(this.scene);
-
     floor.mesh.visible = false;
 
-    const newraam = new raamObject(this.scene);
+    const raamObject = new ImportRaamObject(this.scene);
+    raamObject.loadModel();
 
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
+
+    // Voeg een lichtbron toe aan de scene
+    let light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(0, 0, 5); // Plaats het licht een beetje naar voren
+    this.scene.add(light);
 
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
@@ -33,12 +41,11 @@ export class ThreeJs {
     this.scene.add(axesHelper);
     this.render();
 
-    window.addEventListener('keydown', function(event) {
+    window.addEventListener("keydown", function (event) {
       if (event.shiftKey && event.altKey && event.keyCode == 48) {
-      console.log("test")
+        console.log("test");
       }
-      })
-  
+    });
   }
 
   render() {
