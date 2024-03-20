@@ -27,12 +27,13 @@ export class ThreeJs {
 
     const raamObject = new ImportRaamObject(this.scene);
     raamObject.loadModel();
+    
 
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
 
-    // Voeg een lichtbron toe aan de scene
-    let light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(0, 0, 5); // Plaats het licht een beetje naar voren
+   
+    let light = new THREE.PointLight(0xffffff, 10, 1000);
+    light.position.set(0, 0, 0);
     this.scene.add(light);
 
     const background = new BackgroundColor(this.scene);
