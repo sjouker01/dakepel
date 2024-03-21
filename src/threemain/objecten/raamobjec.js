@@ -10,6 +10,9 @@ export class ImportRaamObject {
         this.dracoLoader = new DRACOLoader();
         this.dracoLoader.setDecoderPath( '/examples/jsm/libs/draco/' );
         this.loader.setDRACOLoader( this.dracoLoader );
+
+
+  
     }
 
     loadModel() {

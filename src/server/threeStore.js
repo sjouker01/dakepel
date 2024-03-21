@@ -1,24 +1,26 @@
 import { defineStore } from 'pinia';
-import { floorObject } from '../threemain/world/floor';
-import { Scene } from 'three';
-import GUI from 'lil-gui';
+import { RaamParts } from '../threemain/objecten/threeparts';
 
-export const useFloorStore = defineStore({
-  id: 'floor',
+export const useStore = defineStore({
+  id: 'meshStore',
   state: () => ({
-    floor: new floorObject(Scene),
-    gui: new GUI(),
+    raamParts: new RaamParts(),
   }),
-  getters: {
-    status() {
-      return this.floor.getStatus();
-    },
-  },
   actions: {
-    initializeGUI() {
-      this.gui.add(this.status, 'visible').onChange((value) => {
-        this.floor.mesh.visible = value;
-      });
+    loadModel() {
+      this.raamParts.loadModel();
+    },
+    getObjects() {
+      let balkOnder = this.raamParts.getObject('balk-onder');
+      let balkRechts = this.raamParts.getObject('balk-rechts');
+      let balkLinks = this.raamParts.getObject('balk-links');
+      let balkBoven = this.raamParts.getObject('balk-boven');
+      let kozijnplankOnder = this.raamParts.getObject('kozijnplank-onder');
+      let kozijnplankLinks = this.raamParts.getObject('kozijnplank-links');
+      let kozijnplankRects =  this.raamParts.getObject('kozijnplank-rechts');
+      let kozijnplankBoven = this.raamParts.getObject('kozijnplan-boven');
+      let cube = this.raamParts.getObject('Cube')
+      return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankBoven, kozijnplankLinks,kozijnplankOnder,kozijnplankRects, cube };
     },
   },
 });

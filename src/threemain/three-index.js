@@ -1,5 +1,7 @@
 import * as THREE from "three";
+
 import { floorObject } from "./world/floor";
+// import { raamParts } from "./objecten/threeparts";
 import { BackgroundColor } from "./world/background";
 import { OrbitControlsClass } from "./controles/control";
 import { ImportRaamObject } from "./objecten/raamobjec";
@@ -7,6 +9,7 @@ import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { lamp1 } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
+import { MeshHandler } from "./objecten/mesh";
 export class ThreeJs {
   constructor(container) {
     // scene toevoegen
@@ -16,7 +19,7 @@ export class ThreeJs {
     // camera maken
     this.camera = new Camera(this.size.width, this.size.height);
     // position van camera
-    // this.camera.instand.position.z = 1;
+
     // groote van scherm doen
     window.addEventListener("resize", () => this.onWindowResize(), false);
     this.renderer = new THREE.WebGLRenderer({ canvas: container });
@@ -27,9 +30,9 @@ export class ThreeJs {
     const floor = new floorObject(this.scene);
 
     // object van de raam
-    const raamObject = new ImportRaamObject(this.scene);
-    raamObject.loadModel();
-    console.log(raamObject);
+      const raamObject = new ImportRaamObject(this.scene);
+      raamObject.loadModel()
+      // console.log(raamObject);
 
     // light object
     let lamp = new lamp1();
@@ -43,16 +46,21 @@ export class ThreeJs {
     // helpers van lichten
     const helper1 = new THREE.DirectionalLightHelper(light1, 5);
     const helper2 = new THREE.DirectionalLightHelper(light2, 5);
-    
-    //onzigbaar 
+
+    //onzigbaar
     helper1.visible = false;
     helper2.visible = false;
-    
+
     //toevoegen aan scene
     this.scene.add(helper1);
     this.scene.add(helper2);
 
+    // // mesh
 
+    const meshManager = new MeshHandler();
+    const objects = meshManager.getObjects();
+
+    console.log(objects);
 
     // controls toe tevoegen
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
@@ -64,9 +72,8 @@ export class ThreeJs {
     const axesHelper = new THREE.AxesHelper(100);
     this.scene.add(axesHelper);
 
-
     // sneltoetsen
-    this.sneltoetsen = new Sneltoetsen(floor, axesHelper, helper1,helper2);
+    this.sneltoetsen = new Sneltoetsen(floor, axesHelper, helper1, helper2);
     // renderen
     this.render();
   }
