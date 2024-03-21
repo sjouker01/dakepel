@@ -19,6 +19,7 @@ export class ThreeJs {
     // camera maken
     this.camera = new Camera(this.size.width, this.size.height);
     // position van camera
+    
 
     // groote van scherm doen
     window.addEventListener("resize", () => this.onWindowResize(), false);
@@ -58,9 +59,10 @@ export class ThreeJs {
     // // mesh
 
     const meshManager = new MeshHandler();
-    const objects = meshManager.getObjects();
+    // const objects = meshManager.getObjects();
 
-    console.log(objects);
+    console.log(meshManager);
+    
 
     // controls toe tevoegen
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
@@ -69,7 +71,7 @@ export class ThreeJs {
     background.setSceneBackgroudColor();
 
     // axses helper maken
-    const axesHelper = new THREE.AxesHelper(100);
+    const axesHelper = new THREE.AxesHelper(20);
     this.scene.add(axesHelper);
 
     // sneltoetsen

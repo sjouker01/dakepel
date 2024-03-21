@@ -15,8 +15,8 @@ export class OrbitControlsClass {
     this.controls.screenSpacePanning = false;
 
     // Hiermee kan de camera op en neer bewegen
-    this.controls.minDistance = 100;
-    this.controls.maxDistance = 500;
+    this.controls.minDistance = 3;
+    this.controls.maxDistance = 50;
 
     // Hiermee kan de camera links en rechts bewegen
     this.controls.maxPolarAngle = Math.PI / 2;

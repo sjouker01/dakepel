@@ -19,8 +19,17 @@ export const useStore = defineStore({
       let kozijnplankLinks = this.raamParts.getObject('kozijnplank-links');
       let kozijnplankRects =  this.raamParts.getObject('kozijnplank-rechts');
       let kozijnplankBoven = this.raamParts.getObject('kozijnplan-boven');
-      let cube = this.raamParts.getObject('Cube')
-      return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankBoven, kozijnplankLinks,kozijnplankOnder,kozijnplankRects, cube };
+      let plankNaarBinnne = this.raamParts.getObject('kozijnplank-naarbinnen')
+      return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankBoven, kozijnplankLinks,kozijnplankOnder,kozijnplankRects, plankNaarBinnne};
     },
+    convertScaleToMM(object){
+        
+        //  maakt 1 = 1000
+        const scaleToMMFactor = 1000;
+
+        object.scale[0] *= scaleToMMFactor;
+        object.scale[1] *= scaleToMMFactor;
+        object.scale[2] *= scaleToMMFactor;
+    }
   },
 });

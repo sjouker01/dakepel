@@ -16,4 +16,7 @@ export class Camera {
     this.camera.position.z = z;
     this.camera.position.y = y;
   }
+  getCameraPosition() {
+    return this.camera.position;
+  }
 }

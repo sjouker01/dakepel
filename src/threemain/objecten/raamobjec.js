@@ -19,8 +19,8 @@ export class ImportRaamObject {
         this.loader.load(
             'blender/raam.gltf',
             (object) => {
-                object.scene.scale.set(50, 50, 50);
-                object.scene.position.set(0,0,0);
+                object.scene.scale.set(1, 1, 1);
+                object.scene.position.set(0,1,0);
                 this.scene.add( object.scene);
             },
             (xhr) => {
