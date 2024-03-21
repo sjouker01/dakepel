@@ -1,6 +1,6 @@
 <template>
   <div id="threejs-container">
-    <canvas id="webgl" ref="webglCanvas" @click="store.showHeader(0)"></canvas>
+    <canvas id="webgl" ref="webglCanvas" @click="storeMenu.showHeader(0)"></canvas>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import { onMounted, ref } from 'vue';
 import { ThreeJs } from './threemain/three-index';
 import { useMenuStore } from './server/menustore';
 
-const storeMenu = useMenuStore
+const storeMenu = useMenuStore();
 const webglCanvas = ref(null);
 
 onMounted(() => {
