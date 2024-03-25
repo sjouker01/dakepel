@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 export class floorObject {
   constructor(scene) {
-    const geometry = new THREE.PlaneGeometry(100, 100, 80, 80);
+    const geometry = new THREE.PlaneGeometry(10, 10, 5, 5);
     const material = new THREE.MeshBasicMaterial({
       color: 0xdddddd,
       side: THREE.DoubleSide,

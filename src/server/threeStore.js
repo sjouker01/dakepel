@@ -1,24 +1,36 @@
 import { defineStore } from 'pinia';
-import { floorObject } from '../threemain/world/floor';
-import { Scene } from 'three';
-import GUI from 'lil-gui';
+import { RaamParts } from '../threemain/objecten/threeparts';
 
-export const useFloorStore = defineStore({
-  id: 'floor',
+export const useStore = defineStore({
+  id: 'meshStore',
   state: () => ({
-    floor: new floorObject(Scene),
-    gui: new GUI(),
+    raamParts: new RaamParts(),
   }),
-  getters: {
-    status() {
-      return this.floor.getStatus();
-    },
-  },
   actions: {
-    initializeGUI() {
-      this.gui.add(this.status, 'visible').onChange((value) => {
-        this.floor.mesh.visible = value;
-      });
+    async loadModel() {
+      try {
+        await this.raamParts.loadModel();
+      } catch (error) {
+        console.error('Fout bij het laden van het model:', error);
+      }
     },
-  },
+    async getObjects() {
+      try {
+        let balkOnder = await this.raamParts.getObject('balk-onder');
+        let balkRechts = await this.raamParts.getObject('balk-rechts');
+        let balkLinks = await this.raamParts.getObject('balk-links');
+        let balkBoven = await this.raamParts.getObject('balk-boven');
+        let kozijnplankOnder = await this.raamParts.getObject('kozijnplank-onder');
+        let kozijnplankLinks = await this.raamParts.getObject('kozijnplank-links');
+        let kozijnplankRechts = await this.raamParts.getObject('kozijnplank-rechts');
+        let kozijnplankBoven = await this.raamParts.getObject('kozijnplan-boven');
+        let plankNaarbinnen = await this.raamParts.getObject('kozijnplank-naarbinnen');
+
+        return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankOnder, kozijnplankLinks, kozijnplankRechts, kozijnplankBoven, plankNaarbinnen };
+      } catch (error) {
+        console.error('Fout bij het ophalen van objecten:', error);
+        return null;
+      }
+    }
+  }
 });

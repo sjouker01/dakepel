@@ -4,7 +4,7 @@
       <q-toolbar class="flex justify-center">
         <q-btn color="blue" class="q-mr-lg" @click="bier.showHeader(1)" label="afmetingen" />
         <img src="../assets/img/logo.jpeg" alt="Logo" class="logo" />
-        <q-btn color="blue" @click="bier.showHeader(2)" label="materialen" />
+        <q-btn color="blue" @click="bier && bier.showHeader(2)" label="materialen" />
       </q-toolbar>
     </header>
     <div class="container69">
@@ -29,7 +29,7 @@
               <q-item clickable v-close-popup>
                 <q-item-section>
                   <q-item-label>Color Options</q-item-label>
-                </q-item-section>
+                </q-item-section> 
                 <q-item-section horizontal>
                   <q-btn flat dense label="Red" color="red" />
                   <q-btn flat dense label="Blue" color="blue" />
@@ -121,5 +121,5 @@ import { useMenuStore } from '../server/menustore';
 import { ref } from 'vue'
 const bier = useMenuStore();
 
-
+  
 </script>
