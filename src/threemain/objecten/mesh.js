@@ -1,30 +1,17 @@
-import { windowParts } from './raamfromstore';
+// RaamComponents.js
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { RaamParts } from './threeparts'; // Zorg ervoor dat je de RaamObject klasse importeert
 
-
-export class MeshHandler {
-    // constructor() {
-    //     this.raamParts = new RaamParts();
-    //     this.raamParts.loadModel();
-    //     // console.log(this.raamParts)
-    // }
-
-    // getObjects() {
-    //     let balkOnder = this.raamParts.getObject('balk-onder');
-    //     let balkRechts = this.raamParts.getObject('balk-rechts');
-    //     let balkLinks = this.raamParts.getObject('balk-links');
-    //     let balkBoven = this.raamParts.getObject('balk-boven');
-    //     let kozijnplankOnder = this.raamParts.getObject('kozijnplank-onder');
-    //     let kozijnplankLinks = this.raamParts.getObject('kozijnplank-links');
-    //     let kozijnplankRects =  this.raamParts.getObject('kozijnplank-rechts');
-    //     let kozijnplankBoven = this.raamParts.getObject('kozijnplan-boven');
-    //     let cube = this.raamParts.getObject('Cube')
-    //     return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankBoven, kozijnplankLinks,kozijnplankOnder,kozijnplankRects, cube };
-    // }
+export class RaamComponents {
     constructor() {
-        this.windowParts = new windowParts();
+      this.loader = new GLTFLoader();
+      this.raamParts = new RaamParts(); // Maak een nieuw RaamParts object
     }
-    printTranslation() {
-        console.log(this.windowParts.translation);
+  
+    async loadObject(name, callback) {
+      const object = await this.raamParts.getObject(name).catch((error) => { // Gebruik het RaamParts object om het object te krijgen
+        throw new Error(`Kon het model niet laden: ${error}`);
+      });
+      callback(object);
     }
-
-}   
+  }

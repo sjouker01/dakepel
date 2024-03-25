@@ -12,21 +12,21 @@ export class RaamParts {
     }
 
     if (node.children) {
-      node.children.forEach(child => this.processNode(child));
+      node.children.forEach((child) => this.processNode(child));
     }
   }
 
   loadModel() {
     return new Promise((resolve, reject) => {
       this.loader.load(
-        'blender/raam.gltf', 
+        "blender/raam.gltf",
         (gltf) => {
           this.processNode(gltf.scene);
           resolve();
         },
-        undefined, // onProgress callback not needed
+        undefined,
         (error) => {
-          console.error('An error happened', error);
+          console.error("Fout bij het laden van het model", error);
           reject(error);
         }
       );
@@ -35,8 +35,15 @@ export class RaamParts {
 
   async getObject(name) {
     if (!this.objects[name]) {
-      await this.loadModel();
+      await this.loadModel().catch((error) => {
+        throw new Error(`Kon het model niet laden: ${error}`);
+      });
     }
     return this.objects[name];
+  }
+
+  async loadObject(name, callback) {
+    const object = await this.getObject(name);
+    callback(object);
   }
 }

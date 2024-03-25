@@ -7,29 +7,30 @@ export const useStore = defineStore({
     raamParts: new RaamParts(),
   }),
   actions: {
-    loadModel() {
-      this.raamParts.loadModel();
+    async loadModel() {
+      try {
+        await this.raamParts.loadModel();
+      } catch (error) {
+        console.error('Fout bij het laden van het model:', error);
+      }
     },
-    getObjects() {
-      let balkOnder = this.raamParts.getObject('balk-onder');
-      let balkRechts = this.raamParts.getObject('balk-rechts');
-      let balkLinks = this.raamParts.getObject('balk-links');
-      let balkBoven = this.raamParts.getObject('balk-boven');
-      let kozijnplankOnder = this.raamParts.getObject('kozijnplank-onder');
-      let kozijnplankLinks = this.raamParts.getObject('kozijnplank-links');
-      let kozijnplankRects =  this.raamParts.getObject('kozijnplank-rechts');
-      let kozijnplankBoven = this.raamParts.getObject('kozijnplan-boven');
-      let plankNaarBinnne = this.raamParts.getObject('kozijnplank-naarbinnen')
-      return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankBoven, kozijnplankLinks,kozijnplankOnder,kozijnplankRects, plankNaarBinnne};
-    },
-    convertScaleToMM(object){
-        
-        //  maakt 1 = 1000
-        const scaleToMMFactor = 1000;
+    async getObjects() {
+      try {
+        let balkOnder = await this.raamParts.getObject('balk-onder');
+        let balkRechts = await this.raamParts.getObject('balk-rechts');
+        let balkLinks = await this.raamParts.getObject('balk-links');
+        let balkBoven = await this.raamParts.getObject('balk-boven');
+        let kozijnplankOnder = await this.raamParts.getObject('kozijnplank-onder');
+        let kozijnplankLinks = await this.raamParts.getObject('kozijnplank-links');
+        let kozijnplankRechts = await this.raamParts.getObject('kozijnplank-rechts');
+        let kozijnplankBoven = await this.raamParts.getObject('kozijnplan-boven');
+        let plankNaarbinnen = await this.raamParts.getObject('kozijnplank-naarbinnen');
 
-        object.scale[0] *= scaleToMMFactor;
-        object.scale[1] *= scaleToMMFactor;
-        object.scale[2] *= scaleToMMFactor;
+        return { balkOnder, balkRechts, balkLinks, balkBoven, kozijnplankOnder, kozijnplankLinks, kozijnplankRechts, kozijnplankBoven, plankNaarbinnen };
+      } catch (error) {
+        console.error('Fout bij het ophalen van objecten:', error);
+        return null;
+      }
     }
-  },
+  }
 });

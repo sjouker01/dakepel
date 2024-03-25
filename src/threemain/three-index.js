@@ -1,15 +1,15 @@
 import * as THREE from "three";
-
 import { floorObject } from "./world/floor";
-// import { raamParts } from "./objecten/threeparts";
+
+import { window1 } from "./objecten/raamfromstore";
 import { BackgroundColor } from "./world/background";
 import { OrbitControlsClass } from "./controles/control";
-import { ImportRaamObject } from "./objecten/raamobjec";
 import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { lamp1 } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
-import { MeshHandler } from "./objecten/mesh";
+
+
 export class ThreeJs {
   constructor(container) {
     // scene toevoegen
@@ -19,7 +19,6 @@ export class ThreeJs {
     // camera maken
     this.camera = new Camera(this.size.width, this.size.height);
     // position van camera
-    
 
     // groote van scherm doen
     window.addEventListener("resize", () => this.onWindowResize(), false);
@@ -31,9 +30,9 @@ export class ThreeJs {
     const floor = new floorObject(this.scene);
 
     // object van de raam
-      const raamObject = new ImportRaamObject(this.scene);
-      raamObject.loadModel()
-      // console.log(raamObject);
+
+    // store manier om windows teladen
+    const myWindow = new window1(this.scene);
 
     // light object
     let lamp = new lamp1();
@@ -55,14 +54,6 @@ export class ThreeJs {
     //toevoegen aan scene
     this.scene.add(helper1);
     this.scene.add(helper2);
-
-    // // mesh
-
-    const meshManager = new MeshHandler();
-    // const objects = meshManager.getObjects();
-
-    console.log(meshManager);
-    
 
     // controls toe tevoegen
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
