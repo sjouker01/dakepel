@@ -9,9 +9,15 @@ import { Sizes } from "./camfile/sizes";
 import { lamp1 } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
 
-
+let instance = null;
 export class ThreeJs {
   constructor(container) {
+    if (instance) {
+      return instance;
+    }
+    instance = this;
+    window.ThreeJs = this;
+
     // scene toevoegen
     this.scene = new THREE.Scene();
     // size maken
@@ -29,10 +35,10 @@ export class ThreeJs {
     // object van de vloer
     const floor = new floorObject(this.scene);
 
-    // object van de raam
+
 
     // store manier om windows teladen
-    const myWindow = new window1(this.scene);
+    this.myWindow = new window1(this.scene);
 
     // light object
     let lamp = new lamp1();

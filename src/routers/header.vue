@@ -116,16 +116,12 @@
 
 
 <script setup>
-
 import { useMenuStore } from '../server/menustore';
-import { ref } from 'vue'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 const bier = useMenuStore();
-watch(() => bier.breedte, (newValue ) => {
-  
-  console.log('De nieuwe waarde van breedte is: ' + newValue);
 
+watch(() => bier.breedte, (newValue ) => {
+window.ThreeJs.myWindow.updateBreedte();
 
 });
-
 </script>
