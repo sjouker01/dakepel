@@ -9,12 +9,12 @@
     </header>
     <div class="container69">
       <div v-if="bier.header === 1" class="sub-header q-mt-md rounded-borders bg-white">
-        <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
-          <q-input v-model="bier.breedte" label="Breedte" />
-          <q-input v-model="bier.hoogte" label="Hoogte" />
-          <q-input v-model="bier.graden" label="Graden" />
-        </q-toolbar>
-      </div>
+  <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
+    <q-input v-model="bier.breedte" label="Breedte"  type="number" />
+    <q-input v-model="bier.hoogte" label="Hoogte" />
+    <q-input v-model="bier.graden" label="Graden" />
+  </q-toolbar>
+</div>
       <div v-if="bier.header === 2" class="sub-header q-mt-md rounded-borders bg-white">
         <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
           <q-btn-dropdown color="blue" rounded label="muur" class="dropdown-btn">
@@ -29,7 +29,7 @@
               <q-item clickable v-close-popup>
                 <q-item-section>
                   <q-item-label>Color Options</q-item-label>
-                </q-item-section> 
+                </q-item-section>
                 <q-item-section horizontal>
                   <q-btn flat dense label="Red" color="red" />
                   <q-btn flat dense label="Blue" color="blue" />
@@ -116,10 +116,12 @@
 
 
 <script setup>
-
 import { useMenuStore } from '../server/menustore';
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const bier = useMenuStore();
 
-  
+watch(() => bier.breedte, (newValue ) => {
+window.ThreeJs.myWindow.updateBreedte();
+
+});
 </script>

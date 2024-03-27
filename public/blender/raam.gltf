@@ -11,12 +11,7 @@
 				0,
 				1,
 				2,
-				3,
-				4,
-				5,
-				6,
-				7,
-				8
+				3
 			]
 		}
 	],
@@ -25,14 +20,14 @@
 			"mesh":0,
 			"name":"balk-onder",
 			"scale":[
-				0.800000011920929,
+				1,
 				0.10000000149011612,
-				0.029999999329447746
+				0.10000000149011612
 			],
 			"translation":[
-				0,
-				-0.44999998807907104,
-				0
+				0.05391277000308037,
+				-0.07127603888511658,
+				-0.08299368619918823
 			]
 		},
 		{
@@ -41,12 +36,12 @@
 			"scale":[
 				0.10000000149011612,
 				1,
-				0.029999999329447746
+				0.10000000149011612
 			],
 			"translation":[
-				0.4500000476837158,
-				0,
-				0
+				0.6015545725822449,
+				0.37872394919395447,
+				-0.08299368619918823
 			]
 		},
 		{
@@ -55,96 +50,26 @@
 			"scale":[
 				0.10000000149011612,
 				1,
-				0.029999999329447746
+				0.10000000149011612
 			],
 			"translation":[
-				-0.4500000476837158,
-				0,
-				0
+				-0.4960872530937195,
+				0.37872394919395447,
+				-0.08299368619918823
 			]
 		},
 		{
 			"mesh":3,
 			"name":"balk-boven",
 			"scale":[
-				0.800000011920929,
-				0.10000000149011612,
-				0.029999999329447746
-			],
-			"translation":[
-				0,
-				0.44999998807907104,
-				0
-			]
-		},
-		{
-			"mesh":4,
-			"name":"kozijnplank-onder",
-			"scale":[
-				0.800000011920929,
-				0.10000000149011612,
-				0.009999999776482582
-			],
-			"translation":[
-				0,
-				-0.44999998807907104,
-				-0.019999999552965164
-			]
-		},
-		{
-			"mesh":5,
-			"name":"kozijnplank-links",
-			"scale":[
-				0.10000000149011612,
 				1,
-				0.009999999776482582
-			],
-			"translation":[
-				0.44999998807907104,
-				0,
-				-0.019999999552965164
-			]
-		},
-		{
-			"mesh":6,
-			"name":"kozijnplank-rechts",
-			"scale":[
 				0.10000000149011612,
-				1,
-				0.009999999776482582
-			],
-			"translation":[
-				-0.44999998807907104,
-				0,
-				-0.019999999552965164
-			]
-		},
-		{
-			"mesh":7,
-			"name":"kozijnplan-boven",
-			"scale":[
-				0.800000011920929,
-				0.10000000149011612,
-				0.009999999776482582
-			],
-			"translation":[
-				0,
-				0.44999998807907104,
-				-0.019999999552965164
-			]
-		},
-		{
-			"mesh":8,
-			"name":"kozijnplank-naarbinnen",
-			"scale":[
-				0.800000011920929,
-				0.019999999552965164,
 				0.10000000149011612
 			],
 			"translation":[
-				0,
-				-0.4099999964237213,
-				-0.07500000298023224
+				0.05391277000308037,
+				0.8287239074707031,
+				-0.08299368619918823
 			]
 		}
 	],
@@ -161,20 +86,6 @@
 				],
 				"metallicFactor":0,
 				"roughnessFactor":0
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Material.002",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.8002041578292847,
-					0.33855339884757996,
-					0.05176873505115509,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.4000000059604645
 			}
 		}
 	],
@@ -232,76 +143,6 @@
 					},
 					"indices":3,
 					"material":0
-				}
-			]
-		},
-		{
-			"name":"Cube.004",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":13,
-						"NORMAL":14,
-						"TEXCOORD_0":15
-					},
-					"indices":3,
-					"material":1
-				}
-			]
-		},
-		{
-			"name":"Cube.005",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":16,
-						"NORMAL":17,
-						"TEXCOORD_0":18
-					},
-					"indices":3,
-					"material":1
-				}
-			]
-		},
-		{
-			"name":"Cube.006",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":19,
-						"NORMAL":20,
-						"TEXCOORD_0":21
-					},
-					"indices":3,
-					"material":1
-				}
-			]
-		},
-		{
-			"name":"Cube.007",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":22,
-						"NORMAL":23,
-						"TEXCOORD_0":24
-					},
-					"indices":3,
-					"material":1
-				}
-			]
-		},
-		{
-			"name":"Cube.008",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":25,
-						"NORMAL":26,
-						"TEXCOORD_0":27
-					},
-					"indices":3,
-					"material":1
 				}
 			]
 		}
@@ -424,146 +265,6 @@
 			"componentType":5126,
 			"count":24,
 			"type":"VEC2"
-		},
-		{
-			"bufferView":13,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				0.5,
-				0.5,
-				0.5
-			],
-			"min":[
-				-0.5,
-				-0.5,
-				-0.5
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":14,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":15,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":16,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				0.5,
-				0.5,
-				0.5
-			],
-			"min":[
-				-0.5,
-				-0.5,
-				-0.5
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":17,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":18,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":19,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				0.5,
-				0.5,
-				0.5
-			],
-			"min":[
-				-0.5,
-				-0.5,
-				-0.5
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":20,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":21,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":22,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				0.5,
-				0.5,
-				0.5
-			],
-			"min":[
-				-0.5,
-				-0.5,
-				-0.5
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":23,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":24,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":25,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				0.5,
-				0.5,
-				0.5
-			],
-			"min":[
-				-0.5,
-				-0.5,
-				-0.5
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":26,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":27,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
 		}
 	],
 	"bufferViews":[
@@ -644,101 +345,11 @@
 			"byteLength":192,
 			"byteOffset":2952,
 			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":3144,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":3432,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":3720,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":3912,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":4200,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":4488,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":4680,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":4968,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":5256,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":5448,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":5736,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":6024,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":6216,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":6504,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":6792,
-			"target":34962
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":6984,
+			"byteLength":3144,
 			"uri":"raam.bin"
 		}
 	]

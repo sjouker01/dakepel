@@ -1,23 +1,23 @@
 import { defineStore } from "pinia";
-
+import { reactive } from "vue";
 
 export const useMenuStore = defineStore("henk", {
-  state: () => {
-    return {
-      // all these properties will have their type inferred automatically
-
-      hoogte: 0,
-      breedte: 0,
-      graden: 0,
-
-      header: 0,
-    };
-  },
+  state: () => ({
+    breedte: "",
+    hoogte: "",
+    graden: "",
+    objects: {}, // Voeg een nieuw veld toe voor de objecten
+  }),
 
   actions: {
     showHeader(NewHeader) {
       this.header = NewHeader;
-      
     },
+
+    setObject(name, object) {
+      this.objects[name] = object; // Voeg een nieuwe actie toe om een object in te stellen
+    },
+
+    
   },
 });
