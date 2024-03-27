@@ -2,20 +2,20 @@
   <div class="z-top">
     <header class=" q-pa-md rounded-borders">
       <q-toolbar class="flex justify-center">
-        <q-btn color="blue" class="q-mr-lg" @click="bier.showHeader(1)" label="afmetingen" />
+        <q-btn color="blue" class="q-mr-lg" @click="store.showHeader(1)" label="afmetingen" />
         <img src="../assets/img/logo.jpeg" alt="Logo" class="logo" />
-        <q-btn color="blue" @click="bier && bier.showHeader(2)" label="materialen" />
+        <q-btn color="blue" @click="store && store.showHeader(2)" label="materialen" />
       </q-toolbar>
     </header>
     <div class="container69">
-      <div v-if="bier.header === 1" class="sub-header q-mt-md rounded-borders bg-white">
+      <div v-if="store.header === 1" class="sub-header q-mt-md rounded-borders bg-white">
   <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
-    <q-input v-model="bier.breedte" label="Breedte"  type="number" />
-    <q-input v-model="bier.hoogte" label="Hoogte" />
-    <q-input v-model="bier.graden" label="Graden" />
+    <q-input v-model="store.breedte" label="Breedte"  type="number" />
+    <q-input v-model="store.hoogte" label="Hoogte" />
+    <q-input v-model="store.graden" label="Graden" />
   </q-toolbar>
 </div>
-      <div v-if="bier.header === 2" class="sub-header q-mt-md rounded-borders bg-white">
+      <div v-if="store.header === 2" class="sub-header q-mt-md rounded-borders bg-white">
         <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
           <q-btn-dropdown color="blue" rounded label="muur" class="dropdown-btn">
             <q-list>
@@ -118,9 +118,9 @@
 <script setup>
 import { useMenuStore } from '../server/menustore';
 import { ref, watch } from 'vue'
-const bier = useMenuStore();
+const store = useMenuStore();
 
-watch(() => bier.breedte, (newValue ) => {
+watch(() => store.breedte, ( ) => {
 window.ThreeJs.myWindow.updateBreedte();
 
 });
