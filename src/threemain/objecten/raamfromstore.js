@@ -18,25 +18,25 @@ export class window1{
                 // Voer de modifyObject methode uit binnen de callback
                 if (name === 'balk-onder') {
                     this.modifyObject(name, (object) => {
-                        object.position.y += 0; // Verhoog de y-positie van het object met 2
+                        object.position.y += 0; 
                     });
                 }
                 // Voer de modifyObject methode uit binnen de callback
                 if (name === 'balk-rechts') {
                     this.modifyObject(name, (object) => {
-                        object.position.y += 0; // Verhoog de y-positie van het object met 2
+                        object.position.y += 0; 
                     });
                 }
                 // Voer de modifyObject methode uit binnen de callback
                 if (name === 'balk-links') {
                     this.modifyObject(name, (object) => {
-                        object.position.y += 0; // Verhoog de y-positie van het object met 2
+                        object.position.y += 0; 
                     });
                 }
                 // Voer de modifyObject methode uit binnen de callback
                 if (name === 'balk-boven') {
                     this.modifyObject(name, (object) => {
-                        object.scale.x += 0; // Verhoog de schaal van het object met 1
+                        object.scale.x += 0; 
                     });
                 }
             });
