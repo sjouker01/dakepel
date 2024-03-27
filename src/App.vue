@@ -20,7 +20,5 @@ const henk = useMenuStore();
 
 
 <style scoped>
-.background-gradient {
-  background: linear-gradient(to bottom, black, blue);
-}
+
 </style>
