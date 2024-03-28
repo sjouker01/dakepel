@@ -122,6 +122,8 @@ const store = useMenuStore();
 
 watch(() => store.breedte, ( ) => {
 window.ThreeJs.myWindow.updateBreedte();
-
+});
+watch(() => store.hoogte, () => {
+  window.ThreeJs.myWindow.updateHoogte();
 });
 </script>

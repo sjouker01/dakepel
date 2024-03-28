@@ -52,17 +52,42 @@ export class window1 {
     window.ThreeJs.myWindow.updateObjectScaleX("balk-onder", this.newWidth);
     this.modifyObject("balk-links", (object) => {
       object.position.x =
-        this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2 + 0.1;
+        this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2;
     });
     this.modifyObject("balk-rechts", (object) => {
       object.position.x =
-        -(this.objects["balk-onder"].scale.x / 2) + object.scale.x;
+        -(this.objects["balk-onder"].scale.x / 2) + object.scale.x / 2;
     });
   }
+  updateHoogte() {
+    this.newHeight = this.menuStore.hoogte;
+    this.updateObjectScaleY("balk-links", this.newHeight);
+    this.updateObjectScaleY("balk-rechts", this.newHeight);
+
+    // Adjust the y-position of "balk-boven" and "balk-onder"
+    this.modifyObject("balk-boven", (object) => {
+      object.position.y =
+        this.objects["balk-rechts"].position.y +
+        this.objects["balk-links"].scale.y / 2;
+    });
+    this.modifyObject("balk-onder", (object) => {
+      object.position.y =
+        this.objects["balk-links"].position.y -
+        this.objects["balk-links"].scale.y / 2;
+    });
+  }
+
+  updateObjectScaleY(name, newHeight) {
+    if (this.objects[name]) {
+      this.objects[name].scale.y = newHeight / 1000; // Set the scale to the new height
+    }
+    console.log(this.objects[name]);
+  }
+
   updateObjectScaleX(name, newWidth) {
     if (this.objects[name]) {
       this.objects[name].scale.x = newWidth / 1000; // Set the scale to the new width
     }
     console.log(this.objects[name]);
-  } 
+  }
 }
