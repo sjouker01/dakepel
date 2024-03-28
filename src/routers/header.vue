@@ -9,22 +9,24 @@
     </header>
     <div class="container69">
       <div v-if="store.header === 1" class="sub-header q-mt-md rounded-borders bg-white">
-  <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
-    <q-input v-model="store.breedte" label="Breedte"  type="number" />
-    <q-input v-model="store.hoogte" label="Hoogte" />
-    <q-input v-model="store.graden" label="Graden" />
-  </q-toolbar>
-</div>
+        <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
+          <q-input v-model="store.breedte" label="Breedte" type="number" />
+          <q-input v-model="store.hoogte" label="Hoogte" />
+          <q-input v-model="store.graden" label="Graden" />
+        </q-toolbar>
+      </div>
       <div v-if="store.header === 2" class="sub-header q-mt-md rounded-borders bg-white">
         <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
           <q-btn-dropdown color="blue" rounded label="muur" class="dropdown-btn">
             <q-list>
-
               <q-item clickable v-close-popup>
-                <q-btn flat dense label="Hout" color="primary" />
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-btn flat dense label="Treplex" color="primary" />
+                <q-item-section>
+                  <q-item-label>Material Options</q-item-label>
+                </q-item-section>
+                <q-item-section horizontal>
+                  <q-btn flat dense label="hout" color="brown" />
+                  <q-btn flat dense label="triplex" color="grey" />
+                </q-item-section>
               </q-item>
               <q-item clickable v-close-popup>
                 <q-item-section>
@@ -33,7 +35,7 @@
                 <q-item-section horizontal>
                   <q-btn flat dense label="Red" color="red" />
                   <q-btn flat dense label="Blue" color="blue" />
-                  <q-btn flat dense label="Green" color="green" />
+                  <q-btn flat dense lnabel="Green" color="green" />
                   <q-btn flat dense label="Yellow" color="yellow" />
                   <q-btn flat dense label="Purple" color="purple" />
                 </q-item-section>
@@ -56,11 +58,11 @@
                   <q-item-label>Color Options</q-item-label>
                 </q-item-section>
                 <q-item-section horizontal>
-                  <q-btn flat dense label="Red" color="red" />
-                  <q-btn flat dense label="Blue" color="blue" />
-                  <q-btn flat dense lnabel="Green" color="green" />
-                  <q-btn flat dense label="Yellow" color="yellow" />
-                  <q-btn flat dense label="Purple" color="purple" />
+                  <q-btn flat dense label="Red" color="red" @click="store.setColor('red')" />
+                  <q-btn flat dense label="Blue" color="blue" @click="store.setColor('blue')" />
+                  <q-btn flat dense label="Green" color="green" @click="store.setColor('green')" />
+                  <q-btn flat dense label="Gray" color="gray" @click="store.setColor('gray')" />
+                  <q-btn flat dense label="Purple" color="purple" @click="store.setColor('purple')" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -120,10 +122,13 @@ import { useMenuStore } from '../server/menustore';
 import { ref, watch } from 'vue'
 const store = useMenuStore();
 
-watch(() => store.breedte, ( ) => {
-window.ThreeJs.myWindow.updateBreedte();
+watch(() => store.breedte, () => {
+  window.ThreeJs.myWindow.updateBreedte();
 });
 watch(() => store.hoogte, () => {
   window.ThreeJs.myWindow.updateHoogte();
+});
+watch(() => store.color, () => {
+  window.ThreeJs.myWindow.updateColor();
 });
 </script>

@@ -73,6 +73,7 @@ export class ThreeJs {
 
     // sneltoetsen
     this.sneltoetsen = new Sneltoetsen(floor, axesHelper, helper1, helper2);
+    floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();
   }

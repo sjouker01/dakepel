@@ -1,6 +1,6 @@
 import { RaamComponents } from "./mesh";
 import { useMenuStore } from "/Users/sjouk/OneDrive/Bureaublad/stage-github/dakepel/src/server/menustore"; // Vervang dit met het juiste pad
-
+import * as THREE from "three";
 export class window1 {
   constructor(scene) {
     this.scene = scene;
@@ -29,6 +29,9 @@ export class window1 {
             // pinia store
             this.menuStore.setObject(name, object); // Zet het object in de store
             this.updateObjectScaleX(name, 1000); // Stel de breedte van het object in op 1000m
+
+            //verander kleur van het object 
+            object.material.color = new THREE.Color(this.menuStore.color);
           });
         }
       });
@@ -90,4 +93,14 @@ export class window1 {
     }
     console.log(this.objects[name]);
   }
+
+
+  updateColor() {
+    const newColor = this.menuStore.color;
+    Object.values(this.objects).forEach((object) => {
+      if (object && object.material) {
+        object.material.color.set(newColor);
+      }
+    });
+}
 }
