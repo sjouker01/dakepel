@@ -17,7 +17,6 @@ export const useMenuStore = defineStore("henk", {
     setObject(name, object) {
       this.objects[name] = object; // Voeg een nieuwe actie toe om een object in te stellen
     },
-
     
   },
 });
