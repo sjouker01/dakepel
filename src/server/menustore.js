@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-export const useMenuStore = defineStore("henk", {
+export const useMenuStore = defineStore("mainstore", {
   state: () => ({
-    breedte: "",
-    hoogte: "",
+    breedte: "1000",
+    hoogte: "1000",
     graden: "",
     objects: {}, // Voeg een nieuw veld toe voor de objecten
+    color: "gray",
+
   }),
 
   actions: {
@@ -17,6 +19,8 @@ export const useMenuStore = defineStore("henk", {
     setObject(name, object) {
       this.objects[name] = object; // Voeg een nieuwe actie toe om een object in te stellen
     },
-    
+    setColor(color){
+      this.color = color;
+    }
   },
 });
