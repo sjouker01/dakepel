@@ -30,7 +30,7 @@ export class window1 {
             this.menuStore.setObject(name, object); // Zet het object in de store
             this.updateObjectScaleX(name, 1000); // Stel de breedte van het object in op 1000m
 
-            //verander kleur van het object 
+            //verander kleur van het object
             object.material.color = new THREE.Color(this.menuStore.color);
           });
         }
@@ -94,7 +94,6 @@ export class window1 {
     console.log(this.objects[name]);
   }
 
-
   updateColor() {
     const newColor = this.menuStore.color;
     Object.values(this.objects).forEach((object) => {
@@ -102,5 +101,5 @@ export class window1 {
         object.material.color.set(newColor);
       }
     });
-}
+  }
 }
