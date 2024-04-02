@@ -65,7 +65,7 @@ export class window1 {
   updateHoogte() {
     this.newHeight = this.menuStore.hoogte;
     this.updateObjectScaleY("balk-links", this.newHeight);
-    this.updateObjectScaleY("balk-rechts", this.newHeight);
+    this.updateObjectScaleY("balk-rechts", this.newHeight);  
 
     // Adjust the y-position of "balk-boven" and "balk-onder"
     this.modifyObject("balk-boven", (object) => {
