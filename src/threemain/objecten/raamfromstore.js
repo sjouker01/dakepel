@@ -19,7 +19,6 @@ export class window1 {
     // voor elk object  naam , laad het overeenkomstige object in . en de y positie dus dit geval de hoogte van object word verhoogt.
     objectNames.forEach((name) => {
       this.raamComponents.loadObject(name, (object) => {
-        object.position.y += 1; // Verhoog de y-positie van het object
         this.objects[name] = object;
         this.scene.add(object);
 
@@ -49,6 +48,8 @@ export class window1 {
 
   //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
   // nieuwe breedte word opgehaald uit store
+   //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
+  // nieuwe breedte word opgehaald uit store
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
     window.ThreeJs.myWindow.updateObjectScaleX("balk-boven", this.newWidth);
@@ -61,11 +62,35 @@ export class window1 {
       object.position.x =
         -(this.objects["balk-onder"].scale.x / 2) + object.scale.x / 2;
     });
+
+    // Bepaal het aantal "balk-midden" objecten dat moet worden toegevoegd
+    const numMiddleBars = Math.min(
+      Math.floor(this.objects["balk-onder"].scale.x) - 1,
+      5
+    );
+
+    // Als er al "balk-midden" objecten zijn, verwijder ze dan
+    if (this.objects["balk-midden"]) {
+      for (let i = 0; i < this.objects["balk-midden"].length; i++) {
+        this.scene.remove(this.objects["balk-midden"][i]);
+      }
+      delete this.objects["balk-midden"];
+    }
+
+    // Voeg het berekende aantal "balk-midden" objecten toe
+    this.objects["balk-midden"] = [];
+    for (let i = 0; i < numMiddleBars; i++) {
+      this.raamComponents.loadObject("balk-midden", (object) => {
+        this.objects["balk-midden"].push(object);
+        this.scene.add(object);
+      });
+    }
   }
+  // de hoogte van object word ge update hier mee
   updateHoogte() {
     this.newHeight = this.menuStore.hoogte;
     this.updateObjectScaleY("balk-links", this.newHeight);
-    this.updateObjectScaleY("balk-rechts", this.newHeight);  
+    this.updateObjectScaleY("balk-rechts", this.newHeight);
 
     // Adjust the y-position of "balk-boven" and "balk-onder"
     this.modifyObject("balk-boven", (object) => {
