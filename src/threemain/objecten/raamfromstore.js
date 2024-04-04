@@ -86,6 +86,8 @@ export class window1 {
       });
     }
   }
+
+
   // de hoogte van object word ge update hier mee
   updateHoogte() {
     this.newHeight = this.menuStore.hoogte;
