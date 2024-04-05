@@ -36,3 +36,16 @@ updateBreedte() {
 }
 
 ik kan dit gebruiken om dan om de 2 m een  nieuwe balk toete voegen 
+
+
+
+
+
+
+
+___________________
+##
+
+als gat grooter is dan 1000 dan moet er een exstra balk komen 
+vakken gelijke groote 
+hoogte  moet mee gaan

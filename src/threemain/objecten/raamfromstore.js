@@ -70,7 +70,7 @@ export class window1 {
     });
   }
   updateMiddleBars() {
-    const maxMiddleBars = 10; // Increase this value to load more bars
+    const maxMiddleBars = 10; // Increase this value to load more bars  || dit moet naar front end
     const numMiddleBars = Math.min(
       Math.max(0, Math.floor(this.objects["balk-onder"].scale.x) - 1),
       maxMiddleBars
