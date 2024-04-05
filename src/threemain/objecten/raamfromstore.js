@@ -46,46 +46,7 @@ export class window1 {
     }
   }
 
-  //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
-  // nieuwe breedte word opgehaald uit store
-  //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
-  // nieuwe breedte word opgehaald uit store
-  // updateBreedte() {
-  //   this.newWidth = this.menuStore.breedte;
-  //   window.ThreeJs.myWindow.updateObjectScaleX("balk-boven", this.newWidth);
-  //   window.ThreeJs.myWindow.updateObjectScaleX("balk-onder", this.newWidth);
-  //   this.modifyObject("balk-links", (object) => {
-  //     object.position.x =
-  //       this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2;
-  //   });
-  //   this.modifyObject("balk-rechts", (object) => {
-  //     object.position.x =
-  //       -(this.objects["balk-onder"].scale.x / 2) + object.scale.x / 2;
-  //   });
 
-  //   // Bepaal het aantal "balk-midden" objecten dat moet worden toegevoegd
-  //   const numMiddleBars = Math.min(
-  //     Math.floor(this.objects["balk-onder"].scale.x) - 1,
-  //     5
-  //   );
-
-  //   // Als er al "balk-midden" objecten zijn, verwijder ze dan
-  //   if (this.objects["balk-midden"]) {
-  //     for (let i = 0; i < this.objects["balk-midden"].length; i++) {
-  //       this.scene.remove(this.objects["balk-midden"][i]);
-  //     }
-  //     delete this.objects["balk-midden"];
-  //   }
-
-  //   // Voeg het berekende aantal "balk-midden" objecten toe
-  //   this.objects["balk-midden"] = [];
-  //   for (let i = 0; i < numMiddleBars; i++) {
-  //     this.raamComponents.loadObject("balk-midden", (object) => {
-  //       this.objects["balk-midden"].push(object);
-  //       this.scene.add(object);
-  //     });
-  //   }
-  // }
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
     this.updateWindowWidth();
@@ -136,11 +97,18 @@ export class window1 {
     const availableWidth = totalWidth - 2 * sideBarWidth;
     const spacing = availableWidth / (numMiddleBars + 1);
   
+    // Get the length of the side bar
+    const sideBarLength = this.objects["balk-links"].scale.y;
+  
     for (let i = 0; i < numMiddleBars; i++) {
       this.raamComponents.loadObject("balk-midden", (object) => {
         if (object) {
           const clonedObject = object.clone();
           clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
+  
+          // Set the length of the middle bar to match the side bar
+          clonedObject.scale.y = sideBarLength;
+  
           this.objects["balk-midden"].push(clonedObject);
           this.scene.add(clonedObject);
         } else {
