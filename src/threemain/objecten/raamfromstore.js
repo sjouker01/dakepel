@@ -48,45 +48,107 @@ export class window1 {
 
   //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
   // nieuwe breedte word opgehaald uit store
-   //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
+  //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
   // nieuwe breedte word opgehaald uit store
+  // updateBreedte() {
+  //   this.newWidth = this.menuStore.breedte;
+  //   window.ThreeJs.myWindow.updateObjectScaleX("balk-boven", this.newWidth);
+  //   window.ThreeJs.myWindow.updateObjectScaleX("balk-onder", this.newWidth);
+  //   this.modifyObject("balk-links", (object) => {
+  //     object.position.x =
+  //       this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2;
+  //   });
+  //   this.modifyObject("balk-rechts", (object) => {
+  //     object.position.x =
+  //       -(this.objects["balk-onder"].scale.x / 2) + object.scale.x / 2;
+  //   });
+
+  //   // Bepaal het aantal "balk-midden" objecten dat moet worden toegevoegd
+  //   const numMiddleBars = Math.min(
+  //     Math.floor(this.objects["balk-onder"].scale.x) - 1,
+  //     5
+  //   );
+
+  //   // Als er al "balk-midden" objecten zijn, verwijder ze dan
+  //   if (this.objects["balk-midden"]) {
+  //     for (let i = 0; i < this.objects["balk-midden"].length; i++) {
+  //       this.scene.remove(this.objects["balk-midden"][i]);
+  //     }
+  //     delete this.objects["balk-midden"];
+  //   }
+
+  //   // Voeg het berekende aantal "balk-midden" objecten toe
+  //   this.objects["balk-midden"] = [];
+  //   for (let i = 0; i < numMiddleBars; i++) {
+  //     this.raamComponents.loadObject("balk-midden", (object) => {
+  //       this.objects["balk-midden"].push(object);
+  //       this.scene.add(object);
+  //     });
+  //   }
+  // }
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
-    window.ThreeJs.myWindow.updateObjectScaleX("balk-boven", this.newWidth);
-    window.ThreeJs.myWindow.updateObjectScaleX("balk-onder", this.newWidth);
-    this.modifyObject("balk-links", (object) => {
-      object.position.x =
-        this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2;
+    this.updateWindowWidth();
+    this.updateSideBarsPosition();
+    this.updateMiddleBars();
+  }
+  updateWindowWidth() {
+    const objectsToUpdate = ["balk-boven", "balk-onder"];
+    objectsToUpdate.forEach((objectName) => {
+      this.updateObjectScaleX(objectName, this.newWidth);
     });
-    this.modifyObject("balk-rechts", (object) => {
-      object.position.x =
-        -(this.objects["balk-onder"].scale.x / 2) + object.scale.x / 2;
+  }
+  updateSideBarsPosition() {
+    const sideBars = ["balk-links", "balk-rechts"];
+    sideBars.forEach((bar, index) => {
+      this.modifyObject(bar, (object) => {
+        const sign = index === 0 ? 1 : -1;
+        object.position.x =
+          sign * (this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2);
+      });
     });
-
-    // Bepaal het aantal "balk-midden" objecten dat moet worden toegevoegd
+  }
+  updateMiddleBars() {
+    const maxMiddleBars = 10; // Increase this value to load more bars
     const numMiddleBars = Math.min(
-      Math.floor(this.objects["balk-onder"].scale.x) - 1,
-      5
+      Math.max(0, Math.floor(this.objects["balk-onder"].scale.x) - 1),
+      maxMiddleBars
     );
-
-    // Als er al "balk-midden" objecten zijn, verwijder ze dan
-    if (this.objects["balk-midden"]) {
-      for (let i = 0; i < this.objects["balk-midden"].length; i++) {
-        this.scene.remove(this.objects["balk-midden"][i]);
-      }
-      delete this.objects["balk-midden"];
+  
+    if (this.objects["balk-onder"].scale.x < 2 && this.objects["balk-midden"]) {
+      this.removeMiddleBars();
     }
-
-    // Voeg het berekende aantal "balk-midden" objecten toe
+  
+    if (this.objects["balk-onder"].scale.x >= 2) {
+      this.addMiddleBars(numMiddleBars);
+    }
+  }
+  removeMiddleBars() {
+    this.objects["balk-midden"].forEach((bar) => {
+      this.scene.remove(bar);
+    });
+    delete this.objects["balk-midden"];
+  }
+  addMiddleBars(numMiddleBars) {
     this.objects["balk-midden"] = [];
+    const totalWidth = this.objects["balk-onder"].scale.x;
+    const sideBarWidth = this.objects["balk-links"].scale.x;
+    const availableWidth = totalWidth - 2 * sideBarWidth;
+    const spacing = availableWidth / (numMiddleBars + 1);
+  
     for (let i = 0; i < numMiddleBars; i++) {
       this.raamComponents.loadObject("balk-midden", (object) => {
-        this.objects["balk-midden"].push(object);
-        this.scene.add(object);
+        if (object) {
+          const clonedObject = object.clone();
+          clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
+          this.objects["balk-midden"].push(clonedObject);
+          this.scene.add(clonedObject);
+        } else {
+          console.error('Failed to load "balk-midden" object');
+        }
       });
     }
   }
-
 
   // de hoogte van object word ge update hier mee
   updateHoogte() {
