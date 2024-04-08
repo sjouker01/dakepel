@@ -36,6 +36,8 @@ export class window1 {
       });
     });
   }
+
+  // nethode om object wijzige 
   modifyObject(name, callback) {
     // Get the object
     const object = this.objects[name];
@@ -47,18 +49,23 @@ export class window1 {
   }
 
 
+  // nethode om de breedte van de raam bij te werken 
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
     this.updateWindowWidth();
     this.updateSideBarsPosition();
     this.updateMiddleBars();
   }
+
+  // manier om breedte van de zij balken te bij werken 
   updateWindowWidth() {
     const objectsToUpdate = ["balk-boven", "balk-onder"];
     objectsToUpdate.forEach((objectName) => {
       this.updateObjectScaleX(objectName, this.newWidth);
     });
   }
+
+  // manier om de positie van de zij balken bij te werken
   updateSideBarsPosition() {
     const sideBars = ["balk-links", "balk-rechts"];
     sideBars.forEach((bar, index) => {
@@ -69,6 +76,8 @@ export class window1 {
       });
     });
   }
+
+  // manier om de middelste balken bij te werken 
   updateMiddleBars() {
     const maxMiddleBars = 10; // Increase this value to load more bars  || dit moet naar front end
     const numMiddleBars = Math.min(
@@ -84,12 +93,15 @@ export class window1 {
       this.addMiddleBars(numMiddleBars);
     }
   }
+
+  // manier om middelste verwijderen
   removeMiddleBars() {
     this.objects["balk-midden"].forEach((bar) => {
       this.scene.remove(bar);
     });
     delete this.objects["balk-midden"];
   }
+  // manier om de balken er bij te doen
   addMiddleBars(numMiddleBars) {
     this.objects["balk-midden"] = [];
     const totalWidth = this.objects["balk-onder"].scale.x;
@@ -118,6 +130,7 @@ export class window1 {
     }
   }
 
+
   // de hoogte van object word ge update hier mee
   updateHoogte() {
     this.newHeight = this.menuStore.hoogte;
@@ -136,7 +149,7 @@ export class window1 {
         this.objects["balk-links"].scale.y / 2;
     });
   }
-
+  // manier om de schaal van het object in de x richting bij te werken
   updateObjectScaleY(name, newHeight) {
     if (this.objects[name]) {
       this.objects[name].scale.y = newHeight / 1000; // Set the scale to the new height
@@ -144,13 +157,14 @@ export class window1 {
     console.log(this.objects[name]);
   }
 
+// methode om de schaal van object in de x richting bij te werken 
   updateObjectScaleX(name, newWidth) {
     if (this.objects[name]) {
       this.objects[name].scale.x = newWidth / 1000; // Set the scale to the new width
     }
     console.log(this.objects[name]);
   }
-
+// kleur bij werken  
   updateColor() {
     const newColor = this.menuStore.color;
     Object.values(this.objects).forEach((object) => {
