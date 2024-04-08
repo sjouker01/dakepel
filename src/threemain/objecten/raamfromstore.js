@@ -79,16 +79,12 @@ export class window1 {
 
   // manier om de middelste balken bij te werken 
   updateMiddleBars() {
-    const maxMiddleBars = 10; // Increase this value to load more bars  || dit moet naar front end
-    const numMiddleBars = Math.min(
-      Math.max(0, Math.floor(this.objects["balk-onder"].scale.x) - 1),
-      maxMiddleBars
-    );
-  
+    const numMiddleBars = Math.max(0, Math.floor(this.objects["balk-onder"].scale.x) - 1);
+    
     if (this.objects["balk-onder"].scale.x < 2 && this.objects["balk-midden"]) {
       this.removeMiddleBars();
     }
-  
+    
     if (this.objects["balk-onder"].scale.x >= 2) {
       this.addMiddleBars(numMiddleBars);
     }
@@ -108,21 +104,24 @@ export class window1 {
     const sideBarWidth = this.objects["balk-links"].scale.x;
     const availableWidth = totalWidth - 2 * sideBarWidth;
     const spacing = availableWidth / (numMiddleBars + 1);
-  
+    
     // Get the length of the side bar
     const sideBarLength = this.objects["balk-links"].scale.y;
-  
+    
     for (let i = 0; i < numMiddleBars; i++) {
       this.raamComponents.loadObject("balk-midden", (object) => {
         if (object) {
           const clonedObject = object.clone();
           clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
-  
+    
           // Set the length of the middle bar to match the side bar
           clonedObject.scale.y = sideBarLength;
-  
-          this.objects["balk-midden"].push(clonedObject);
-          this.scene.add(clonedObject);
+    
+          // Check if the number of middle bars is not exceeding the height
+          if (this.objects["balk-midden"].length < this.objects["balk-links"].scale.y) {
+            this.objects["balk-midden"].push(clonedObject);
+            this.scene.add(clonedObject);
+          }
         } else {
           console.error('Failed to load "balk-midden" object');
         }
