@@ -122,12 +122,20 @@ import { useMenuStore } from '../server/menustore';
 import { ref, watch } from 'vue'
 const store = useMenuStore();
 
-watch(() => store.breedte, () => {
-  window.ThreeJs.myWindow.updateBreedte();
+const maxBreedte = 10;
+
+watch(() => store.breedte, (newBreedte) => {
+  if (newBreedte > maxBreedte) {
+    store.setBreedte(maxBreedte);
+  } else {
+    window.ThreeJs.myWindow.updateBreedte();
+  }
 });
+
 watch(() => store.hoogte, () => {
   window.ThreeJs.myWindow.updateHoogte();
 });
+
 watch(() => store.color, () => {
   window.ThreeJs.myWindow.updateColor();
 });

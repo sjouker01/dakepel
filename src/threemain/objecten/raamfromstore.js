@@ -37,7 +37,7 @@ export class window1 {
     });
   }
 
-  // nethode om object wijzige 
+  // methode om object wijzige 
   modifyObject(name, callback) {
     // Get the object
     const object = this.objects[name];
@@ -54,7 +54,7 @@ updateBreedte() {
   this.newWidth = this.menuStore.breedte;
   this.updateWindowWidth();
   this.updateSideBarsPosition();
-  this.updateMiddleBars(); // Voeg deze regel toe
+  this.updateMiddleBars(); 
 }
 
   // manier om breedte van de zij balken te bij werken 
@@ -77,10 +77,12 @@ updateBreedte() {
     });
   }
   updateMiddleBarLengths() {
-    const sideBarLength = this.objects["balk-links"].scale.y;
+    if (this.objects["balk-midden"]) {
+      const sideBarLength = this.objects["balk-links"].scale.y;
   
-    for (let i = 0; i < this.objects["balk-midden"].length; i++) {
-      this.objects["balk-midden"][i].scale.y = sideBarLength;
+      for (let i = 0; i < this.objects["balk-midden"].length; i++) {
+        this.objects["balk-midden"][i].scale.y = sideBarLength;
+      }
     }
   }
 
@@ -92,55 +94,60 @@ updateMiddleBars() {
     this.removeMiddleBars();
   }
   
-  if (this.objects["balk-onder"].scale.x >= 2) {
+  if (this.objects["balk-onder"].scale.x > 2) {
     this.addMiddleBars(numMiddleBars);
   }
 
   // Update the length of the middle bars
   this.updateMiddleBarLengths();
 }
-// manier om de lengte van de middelste balken bij te werken
-
 
   // manier om middelste verwijderen
   removeMiddleBars() {
-    this.objects["balk-midden"].forEach((bar) => {
-      this.scene.remove(bar);
-    });
-    delete this.objects["balk-midden"];
+    if (this.objects["balk-midden"]) {
+      for (let i = 0; i < this.objects["balk-midden"].length; i++) {
+        // Dispose of the object's geometry and material
+        this.objects["balk-midden"][i].geometry.dispose();
+        this.objects["balk-midden"][i].material.dispose();
+  
+        // Remove the object from the scene
+        this.scene.remove(this.objects["balk-midden"][i]);
+      }
+  
+      // Clear the array
+      this.objects["balk-midden"] = [];
+    }
   }
-  // manier om de balken er bij te doen
-// manier om de balken er bij te doen
-addMiddleBars(numMiddleBars) {
-  this.objects["balk-midden"] = [];
-  const totalWidth = this.objects["balk-onder"].scale.x;
-  const sideBarWidth = this.objects["balk-links"].scale.x;
-  const availableWidth = totalWidth - 2 * sideBarWidth;
-  const spacing = availableWidth / (numMiddleBars + 1);
-  
-  // Get the length of the side bar
-  const sideBarLength = this.objects["balk-links"].scale.y;
-  
-  for (let i = 0; i < numMiddleBars; i++) {
-    this.raamComponents.loadObject("balk-midden", (object) => {
-      if (object) {
-        const clonedObject = object.clone();
-        clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
 
-        // Set the length of the middle bar to match the side bar
-        clonedObject.scale.y = sideBarLength;
+  // manier om de balken er bij te doen
+  addMiddleBars(numMiddleBars) {
+    this.objects["balk-midden"] = [];
+    const totalWidth = this.objects["balk-onder"].scale.x;
+    const sideBarWidth = this.objects["balk-links"].scale.x;
+    const availableWidth = totalWidth - 2 * sideBarWidth;
+    const spacing = availableWidth / (numMiddleBars + 1);
+    
+    // Get the length of the side bar
+    const sideBarLength = this.objects["balk-links"].scale.y;
+    
+    for (let i = 0; i < numMiddleBars; i++) {
+      this.raamComponents.loadObject("balk-midden", (object) => {
+        if (object) {
+          const clonedObject = object.clone();
+          clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
   
-        // Check if the number of middle bars is not exceeding the height
-        if (this.objects["balk-midden"].length < this.objects["balk-links"].scale.y) {
+          // Set the length of the middle bar to match the side bar
+          clonedObject.scale.y = sideBarLength;
+    
+          // Add the middle bar to the scene without checking the height
           this.objects["balk-midden"].push(clonedObject);
           this.scene.add(clonedObject);
+        } else {
+          console.error('Failed to load "balk-midden" object');
         }
-      } else {
-        console.error('Failed to load "balk-midden" object');
-      }
-    });
+      });
+    }
   }
-}
 
 
   // de hoogte van object word ge update hier mee
