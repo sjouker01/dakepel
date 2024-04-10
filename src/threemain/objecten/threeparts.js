@@ -1,4 +1,5 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { TextureLoader } from 'three';
 
 export class RaamParts {
   constructor() {
@@ -45,5 +46,20 @@ export class RaamParts {
   async loadObject(name, callback) {
     const object = await this.getObject(name);
     callback(object);
+  }
+
+  async applyTexture(name, texturePath) {
+    const object = await this.getObject(name);
+    if (!object) {
+      throw new Error(`Object ${name} niet gevonden`);
+    }
+
+    const textureLoader = new TextureLoader();
+    textureLoader.load(texturePath, (texture) => {
+      object.material.map = texture;
+      object.material.needsUpdate = true;
+    }, undefined, (error) => {
+      console.error(`Fout bij het laden van de textuur: ${error}`);
+    });
   }
 }
