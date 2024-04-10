@@ -6,9 +6,9 @@ export class window1 {
     this.scene = scene;
     this.raamComponents = new RaamComponents();
     this.objects = {};
-    // store inladen
+    // Laden van de store
     this.menuStore = useMenuStore();
-    // de namen van objects
+    // De namen van de objecten
     const objectNames = [
       "balk-onder",
       "balk-links",
@@ -16,58 +16,150 @@ export class window1 {
       "balk-boven",
     ];
 
-    // voor elk object  naam , laad het overeenkomstige object in . en de y positie dus dit geval de hoogte van object word verhoogt.
+    // Voor elke objectnaam, laad het overeenkomstige object in. En de y-positie, in dit geval de hoogte van het object, wordt verhoogd.
     objectNames.forEach((name) => {
       this.raamComponents.loadObject(name, (object) => {
-        object.position.y += 1; // Verhoog de y-positie van het object
         this.objects[name] = object;
         this.scene.add(object);
 
         // Voer de modifyObject methode uit binnen de callback
         if (name === "balk-onder" || name === "balk-boven") {
           this.modifyObject(name, (object) => {
-            // pinia store
+            // Pinia store
             this.menuStore.setObject(name, object); // Zet het object in de store
             this.updateObjectScaleX(name, 1000); // Stel de breedte van het object in op 1000m
 
-            //verander kleur van het object 
+            // Verander de kleur van het object
             object.material.color = new THREE.Color(this.menuStore.color);
           });
         }
       });
     });
   }
+
+  // Methode om een object te wijzigen
   modifyObject(name, callback) {
-    // Get the object
+    // Haal het object op
     const object = this.objects[name];
 
-    // als object bestaat dan moet die de callback uitvoeren met de object argument
+    // Als het object bestaat, voer dan de callback uit met het object als argument
     if (object) {
       callback(object);
     }
   }
 
-  //deze zorg er voor dat breedte van de raam word aan gepast en zorgen dat de buitenbalken mee beweegd
-  // nieuwe breedte word opgehaald uit store
+  // Methode om de breedte van het raam bij te werken
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
-    window.ThreeJs.myWindow.updateObjectScaleX("balk-boven", this.newWidth);
-    window.ThreeJs.myWindow.updateObjectScaleX("balk-onder", this.newWidth);
-    this.modifyObject("balk-links", (object) => {
-      object.position.x =
-        this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2;
-    });
-    this.modifyObject("balk-rechts", (object) => {
-      object.position.x =
-        -(this.objects["balk-onder"].scale.x / 2) + object.scale.x / 2;
+    this.updateWindowWidth();
+    this.updateSideBarsPosition();
+    this.updateMiddleBars(); 
+  }
+
+  // Methode om de breedte van de zijbalken bij te werken
+  updateWindowWidth() {
+    const objectsToUpdate = ["balk-boven", "balk-onder"];
+    objectsToUpdate.forEach((objectName) => {
+      this.updateObjectScaleX(objectName, this.newWidth);
     });
   }
+
+  // Methode om de positie van de zijbalken bij te werken
+  updateSideBarsPosition() {
+    const sideBars = ["balk-links", "balk-rechts"];
+    sideBars.forEach((bar, index) => {
+      this.modifyObject(bar, (object) => {
+        const sign = index === 0 ? 1 : -1;
+        object.position.x =
+          sign * (this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2);
+      });
+    });
+  }
+
+  // Methode om de lengte van de middelste balken bij te werken
+  updateMiddleBarLengths() {
+    if (this.objects["balk-midden"]) {
+      const sideBarLength = this.objects["balk-links"].scale.y;
+  
+      for (let i = 0; i < this.objects["balk-midden"].length; i++) {
+        this.objects["balk-midden"][i].scale.y = sideBarLength;
+      }
+    }
+  }
+
+  // Methode om de middelste balken bij te werken
+  updateMiddleBars() {
+    const numMiddleBars = Math.max(0, Math.floor(this.objects["balk-onder"].scale.x) - 1);
+  
+    // Verwijder altijd de bestaande middelste balken
+    if (this.objects["balk-midden"]) {
+      this.removeMiddleBars();
+    }
+  
+    // Als de breedte groter of gelijk is aan 2m, voeg dan het berekende aantal middelste balken toe
+    if (this.objects["balk-onder"].scale.x >= 2) {
+      this.addMiddleBars(numMiddleBars);
+    }
+
+    // Werk de lengte van de middelste balken bij
+    this.updateMiddleBarLengths();
+  }
+
+  // Methode om de middelste balken te verwijderen
+  removeMiddleBars() {
+    if (this.objects["balk-midden"]) {
+      for (let i = 0; i < this.objects["balk-midden"].length; i++) {
+        // Verwijder de geometrie en het materiaal van het object
+        this.objects["balk-midden"][i].geometry.dispose();
+        this.objects["balk-midden"][i].material.dispose();
+  
+        // Verwijder de middelste balk van de scene
+        this.scene.remove(this.objects["balk-midden"][i]);
+      }
+  
+      // Maak de array leeg
+      this.objects["balk-midden"] = [];
+    }
+  }
+
+  // Methode om middelste balken toe te voegen
+  addMiddleBars(numMiddleBars) {
+    this.objects["balk-midden"] = [];
+    const totalWidth = this.objects["balk-onder"].scale.x;
+    const sideBarWidth = this.objects["balk-links"].scale.x;
+    const availableWidth = totalWidth - 2 * sideBarWidth;
+    const spacing = availableWidth / (numMiddleBars + 1);
+    
+    // Haal de lengte van de zijbalk op
+    const sideBarLength = this.objects["balk-links"].scale.y;
+    
+    for (let i = 0; i < numMiddleBars; i++) {
+      this.raamComponents.loadObject("balk-midden", (object) => {
+        if (object) {
+          const clonedObject = object.clone();
+          clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
+  
+          // Stel de lengte van de middelste balk in om overeen te komen met de zijbalk
+          clonedObject.scale.y = sideBarLength;
+    
+          // Voeg de middelste balk toe aan de scene zonder de hoogte te controleren
+          this.objects["balk-midden"].push(clonedObject);
+          this.scene.add(clonedObject);
+        } else {
+          console.error('Het laden van het object "balk-midden" is mislukt');
+        }
+      });
+    }
+  }
+
+  // Methode om de hoogte van het object bij te werken
   updateHoogte() {
     this.newHeight = this.menuStore.hoogte;
     this.updateObjectScaleY("balk-links", this.newHeight);
     this.updateObjectScaleY("balk-rechts", this.newHeight);
+    this.updateMiddleBarLengths(); 
 
-    // Adjust the y-position of "balk-boven" and "balk-onder"
+    // Pas de y-positie van "balk-boven" en "balk-onder" aan
     this.modifyObject("balk-boven", (object) => {
       object.position.y =
         this.objects["balk-rechts"].position.y +
@@ -80,21 +172,26 @@ export class window1 {
     });
   }
 
+  // Methode om de schaal van het object in de y-richting bij te werken
   updateObjectScaleY(name, newHeight) {
     if (this.objects[name]) {
-      this.objects[name].scale.y = newHeight / 1000; // Set the scale to the new height
+      this.objects[name].scale.y = newHeight / 1000; // Stel de schaal in op de nieuwe hoogte
     }
     console.log(this.objects[name]);
+  
+    // Werk de lengte van de middelste balken bij
+    this.updateMiddleBarLengths();
   }
 
+  // Methode om de schaal van het object in de x-richting bij te werken
   updateObjectScaleX(name, newWidth) {
     if (this.objects[name]) {
-      this.objects[name].scale.x = newWidth / 1000; // Set the scale to the new width
+      this.objects[name].scale.x = newWidth / 1000; // Stel de schaal in op de nieuwe breedte
     }
     console.log(this.objects[name]);
   }
 
-
+  // Methode om de kleur bij te werken
   updateColor() {
     const newColor = this.menuStore.color;
     Object.values(this.objects).forEach((object) => {
@@ -102,5 +199,5 @@ export class window1 {
         object.material.color.set(newColor);
       }
     });
-}
+  }
 }

@@ -6,21 +6,25 @@ export const useMenuStore = defineStore("mainstore", {
     breedte: "1000",
     hoogte: "1000",
     graden: "",
-    objects: {}, // Voeg een nieuw veld toe voor de objecten
+    objects: {}, 
+    // windowSize: 1,
     color: "gray",
-
   }),
+
 
   actions: {
     showHeader(NewHeader) {
       this.header = NewHeader;
     },
+    setBreedte(breedte) {
+      this.breedte = Number(breedte);
+    },
 
     setObject(name, object) {
-      this.objects[name] = object; // Voeg een nieuwe actie toe om een object in te stellen
+      this.objects[name] = object; 
     },
-    setColor(color){
+    setColor(color) {
       this.color = color;
-    }
+    },
   },
 });
