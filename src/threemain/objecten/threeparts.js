@@ -48,16 +48,22 @@ export class RaamParts {
     callback(object);
   }
 
-  async applyTexture(name, texturePath) {
+  async applyTexture(name) {
     const object = await this.getObject(name);
     if (!object) {
       throw new Error(`Object ${name} niet gevonden`);
     }
+  
 
     const textureLoader = new TextureLoader();
-    textureLoader.load(texturePath, (texture) => {
-      object.material.map = texture;
-      object.material.needsUpdate = true;
+    textureLoader.setPath('/public/blender/WoodFlooringAshSuperWhite001/');
+    textureLoader.load('flooringwhite.jpg', (texture) => {
+      object.traverse((node) => {
+        if (node.isMesh) {
+          node.material.map = texture;
+          node.material.needsUpdate = true;
+        }
+      });
     }, undefined, (error) => {
       console.error(`Fout bij het laden van de textuur: ${error}`);
     });

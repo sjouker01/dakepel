@@ -14,6 +14,9 @@ export class RaamComponents {
     });
     callback(object);
   }
+  addObject(name, object) {
+    this.raamParts.objects[name] = object;
+  }
 
   applyTexture(name, texturePath) {
     this.raamParts.applyTexture(name, texturePath);

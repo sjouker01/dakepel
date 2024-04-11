@@ -121,7 +121,9 @@ export class window1 {
       this.objects["balk-midden"] = [];
     }
   }
-
+  addObjectToRaamComponents(name, object) {
+    this.raamComponents.addObject(name, object);
+  }
   // Methode om middelste balken toe te voegen
   addMiddleBars(numMiddleBars) {
     this.objects["balk-midden"] = [];
@@ -135,7 +137,7 @@ export class window1 {
     
     for (let i = 0; i < numMiddleBars; i++) {
       this.raamComponents.loadObject("balk-midden", (object) => {
-        if (object) {
+        if (object) {    
           const clonedObject = object.clone();
           clonedObject.position.x = -totalWidth / 2 + sideBarWidth + spacing * (i + 1);
   
