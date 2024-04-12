@@ -23,7 +23,7 @@ export class RaamParts {
         "blender/raam.gltf",
         (gltf) => {
           this.processNode(gltf.scene);
-          resolve();
+          resolve(); 
         },
         undefined,
         (error) => {
