@@ -28,9 +28,9 @@ export class window1 {
             // Pinia store
             this.menuStore.setObject(name, object); // Zet het object in de store
             this.updateObjectScaleX(name, 1000); // Stel de breedte van het object in op 1000m
-
             // Verander de kleur van het object
-            object.material.color = new THREE.Color(this.menuStore.color);
+            this.menuStore.setTexture('hout')
+            object.material.map = this.menuStore.texture 
           });
         }
       });
@@ -196,6 +196,14 @@ export class window1 {
   // Methode om de kleur bij te werken
   updateColor() {
     const newColor = this.menuStore.color;
+    Object.values(this.objects).forEach((object) => {
+      if (object && object.material) {
+        object.material.color.set(newColor);
+      }
+    });
+  }
+  updatemateriaal() {
+    const newMateriaal = this.menuStore.color;
     Object.values(this.objects).forEach((object) => {
       if (object && object.material) {
         object.material.color.set(newColor);

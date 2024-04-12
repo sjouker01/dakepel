@@ -45,13 +45,16 @@ export class RaamParts {
 
   async loadObject(name, callback) {
     const object = await this.getObject(name);
+    console.log('test')
     callback(object);
   }
 
   async applyTexture(name) {
     const object = await this.getObject(name);
+    console.log("ik ben gay")
     if (!object) {
       throw new Error(`Object ${name} niet gevonden`);
+
     }
   
 
