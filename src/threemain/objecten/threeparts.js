@@ -15,7 +15,7 @@ export class RaamParts {
     if (node.children) {
       node.children.forEach((child) => this.processNode(child));
     }
-  }
+  } 
 
   loadModel() {
     return new Promise((resolve, reject) => {

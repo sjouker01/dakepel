@@ -198,7 +198,7 @@
 						"TEXCOORD_0":9
 					},
 					"indices":3,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -226,7 +226,7 @@
 						"TEXCOORD_0":15
 					},
 					"indices":3,
-					"material":0
+					"material":1
 				}
 			]
 		}
