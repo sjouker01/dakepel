@@ -29,8 +29,8 @@ export class window1 {
             this.menuStore.setObject(name, object); // Zet het object in de store
             this.updateObjectScaleX(name, 1000); // Stel de breedte van het object in op 1000m
             // Verander de kleur van het object
-            this.menuStore.setTexture('hout')
-            object.material.map = this.menuStore.texture 
+            // this.menuStore.setTexture('hout')
+            // object.material.map
           });
         }
       });

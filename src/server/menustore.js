@@ -31,7 +31,7 @@ export const useMenuStore = defineStore("mainstore", {
     },
     setTexture( texture) {
 
-    this.texture =  new  THREE.TextureLoader().load('public/blender/WoodFlooringAshSuperWhite001/WoodFlooringAshSuperWhite001_COL_2K.jpg' ); 
+    this.texture =  new  THREE.TextureLoader().load('/blender/WoodFlooringAshSuperWhite001/WoodFlooringAshSuperWhite001_COL_2K.jpg' ); 
     this.texture.colorSpace = THREE.SRGBColorSpace
     console.log('test')
     },
