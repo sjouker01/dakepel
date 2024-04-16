@@ -32,7 +32,7 @@ export class window1 {
             // this.menuStore.setTexture('hout')
             // object.material.map
           });
-        }
+        } 
       });
     });
   }
