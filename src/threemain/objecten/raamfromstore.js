@@ -32,7 +32,7 @@ export class window1 {
             // this.menuStore.setTexture('hout')
             // object.material.map
           });
-        } 
+        } l
       });
     });
   }
@@ -45,14 +45,14 @@ export class window1 {
     // Als het object bestaat, voer dan de callback uit met het object als argument
     if (object) {
       callback(object);
-    }
+    } 
   }
 
   // Methode om de breedte van het raam bij te werken
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
     this.updateWindowWidth();
-    this.updateSideBarsPosition();
+    this.updateSideBarsPosition(); 
     this.updateMiddleBars(); 
   }
 
