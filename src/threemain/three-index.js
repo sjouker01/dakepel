@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { floorObject } from "./world/floor";
-
+import { RaamParts } from "./objecten/threeparts"; // Import RaamParts
 import { window1 } from "./objecten/raamfromstore";
 import { BackgroundColor } from "./world/background";
 import { OrbitControlsClass } from "./controles/control";
@@ -32,10 +32,12 @@ export class ThreeJs {
     this.renderer.setSize(this.size.width, this.size.height);
     document.body.appendChild(this.renderer.domElement);
 
-    // object van de vloer
+    // object van de vloer  
     const floor = new floorObject(this.scene);
-
-
+    // raam texture
+    this.raamParts = new RaamParts();
+    this.initialize();
+ 
 
     // store manier om windows teladen
     this.myWindow = new window1(this.scene);
@@ -76,6 +78,13 @@ export class ThreeJs {
     floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();
+  }
+  async initialize() {
+    const object = await this.raamParts.applyTexture(
+      "balk-onder",
+      "../../public/blender/WoodFlooringAshSuperWhite001/flooringwhite.jpg"
+    );
+    this.scene.add(object);
   }
 
   render() {

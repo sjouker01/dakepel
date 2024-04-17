@@ -1,13 +1,17 @@
   import { RaamComponents } from "./mesh";
   import { useMenuStore } from "/Users/sjouk/OneDrive/Bureaublad/stage-github/dakepel/src/server/menustore"; // Vervang dit met het juiste pad
   import * as THREE from "three";
+  import { RaamParts } from "./threeparts";
   export class window1 {
     constructor(scene) {
       this.scene = scene;
-      this.raamComponents = new RaamComponents();
+      // this.raamComponents = new RaamComponents();
+      this.raamComponents = new RaamParts();
       this.objects = {};
       // Laden van de store
       this.menuStore = useMenuStore();
+      this.raamParts = new RaamParts();
+  
       // De namen van de objecten
       const objectNames = [
         "balk-onder",
@@ -15,7 +19,21 @@
         "balk-rechts",
         "balk-boven",
       ];
-
+      objectNames.forEach((name) => {
+        this.raamComponents.loadObject(name, async (object) => {
+          this.objects[name] = object;
+          const texturedObject = await this.raamParts.applyTexture(
+            name,
+            "/public/blender/WoodFlooringAshSuperWhite001/flooringwhite.jpg"
+          );
+          this.scene.add(texturedObject);
+          if (name === "balk-onder" || name === "balk-boven") {
+            this.modifyObject(name, (object) => {
+              this.menuStore.setObject(name, object);
+              this.updateObjectScaleX(name, 1000);
+            });
+          }
+        });
       // Voor elke objectnaam, laad het overeenkomstige object in. En de y-positie, in dit geval de hoogte van het object, wordt verhoogd.
       objectNames.forEach((name) => {
         this.raamComponents.loadObject(name, (object) => {
@@ -29,7 +47,9 @@
           }
         });
       });
-    }
+    })
+  }
+
 
     // Methode om een object te wijzigen
     modifyObject(name, callback) {
@@ -166,12 +186,17 @@
         }
       });
     }
-    updatemateriaal() {
-      const newMateriaal = this.menuStore.color;
-      Object.values(this.objects).forEach((object) => {
-        if (object && object.material) {
-          object.material.color.set(newColor);
-        }
+    updateTexture(textureUrl) {
+      const loader = new THREE.TextureLoader();
+
+      loader.load(textureUrl, (texture) => {
+          Object.values(this.objects).forEach((object) => {
+              if (object) {
+                  object.material = new THREE.MeshBasicMaterial({ map: texture });
+              }
+          });
+      }, undefined, function (error) {
+          console.error('Er is een fout opgetreden bij het laden van de textuur', error);
       });
-    }
+  }
   }
