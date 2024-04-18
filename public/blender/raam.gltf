@@ -130,7 +130,7 @@
 					"use_micro_displacements":0
 				}
 			},
-			"name":"WoodFlooringAshSuperWhite001_2K",
+			"name":"wood1.003",
 			"pbrMetallicRoughness":{}
 		},
 		{
@@ -155,7 +155,82 @@
 					"use_micro_displacements":0
 				}
 			},
-			"name":"WoodFlooringAshSuperWhite001_2K.001",
+			"name":"wood1.002",
+			"pbrMetallicRoughness":{}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"extras":{
+				"pmc_matprops":{},
+				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
+				"poliigon_props":{
+					"asset_name":"WoodFlooringAshSuperWhite001",
+					"asset_id":4186,
+					"asset_type":"Textures",
+					"size":"2K",
+					"mapping":"UV",
+					"scale":1.0,
+					"displacement":0.0,
+					"use_16bit":1,
+					"use_micro_displacements":0
+				}
+			},
+			"name":"wood1.004",
+			"pbrMetallicRoughness":{}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"extras":{
+				"pmc_matprops":{},
+				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
+				"poliigon_props":{
+					"asset_name":"WoodFlooringAshSuperWhite001",
+					"asset_id":4186,
+					"asset_type":"Textures",
+					"size":"2K",
+					"mapping":"UV",
+					"scale":1.0,
+					"displacement":0.0,
+					"use_16bit":1,
+					"use_micro_displacements":0
+				}
+			},
+			"name":"wood1.005",
+			"pbrMetallicRoughness":{}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"extras":{
+				"pmc_matprops":{},
+				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
+				"poliigon_props":{
+					"asset_name":"WoodFlooringAshSuperWhite001",
+					"asset_id":4186,
+					"asset_type":"Textures",
+					"size":"2K",
+					"mapping":"UV",
+					"scale":1.0,
+					"displacement":0.0,
+					"use_16bit":1,
+					"use_micro_displacements":0
+				}
+			},
+			"name":"wood1.001",
 			"pbrMetallicRoughness":{}
 		}
 	],
@@ -198,7 +273,7 @@
 						"TEXCOORD_0":9
 					},
 					"indices":3,
-					"material":1
+					"material":2
 				}
 			]
 		},
@@ -212,7 +287,7 @@
 						"TEXCOORD_0":12
 					},
 					"indices":3,
-					"material":0
+					"material":3
 				}
 			]
 		},
@@ -226,7 +301,7 @@
 						"TEXCOORD_0":15
 					},
 					"indices":3,
-					"material":1
+					"material":4
 				}
 			]
 		}

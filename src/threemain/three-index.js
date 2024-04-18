@@ -41,7 +41,8 @@ export class ThreeJs {
 
     // store manier om windows teladen
     this.myWindow = new window1(this.scene);
-
+    let window1Instance = new window1(/* constructor parameters if any */);
+window1Instance.updateTexture('path/to/your/texture.jpg')
     // light object
     let lamp = new lamp1();
     let lights = lamp.getLight();
