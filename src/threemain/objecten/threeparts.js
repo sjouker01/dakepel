@@ -44,24 +44,26 @@ import { TextureLoader } from 'three';
     return this.objects[name];
   }
 
+
+
   async applyTexture(objectName, texturePath) {
     const object = await this.getObject(objectName);
     if (!object) {
-      throw new Error(`Object ${objectName} niet gevonden`);
+        throw new Error(`Object ${objectName} not found`);
     }
 
     this.textureLoader.load(texturePath, (texture) => {
-      object.traverse((node) => {
-        if (node.isMesh) {
-          node.material.map = texture;
-          node.material.needsUpdate = true;
-        }
-      });
+        object.traverse((node) => {
+            if (node.isMesh) {
+                node.material.map = texture;
+                node.material.needsUpdate = true;
+            }
+        });
     }, undefined, (error) => {
-      console.error(`Fout bij het laden van de textuur: ${error}`);
+        console.error(`Error loading texture: ${error}`);
     });
 
     return object; // Return the object
-  }
+}
 }
 
