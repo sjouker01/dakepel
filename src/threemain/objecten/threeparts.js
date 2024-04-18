@@ -40,7 +40,7 @@ import { TextureLoader } from 'three';
       await this.loadModel().catch((error) => {
         throw new Error(`Kon het model niet laden: ${error}`);
       });
-    }
+    } 
     return this.objects[name];
   }
 

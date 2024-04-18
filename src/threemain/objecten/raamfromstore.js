@@ -35,7 +35,7 @@ export class window1 {
         });
     }
 
-    modifyObject(name, callback) {
+    modifyObject(name, callback) {  
         const object = this.objects[name];
         if (object) {
             callback(object);
@@ -50,7 +50,7 @@ export class window1 {
     }
 
     updateWindowWidth() {
-        const objectsToUpdate = ["balk-boven", "balk-onder"];
+        const objectsToUpdate = ["balk-boven", "balk-onder"];           
         objectsToUpdate.forEach((objectName) => {
             this.updateObjectScaleX(objectName, this.newWidth);
         });
