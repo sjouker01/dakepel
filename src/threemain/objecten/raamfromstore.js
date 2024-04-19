@@ -1,7 +1,7 @@
 import { RaamComponents } from "./mesh";
 import { useMenuStore } from "/Users/sjouk/OneDrive/Bureaublad/stage-github/dakepel/src/server/menustore"; // Vervang dit met het juiste pad
 import * as THREE from "three";
-import { RaamParts } from "./threeparts";
+
 
 export class window1 {
   constructor(scene) {
@@ -9,54 +9,46 @@ export class window1 {
     this.raamComponents = new RaamComponents();
     this.objects = {};
     this.menuStore = useMenuStore();
-    this.raamParts = new RaamParts();
+    this.objectNames = ["balk-onder", "balk-links", "balk-rechts", "balk-boven"];
+    this.loadObjects();
+    this.raamComponents.loadObject(name, (object) => {
+      this.objects[name] = object;
+      this.scene.add(object);
+      if (name === "balk-onder" || name === "balk-boven") {
+        this.modifyObject(name, this.modifyCallback);
+      }
+    });
+  }
 
-    const objectNames = [
-      "balk-onder",
-      "balk-links",
-      "balk-rechts",
-      "balk-boven",
-    ];
-    objectNames.forEach((name) => {
-      this.raamComponents.loadObject(name, async (object) => {
+  loadObjects() {
+    this.objectNames.forEach((name) => {
+      this.raamComponents.loadObject(name, (object) => {
+        console.log(`Object ${name} loaded`, object);
         this.objects[name] = object;
-        const texturePath = `/public/blender/${name}.jpg`; // Different texture for each object
-        const texturedObject = await this.raamParts.applyTextureToObject(
-          name,
-          texturePath
-        );
-        this.scene.add(texturedObject);
+        this.scene.add(object);
         if (name === "balk-onder" || name === "balk-boven") {
-          this.modifyObject(name, (object) => {
-            this.menuStore.setObject(name, object);
-            this.updateObjectScaleX(name, 1000);
-          });   
+          if (typeof this.modifyCallback === 'function') {
+            this.modifyObject(name, this.modifyCallback);
+          } else {
+            console.error('Error: this.modifyCallback is not a function');
+          }
         }
       });
-    });
-    this.raamComponents.loadObject(name, async (object) => {
-        this.objects[name] = object;
-        const texturePath = `/public/blender/${name}.jpg`; // Different texture for each object
-        const texturedObject = await this.raamParts.applyTexture(name, texturePath);
-        this.scene.add(texturedObject);
-        if (name === "balk-onder" || name === "balk-boven") {
-            this.modifyObject(name, (object) => {
-                this.menuStore.setObject(name, object);
-                this.updateObjectScaleX(name, 1000);
-            });
-        }
     });
   }
 
   modifyObject(name, callback) {
     const object = this.objects[name];
     if (object) {
-      callback(object);
+      callback(object, name);
+      
     }
   }
 
+
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
+    console.log(`New width: ${this.newWidth}`); // Voeg deze regel toe
     this.updateWindowWidth();
     this.updateSideBarsPosition();
     this.updateMiddleBars();
@@ -182,28 +174,22 @@ export class window1 {
     });
   }
 
-  updateTexture(textureUrl) {
-    const loader = new THREE.TextureLoader();
-
-    loader.load(
-      textureUrl,
-      (texture) => {
-        Object.values(this.objects).forEach((object) => {
-          if (object && object.material) {
-            object.material.map = texture;
-            object.material.needsUpdate = true;
-          } else {
-            console.error(`Object ${object} heeft geen materiaal eigenschap`);
-          }
-        });
-      },
-      undefined,
-      (error) => {
-        console.error(
-          "Er is een fout opgetreden bij het laden van de textuur",
-          error
-        );
+  loadTextureAndApplyToObject(objectName, textureUrl) {
+    // Maak een nieuwe TextureLoader
+    const textureLoader = new THREE.TextureLoader();
+  
+    // Laad de textuur
+    textureLoader.load(textureUrl, (texture) => {
+      // Zoek het object
+      const object = this.scene.getObjectByName(objectName);
+  
+      if (object) {
+        // Voeg de textuur toe aan het materiaal van het object
+        object.material.map = texture;
+        object.material.needsUpdate = true;
       }
-    );
+    });
   }
+  
 }
+

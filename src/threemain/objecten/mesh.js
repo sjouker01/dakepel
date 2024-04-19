@@ -9,16 +9,14 @@ export class RaamComponents {
   }
 
   async loadObject(name, callback) {
-    const object = await this.raamParts.getObject(name).catch((error) => { // Gebruik het RaamParts object om het object te krijgen
+    const object = await this.raamParts.getObject(name).catch((error) => {
       throw new Error(`Kon het model niet laden: ${error}`);
     });
-    callback(object);
-  }
-  addObject(name, object) {
-    this.raamParts.objects[name] = object;
-  } 
-
-  applyTexture(name, texturePath) {
-    this.raamParts.applyTexture(name, texturePath);
+  
+    if (typeof callback === 'function') {
+      callback(object);
+    } else {
+      console.error('Error: callback is not a function');
+    }
   }
 }

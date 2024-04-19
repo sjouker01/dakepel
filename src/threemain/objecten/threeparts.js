@@ -1,30 +1,39 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { TextureLoader } from 'three';
 
- export class RaamParts {
+export class RaamParts {
   constructor() {
     this.loader = new GLTFLoader();
-    this.textureLoader = new TextureLoader();
     this.objects = {};
+    this.textures = {};
   }
 
   processNode(node) {
     if (node.isMesh) {
       this.objects[node.name] = node;
+      if (node.material && node.material.map && node.material.map.image) {
+        this.textures[node.material.map.image.src] = node.material.map.image;
+      }
     }
-
+  
     if (node.children) {
       node.children.forEach((child) => this.processNode(child));
     }
-  } 
+  }
 
   loadModel() {
     return new Promise((resolve, reject) => {
       this.loader.load(
         "blender/raam.gltf",
         (gltf) => {
-          this.processNode(gltf.scene);
-          resolve(); 
+          gltf.scene.traverse((node) => {
+            if (node.isMesh) {
+              this.objects[node.name] = node;
+              if (node.material.map) {
+                this.textures[node.material.map.name] = node.material.map.image;
+              }
+            }
+          });
+          resolve();
         },
         undefined,
         (error) => {
@@ -40,30 +49,7 @@ import { TextureLoader } from 'three';
       await this.loadModel().catch((error) => {
         throw new Error(`Kon het model niet laden: ${error}`);
       });
-    } 
+    }
     return this.objects[name];
   }
-
-
-
-  async applyTexture(objectName, texturePath) {
-    const object = await this.getObject(objectName);
-    if (!object) {
-        throw new Error(`Object ${objectName} not found`);
-    }
-
-    this.textureLoader.load(texturePath, (texture) => {
-        object.traverse((node) => {
-            if (node.isMesh) {
-                node.material.map = texture;
-                node.material.needsUpdate = true;
-            }
-        });
-    }, undefined, (error) => {
-        console.error(`Error loading texture: ${error}`);
-    });
-
-    return object; // Return the object
 }
-}
-

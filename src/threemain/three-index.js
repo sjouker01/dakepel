@@ -32,17 +32,16 @@ export class ThreeJs {
     this.renderer.setSize(this.size.width, this.size.height);
     document.body.appendChild(this.renderer.domElement);
 
-    // object van de vloer  
+    // object van de vloer
     const floor = new floorObject(this.scene);
     // raam texture
     this.raamParts = new RaamParts();
-    this.initialize();
- 
+
 
     // store manier om windows teladen
     this.myWindow = new window1(this.scene);
-    let window1Instance = new window1(/* constructor parameters if any */);
-window1Instance.updateTexture('path/to/your/texture.jpg')
+
+
     // light object
     let lamp = new lamp1();
     let lights = lamp.getLight();
@@ -61,7 +60,7 @@ window1Instance.updateTexture('path/to/your/texture.jpg')
     helper2.visible = false;
 
     //toevoegen aan scene
-    this.scene.add(helper1);
+    this.scene.add(helper1);  
     this.scene.add(helper2);
 
     // controls toe tevoegen
@@ -80,13 +79,7 @@ window1Instance.updateTexture('path/to/your/texture.jpg')
     // renderen
     this.render();
   }
-  async initialize() {
-    const object = await this.raamParts.applyTexture(
-      "balk-onder",
-      "../../public/blender/WoodFlooringAshSuperWhite001/flooringwhite.jpg"
-    );
-    this.scene.add(object);
-  }
+
 
   render() {
     requestAnimationFrame(() => this.render());
