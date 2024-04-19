@@ -125,16 +125,6 @@
 				1
 			],
 			"name":"wood1.004",
-			"pbrMetallicRoughness":{}
-		},
-		{
-			"doubleSided":true,
-			"emissiveFactor":[
-				1,
-				1,
-				1
-			],
-			"name":"wood1.005",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
@@ -148,8 +138,26 @@
 				1,
 				1
 			],
+			"name":"wood1.005",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":3
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
 			"name":"wood1.001",
-			"pbrMetallicRoughness":{}
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":4
+				}
+			}
 		}
 	],
 	"meshes":[
@@ -236,23 +244,41 @@
 		{
 			"sampler":0,
 			"source":2
+		},
+		{
+			"sampler":0,
+			"source":3
+		},
+		{
+			"sampler":0,
+			"source":4
 		}
 	],
 	"images":[
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"balk-onder",
-			"uri":"balk-links.jpeg"
+			"uri": "balk-onder.png"
 		},
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
 			"name":"balk-rechts",
-			"uri":"balk-rechts.jpeg"
+			"uri":"balk-rechts.png"
 		},
 		{
-			"mimeType":"image/jpeg",
+			"mimeType":"image/png",
+			"name":"balk-links",
+			"uri":"balk-links.png"
+		},
+		{
+			"mimeType":"image/png",
 			"name":"balk-boven",
-			"uri":"balk-boven.jpeg"
+			"uri":"balk-boven.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"balk-midden",
+			"uri":"balk-midden.png"
 		}
 	],
 	"accessors":[

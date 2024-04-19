@@ -21,7 +21,7 @@ import { TextureLoader } from 'three';
   loadModel() {
     return new Promise((resolve, reject) => {
       this.loader.load(
-        "blender/raam1.gltf",
+        "blender/raam.gltf",
         (gltf) => {
           this.processNode(gltf.scene);
           resolve(); 
