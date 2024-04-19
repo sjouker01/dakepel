@@ -6,25 +6,6 @@
 	"scene":0,
 	"scenes":[
 		{
-			"extras":{
-				"dmx":{
-					"collection":null,
-					"volume":null,
-					"artnet_status":0,
-					"programmer_dimmer":0.0,
-					"programmer_color":[
-						1.0,
-						1.0,
-						1.0,
-						1.0
-					],
-					"programmer_pan":0.0,
-					"programmer_tilt":0.0
-				},
-				"NWBusyDrawing":"",
-				"NWLazySource":"Mapping",
-				"NWLazyTarget":"Combine Color"
-			},
 			"name":"Scene",
 			"nodes":[
 				0,
@@ -115,23 +96,12 @@
 				1,
 				1
 			],
-			"extras":{
-				"pmc_matprops":{},
-				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
-				"poliigon_props":{
-					"asset_name":"WoodFlooringAshSuperWhite001",
-					"asset_id":4186,
-					"asset_type":"Textures",
-					"size":"2K",
-					"mapping":"UV",
-					"scale":1.0,
-					"displacement":0.0,
-					"use_16bit":1,
-					"use_micro_displacements":0
-				}
-			},
 			"name":"wood1.003",
-			"pbrMetallicRoughness":{}
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":0
+				}
+			}
 		},
 		{
 			"doubleSided":true,
@@ -140,23 +110,12 @@
 				1,
 				1
 			],
-			"extras":{
-				"pmc_matprops":{},
-				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
-				"poliigon_props":{
-					"asset_name":"WoodFlooringAshSuperWhite001",
-					"asset_id":4186,
-					"asset_type":"Textures",
-					"size":"2K",
-					"mapping":"UV",
-					"scale":1.0,
-					"displacement":0.0,
-					"use_16bit":1,
-					"use_micro_displacements":0
+			"name":"balk-rechts",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":1
 				}
-			},
-			"name":"wood1.002",
-			"pbrMetallicRoughness":{}
+			}
 		},
 		{
 			"doubleSided":true,
@@ -165,21 +124,6 @@
 				1,
 				1
 			],
-			"extras":{
-				"pmc_matprops":{},
-				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
-				"poliigon_props":{
-					"asset_name":"WoodFlooringAshSuperWhite001",
-					"asset_id":4186,
-					"asset_type":"Textures",
-					"size":"2K",
-					"mapping":"UV",
-					"scale":1.0,
-					"displacement":0.0,
-					"use_16bit":1,
-					"use_micro_displacements":0
-				}
-			},
 			"name":"wood1.004",
 			"pbrMetallicRoughness":{}
 		},
@@ -190,23 +134,12 @@
 				1,
 				1
 			],
-			"extras":{
-				"pmc_matprops":{},
-				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
-				"poliigon_props":{
-					"asset_name":"WoodFlooringAshSuperWhite001",
-					"asset_id":4186,
-					"asset_type":"Textures",
-					"size":"2K",
-					"mapping":"UV",
-					"scale":1.0,
-					"displacement":0.0,
-					"use_16bit":1,
-					"use_micro_displacements":0
-				}
-			},
 			"name":"wood1.005",
-			"pbrMetallicRoughness":{}
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":2
+				}
+			}
 		},
 		{
 			"doubleSided":true,
@@ -215,21 +148,6 @@
 				1,
 				1
 			],
-			"extras":{
-				"pmc_matprops":{},
-				"poliigon":"Textures;WoodFlooringAshSuperWhite001",
-				"poliigon_props":{
-					"asset_name":"WoodFlooringAshSuperWhite001",
-					"asset_id":4186,
-					"asset_type":"Textures",
-					"size":"2K",
-					"mapping":"UV",
-					"scale":1.0,
-					"displacement":0.0,
-					"use_16bit":1,
-					"use_micro_displacements":0
-				}
-			},
 			"name":"wood1.001",
 			"pbrMetallicRoughness":{}
 		}
@@ -304,6 +222,37 @@
 					"material":4
 				}
 			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		},
+		{
+			"sampler":0,
+			"source":1
+		},
+		{
+			"sampler":0,
+			"source":2
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-onder",
+			"uri":"balk-links.jpeg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-rechts",
+			"uri":"balk-rechts.jpeg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-boven",
+			"uri":"balk-boven.jpeg"
 		}
 	],
 	"accessors":[
@@ -550,6 +499,12 @@
 			"byteLength":192,
 			"byteOffset":3720,
 			"target":34962
+		}
+	],
+	"samplers":[
+		{
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[
