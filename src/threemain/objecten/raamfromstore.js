@@ -11,6 +11,7 @@ export class window1 {
     this.menuStore = useMenuStore();
     this.objectNames = ["balk-onder", "balk-links", "balk-rechts", "balk-boven"];
     this.loadObjects();
+    this.modifyCallback = this.modifyCallback || function() {};
     this.raamComponents.loadObject(name, (object) => {
       this.objects[name] = object;
       this.scene.add(object);
@@ -23,19 +24,23 @@ export class window1 {
   loadObjects() {
     this.objectNames.forEach((name) => {
       this.raamComponents.loadObject(name, (object) => {
-        console.log(`Object ${name} loaded`, object);
-        this.objects[name] = object;
-        this.scene.add(object);
-        if (name === "balk-onder" || name === "balk-boven") {
-          if (typeof this.modifyCallback === 'function') {
-            this.modifyObject(name, this.modifyCallback);
-          } else {
-            console.error('Error: this.modifyCallback is not a function');
+        if (object instanceof THREE.Object3D) {
+          console.log(`Object ${name} loaded`, object);
+          this.objects[name] = object;
+          this.scene.add(object);
+          if (name === "balk-onder" || name === "balk-boven") {
+            if (typeof this.modifyCallback === 'function') {
+              this.modifyObject(name, this.modifyCallback);
+            } else {
+              console.error('Error: this.modifyCallback is not a function');
+            }
           }
+        } else {
+          console.error(`Error: Object ${name} failed to load or is not an instance of THREE.Object3D`, object);
         }
       });
     });
-  }
+  } 
 
   modifyObject(name, callback) {
     const object = this.objects[name];
@@ -193,3 +198,4 @@ export class window1 {
   
 }
 
+ 

@@ -1,10 +1,18 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import * as THREE from 'three';
 
 export class RaamParts {
   constructor() {
     this.loader = new GLTFLoader();
+    this.textureLoader = new THREE.TextureLoader();
     this.objects = {};
     this.textures = {};
+  }
+   // Voeg een nieuwe methode toe om een textuur te laden
+   loadTexture(url) {
+    return new Promise((resolve, reject) => {
+      this.textureLoader.load(url, resolve, undefined, reject);
+    });
   }
 
   processNode(node) {
@@ -19,7 +27,6 @@ export class RaamParts {
       node.children.forEach((child) => this.processNode(child));
     }
   }
-
   loadModel() {
     return new Promise((resolve, reject) => {
       this.loader.load(
@@ -43,6 +50,8 @@ export class RaamParts {
       );
     });
   }
+  
+
 
   async getObject(name) {
     if (!this.objects[name]) {
