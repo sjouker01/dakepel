@@ -11,7 +11,7 @@ export class WindowKozijn {
     this.objectNamen = [
       "balk-onder",
       "balk-rechts",
-      " balk-links",
+      "balk-links",
       "balk-boven",
     ];
     this.scaleFactor = 1000;
@@ -19,7 +19,7 @@ export class WindowKozijn {
   }
 
   LoadWindow() {
-    this.objectNames.forEach((name) => {
+    this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
         if (object instanceof THREE.Object3D) {
           this.objects[name] = object;
@@ -33,16 +33,38 @@ export class WindowKozijn {
       });
     });
   }
+  // max groote van raam
+  MaxGroote(){
+    const MaxGroote = 15;
+    if (this.breedte > MaxGroote ){
+      this.breedte = MaxGroote;
+    }
+    if (this.hoogte > MaxGroote){
+      this.hoogte = MaxGroote
+    }
+  }
+  HoogteKozijn(){
+    this.newHoogte = Number(this.KozijnStore.hoogte) / this.scaleFactor; 
+    if (this.objects['balk-links'] && this.objects['balk-rechts']){
+      this.objects['balk-links'].scale.y = this.hoogte;
+      this.objects['balk-rechts'].scale.y = this.hoogte;
+    } else{
+      console.log(" er is iets fout gegaan met veranderen van de hoogte")
+    }
+  }
 
   // hier mee haal de de maten van hoogte en breedte op uit store
-  StoreMaten(){
-    this.breedte = Number(this.KozijnStore.breedte);
-    this.hoogte = Number(this.KozijnStore.hoogte);
-  }
   MmToMeter(){
     this.breedte /= this.scaleFactor;
     this.hoogte /= this.scaleFactor;
   }
-
- 
+  // hier word max groote van de raam bepaald
+  maxKozijnGroote(){
+    this.breedte = Number(this.KozijnStore.breedte);
+    this.hoogte = Number(this.KozijnStore.hoogte);
+    this.MmToMeter();
+    this.MaxGroote();
+    this.HoogteKozijn();
+  }
+  
 }

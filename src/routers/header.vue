@@ -133,12 +133,12 @@ watch(() => store.breedte, (newBreedte) => {
   }
 });
 
-watch(() => store.hoogte, () => {
-  window.ThreeJs.myWindow.updateHoogte();
+watch(() => store.breedte, () => {
+  myWindow.maxKozijnGroote();
 });
 
-watch(() => store.color, () => {
-  window.ThreeJs.myWindow.updateColor();
+watch(() => store.hoogte, () => {
+  myWindow.maxKozijnGroote();
 });
 
 function checkMaxBreedte(event) {
