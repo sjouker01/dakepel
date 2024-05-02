@@ -6,26 +6,18 @@ import * as THREE from "three";
 export class window1 {
   constructor(scene) {
     this.scene = scene;
-    this.raamComponents = new RaamComponents();
+    this.raamComponents = new RaamComponents(); // Voeg deze regel toe
     this.objects = {};
     this.menuStore = useMenuStore();
     this.objectNames = ["balk-onder", "balk-links", "balk-rechts", "balk-boven"];
     this.loadObjects();
     this.modifyCallback = this.modifyCallback || function() {};
-    this.raamComponents.loadObject(name, (object) => {
-      this.objects[name] = object;
-      this.scene.add(object);
-      if (name === "balk-onder" || name === "balk-boven") {
-        this.modifyObject(name, this.modifyCallback);
-      }
-    });
   }
-
+  
   loadObjects() {
     this.objectNames.forEach((name) => {
       this.raamComponents.loadObject(name, (object) => {
         if (object instanceof THREE.Object3D) {
-          console.log(`Object ${name} loaded`, object);
           this.objects[name] = object;
           this.scene.add(object);
           if (name === "balk-onder" || name === "balk-boven") {
@@ -40,20 +32,19 @@ export class window1 {
         }
       });
     });
-  } 
-
+  }
+  
   modifyObject(name, callback) {
     const object = this.objects[name];
     if (object) {
       callback(object, name);
-      
     }
   }
-
-
+  
+  
   updateBreedte() {
     this.newWidth = this.menuStore.breedte;
-    console.log(`New width: ${this.newWidth}`); // Voeg deze regel toe
+    console.log(`New width: ${this.newWidth}`);
     this.updateWindowWidth();
     this.updateSideBarsPosition();
     this.updateMiddleBars();
@@ -111,9 +102,7 @@ export class window1 {
     }
   }
 
-  addObjectToRaamComponents(name, object) {
-    this.raamComponents.addObject(name, object);
-  }
+ 
 
   addMiddleBars(numMiddleBars) {
     this.objects["balk-midden"] = [];
@@ -195,7 +184,5 @@ export class window1 {
       }
     });
   }
-  
 }
-
  

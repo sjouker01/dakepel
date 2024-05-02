@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { floorObject } from "./world/floor";
-import { RaamParts } from "./objecten/threeparts"; // Import RaamParts
-import { window1 } from "./objecten/raamfromstore";
+import { WindowKozijn} from "./objecten/kozijn";
 import { BackgroundColor } from "./world/background";
 import { OrbitControlsClass } from "./controles/control";
 import { Camera } from "./camfile/camera";
@@ -34,12 +33,11 @@ export class ThreeJs {
 
     // object van de vloer
     const floor = new floorObject(this.scene);
-    // raam texture
-    this.raamParts = new RaamParts();
+  
 
 
     // store manier om windows teladen
-    this.myWindow = new window1(this.scene);
+    this.myWindow = new WindowKozijn(this.scene);
 
 
     // light object
