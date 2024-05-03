@@ -11,8 +11,8 @@ import { Sneltoetsen } from "./controles/sneltoetsen";
 let instance = null;
 export class ThreeJs {
   constructor(container) {
-    if (instance) {
-      return instance;
+    if (!instance) {
+      instance = this;
     }
     instance = this;
     window.ThreeJs = this;
@@ -39,7 +39,7 @@ export class ThreeJs {
     // store manier om windows teladen
     this.myWindow = new WindowKozijn(this.scene);
 
-
+   
     // light object
     let lamp = new lamp1();
     let lights = lamp.getLight();
@@ -78,7 +78,7 @@ export class ThreeJs {
     this.render();
   }
 
-
+ 
   render() {
     requestAnimationFrame(() => this.render());
     this.controls.update();

@@ -27,7 +27,7 @@
 			],
 			"translation":[
 				0,
-				-0.07127603888511658,
+				-0.44999998807907104,
 				0
 			]
 		},
@@ -41,7 +41,7 @@
 			],
 			"translation":[
 				0.550000011920929,
-				0.37872394919395447,
+				0,
 				0
 			]
 		},
@@ -55,7 +55,7 @@
 			],
 			"translation":[
 				-0.550000011920929,
-				0.37872394919395447,
+				0,
 				0
 			]
 		},
@@ -69,7 +69,7 @@
 			],
 			"translation":[
 				0,
-				0.8287240266799927,
+				0.44999998807907104,
 				0
 			]
 		},
@@ -80,11 +80,6 @@
 				0.10000000149011612,
 				0.800000011920929,
 				0.10000000149011612
-			],
-			"translation":[
-				0,
-				0.37999993562698364,
-				0
 			]
 		}
 	],
@@ -256,29 +251,29 @@
 	],
 	"images":[
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"balk-onder",
-			"uri": "balk-onder.png"
+			"uri":"texture/balk-onder.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"balk-rechts",
-			"uri":"balk-rechts.png"
+			"uri":"texture/balk-rechts.jpg"
 		},
-		{	
-			"mimeType":"image/png",
+		{
+			"mimeType":"image/jpeg",
 			"name":"balk-links",
-			"uri":"balk-links.png"
+			"uri":"texture/balk-links.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"balk-boven",
-			"uri":"balk-boven.png"
+			"uri":"texture/balk-boven.jpg"
 		},
 		{
-			"mimeType":"image/png",
+			"mimeType":"image/jpeg",
 			"name":"balk-midden",
-			"uri":"balk-midden.png"
+			"uri":"texture/balk-midden.jpg"
 		}
 	],
 	"accessors":[

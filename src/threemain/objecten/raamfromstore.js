@@ -57,16 +57,16 @@ export class window1 {
     });
   }
 
-  updateSideBarsPosition() {
-    const sideBars = ["balk-links", "balk-rechts"];
-    sideBars.forEach((bar, index) => {
-      this.modifyObject(bar, (object) => {
-        const sign = index === 0 ? 1 : -1;
-        object.position.x =
-          sign * (this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2);
+    updateSideBarsPosition() {
+      const sideBars = ["balk-links", "balk-rechts"];
+      sideBars.forEach((bar, index) => {
+        this.modifyObject(bar, (object) => {
+          const sign = index === 0 ? 1 : -1;
+          object.position.x =
+            sign * (this.objects["balk-onder"].scale.x / 2 - object.scale.x / 2);
+        });
       });
-    });
-  }
+    }
 
   updateMiddleBarLengths() {
     if (this.objects["balk-midden"]) {

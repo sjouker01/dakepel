@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { KozijnParts } from "./FileLoader";
-import { useMenuStore } from "/Users/sjouk/OneDrive/Bureaublad/stage-github/dakepel/src/server/menustore";
+import { useMenuStore } from "../../server/menustore";
 
 export class WindowKozijn {
   constructor(scene) {
@@ -14,6 +14,8 @@ export class WindowKozijn {
       "balk-links",
       "balk-boven",
     ];
+    this.zijBalken = ['balk-links', 'balk-rechts'];
+    this.bovenOnderBalken = ['balk-boven', 'balk-onder'];
     this.scaleFactor = 1000;
     this.LoadWindow();
   }
@@ -33,38 +35,43 @@ export class WindowKozijn {
       });
     });
   }
-  // max groote van raam
-  MaxGroote(){
-    const MaxGroote = 15;
-    if (this.breedte > MaxGroote ){
-      this.breedte = MaxGroote;
-    }
-    if (this.hoogte > MaxGroote){
-      this.hoogte = MaxGroote
-    }
-  }
-  HoogteKozijn(){
-    this.newHoogte = Number(this.KozijnStore.hoogte) / this.scaleFactor; 
-    if (this.objects['balk-links'] && this.objects['balk-rechts']){
-      this.objects['balk-links'].scale.y = this.hoogte;
-      this.objects['balk-rechts'].scale.y = this.hoogte;
-    } else{
-      console.log(" er is iets fout gegaan met veranderen van de hoogte")
-    }
+
+
+
+
+
+
+
+
+
+
+  // dit is om de hoogte te update
+  updateHoogte() {
+    this.hoogte =  this.KozijnStore.hoogte / this.scaleFactor
+     
+    this.zijBalken.forEach((bar ) => {
+      this.objects[bar].scale.y = this.hoogte
+    })
+    
+    this.bovenOnderBalken.forEach((bar) => {
+      let richting
+      if(bar === "balk-boven"){
+         richting = 1
+      } else {
+
+         richting = -1
+      }
+      console.log(richting)
+      this.objects[bar].position.y = richting * (this.hoogte / 2 - this.objects[bar].scale.y / 2);
+      console.log(this.objects[bar].position.y)
+    })
+    
   }
 
-  // hier mee haal de de maten van hoogte en breedte op uit store
-  MmToMeter(){
-    this.breedte /= this.scaleFactor;
-    this.hoogte /= this.scaleFactor;
-  }
-  // hier word max groote van de raam bepaald
-  maxKozijnGroote(){
-    this.breedte = Number(this.KozijnStore.breedte);
-    this.hoogte = Number(this.KozijnStore.hoogte);
-    this.MmToMeter();
-    this.MaxGroote();
-    this.HoogteKozijn();
-  }
+
+
+
+
   
+
 }
