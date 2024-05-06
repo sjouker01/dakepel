@@ -14,8 +14,8 @@ export class WindowKozijn {
       "balk-links",
       "balk-boven",
     ];
-    this.zijBalken = ['balk-links', 'balk-rechts'];
-    this.bovenOnderBalken = ['balk-boven', 'balk-onder'];
+    this.zijBalken = ["balk-links", "balk-rechts"];
+    this.bovenOnderBalken = ["balk-boven", "balk-onder"];
     this.scaleFactor = 1000;
     this.LoadWindow();
   }
@@ -36,42 +36,25 @@ export class WindowKozijn {
     });
   }
 
-
-
-
-
-
-
-
-
-
-  // dit is om de hoogte te update
-  updateHoogte() {
-    this.hoogte =  this.KozijnStore.hoogte / this.scaleFactor
-     
-    this.zijBalken.forEach((bar ) => {
-      this.objects[bar].scale.y = this.hoogte
-    })
-    
-    this.bovenOnderBalken.forEach((bar) => {
-      let richting
-      if(bar === "balk-boven"){
-         richting = 1
-      } else {
-
-         richting = -1
-      }
-      console.log(richting)
-      this.objects[bar].position.y = richting * (this.hoogte / 2 - this.objects[bar].scale.y / 2);
-      console.log(this.objects[bar].position.y)
-    })
-    
-  }
-
-
-
-
-
   
+  updateHoogte() {
+    this.hoogte = this.KozijnStore.hoogte / this.scaleFactor;
 
+    this.zijBalken.forEach((bar) => {
+      this.objects[bar].scale.y = this.hoogte;
+    });
+
+    this.bovenOnderBalken.forEach((bar) => {
+      let richting;
+      if (bar === "balk-boven") {
+        richting = 1;
+      } else {
+        richting = -1;
+      }
+      console.log(richting);
+      this.objects[bar].position.y =
+        richting * (this.hoogte / 2 - this.objects[bar].scale.y / 2);
+      console.log(this.objects[bar].position.y);
+    });
+  }
 }
