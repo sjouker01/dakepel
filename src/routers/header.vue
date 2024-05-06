@@ -10,8 +10,8 @@
     <div class="container69">
       <div v-if="store.header === 1" class="sub-header q-mt-md rounded-borders bg-white">
         <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
-          <q-input v-model="store.breedte" label="Breedte" type="number" :max="maxBreedte" @input="checkMaxBreedte" />
-          <q-input v-model="store.hoogte" label="Hoogte" />
+          <q-input v-model="store.breedte" label="Breedte" type="number" />
+          <q-input v-model="store.hoogte" label="Hoogte" type="number" />
           <q-input v-model="store.graden" label="Graden" />
         </q-toolbar>
       </div>
@@ -119,31 +119,39 @@
 
 <script setup>
 import { useMenuStore } from '../server/menustore';
-import { ref, watch } from 'vue'
+import {  watch } from 'vue'
 const store = useMenuStore();
+let maxHoogte = 10000;
+let minHoogte  = 800;
 
-const maxBreedte = 15000; // Define maxBreedte here
+watch(() => store.hoogte, (newHoogte) => {
+  newHoogte = Number(newHoogte);
 
-watch(() => store.breedte, (newBreedte) => {
-  newBreedte = Number(newBreedte);
-  if (newBreedte > maxBreedte) {
-    store.setBreedte(maxBreedte, maxBreedte);
-  } else {
-    window.ThreeJs.myWindow.updateBreedte();
+  if (newHoogte > maxHoogte) {
+   console.log("test")
+    store.setHoogte(maxHoogte);
+  } 
+  else if(newHoogte < minHoogte ){
+    store.setHoogte(minHoogte);
   }
-});
-
-watch(() => store.hoogte, () => {
-  window.ThreeJs.myWindow.updateHoogte();
-});
-
-watch(() => store.color, () => {
-  window.ThreeJs.myWindow.updateColor();
-});
-
-function checkMaxBreedte(event) {
-  if (Number(event.target.value) > maxBreedte) {
-    store.setBreedte(maxBreedte, maxBreedte);
+  else {
+    console.log(window.ThreeJs)
+    window.ThreeJs.myWindow.updateHoogte();
   }
-}
+  
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>

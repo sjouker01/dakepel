@@ -27,7 +27,7 @@
 			],
 			"translation":[
 				0,
-				-0.07127603888511658,
+				-0.44999998807907104,
 				0
 			]
 		},
@@ -41,7 +41,7 @@
 			],
 			"translation":[
 				0.550000011920929,
-				0.37872394919395447,
+				0,
 				0
 			]
 		},
@@ -55,7 +55,7 @@
 			],
 			"translation":[
 				-0.550000011920929,
-				0.37872394919395447,
+				0,
 				0
 			]
 		},
@@ -69,7 +69,7 @@
 			],
 			"translation":[
 				0,
-				0.8287240266799927,
+				0.44999998807907104,
 				0
 			]
 		},
@@ -80,11 +80,6 @@
 				0.10000000149011612,
 				0.800000011920929,
 				0.10000000149011612
-			],
-			"translation":[
-				0,
-				0.37999993562698364,
-				0
 			]
 		}
 	],
@@ -96,8 +91,68 @@
 				1,
 				1
 			],
-			"name":"WoodFlooringAshSuperWhite001_2K",
-			"pbrMetallicRoughness":{}
+			"name":"wood1.003",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":0
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"name":"balk-rechts",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":1
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"name":"wood1.004",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":2
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"name":"wood1.005",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":3
+				}
+			}
+		},
+		{
+			"doubleSided":true,
+			"emissiveFactor":[
+				1,
+				1,
+				1
+			],
+			"name":"wood1.001",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":4
+				}
+			}
 		}
 	],
 	"meshes":[
@@ -125,7 +180,7 @@
 						"TEXCOORD_0":6
 					},
 					"indices":3,
-					"material":0
+					"material":1
 				}
 			]
 		},
@@ -139,7 +194,7 @@
 						"TEXCOORD_0":9
 					},
 					"indices":3,
-					"material":0
+					"material":2
 				}
 			]
 		},
@@ -153,7 +208,7 @@
 						"TEXCOORD_0":12
 					},
 					"indices":3,
-					"material":0
+					"material":3
 				}
 			]
 		},
@@ -167,9 +222,58 @@
 						"TEXCOORD_0":15
 					},
 					"indices":3,
-					"material":0
+					"material":4
 				}
 			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		},
+		{
+			"sampler":0,
+			"source":1
+		},
+		{
+			"sampler":0,
+			"source":2
+		},
+		{
+			"sampler":0,
+			"source":3
+		},
+		{
+			"sampler":0,
+			"source":4
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-onder",
+			"uri":"texture/balk-onder.jpg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-rechts",
+			"uri":"texture/balk-rechts.jpg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-links",
+			"uri":"texture/balk-links.jpg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-boven",
+			"uri":"texture/balk-boven.jpg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"balk-midden",
+			"uri":"texture/balk-midden.jpg"
 		}
 	],
 	"accessors":[
@@ -416,6 +520,12 @@
 			"byteLength":192,
 			"byteOffset":3720,
 			"target":34962
+		}
+	],
+	"samplers":[
+		{
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[

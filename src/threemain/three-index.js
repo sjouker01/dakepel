@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { floorObject } from "./world/floor";
-
-import { window1 } from "./objecten/raamfromstore";
+import { WindowKozijn} from "./objecten/kozijn";
 import { BackgroundColor } from "./world/background";
 import { OrbitControlsClass } from "./controles/control";
 import { Camera } from "./camfile/camera";
@@ -12,8 +11,8 @@ import { Sneltoetsen } from "./controles/sneltoetsen";
 let instance = null;
 export class ThreeJs {
   constructor(container) {
-    if (instance) {
-      return instance;
+    if (!instance) {
+      instance = this;
     }
     instance = this;
     window.ThreeJs = this;
@@ -34,12 +33,13 @@ export class ThreeJs {
 
     // object van de vloer
     const floor = new floorObject(this.scene);
-
+  
 
 
     // store manier om windows teladen
-    this.myWindow = new window1(this.scene);
+    this.myWindow = new WindowKozijn(this.scene);
 
+   
     // light object
     let lamp = new lamp1();
     let lights = lamp.getLight();
@@ -58,7 +58,7 @@ export class ThreeJs {
     helper2.visible = false;
 
     //toevoegen aan scene
-    this.scene.add(helper1);
+    this.scene.add(helper1);  
     this.scene.add(helper2);
 
     // controls toe tevoegen
@@ -78,6 +78,7 @@ export class ThreeJs {
     this.render();
   }
 
+ 
   render() {
     requestAnimationFrame(() => this.render());
     this.controls.update();

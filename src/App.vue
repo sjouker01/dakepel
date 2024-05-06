@@ -13,12 +13,10 @@
 import SetupComponent from './setup.vue';
 import Header from './routers/header.vue'
 import { useMenuStore } from './server/menustore'
-const henk = useMenuStore();
+const store = useMenuStore();
 
 
 </script>
 
 
-<style scoped>
-
-</style>
+<style scoped></style>

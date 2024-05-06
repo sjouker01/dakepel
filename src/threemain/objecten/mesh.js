@@ -1,17 +1,50 @@
 // RaamComponents.js
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { RaamParts } from './threeparts'; // Zorg ervoor dat je de RaamObject klasse importeert
 
 export class RaamComponents {
     constructor() {
       this.loader = new GLTFLoader();
-      this.raamParts = new RaamParts(); // Maak een nieuw RaamParts object
+      this.objects = {};
+    }
+  
+    processNode(node) {
+      if (node.isMesh) {
+        this.objects[node.name] = node;
+      }
+  
+      if (node.children) {
+        node.children.forEach((child) => this.processNode(child));
+      }
+    }
+  
+    loadModel() {
+      return new Promise((resolve, reject) => {
+        this.loader.load(
+          "blender/raam.gltf",
+          (gltf) => {
+            this.processNode(gltf.scene);
+            resolve();
+          },
+          undefined,
+          (error) => {
+            console.error("Fout bij het laden van het model", error);
+            reject(error);
+          }
+        );
+      });
+    }
+  
+    async getObject(name) {
+      if (!this.objects[name]) {
+        await this.loadModel().catch((error) => {
+          throw new Error(`Kon het model niet laden: ${error}`);
+        });
+      }
+      return this.objects[name];
     }
   
     async loadObject(name, callback) {
-      const object = await this.raamParts.getObject(name).catch((error) => { // Gebruik het RaamParts object om het object te krijgen
-        throw new Error(`Kon het model niet laden: ${error}`);
-      });
+      const object = await this.getObject(name);
       callback(object);
     }
   }
