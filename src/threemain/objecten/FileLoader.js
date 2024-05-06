@@ -1,9 +1,18 @@
+import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
-
 export class KozijnParts {
   constructor() {
     this.loader = new GLTFLoader();
+    this.textureLoader = new THREE.TextureLoader();
     this.objects = {};
+    this.textures = {
+      'balk-onder': 'blender/texture/balk-onder.jpg',
+      'balk-boven': 'blender/texture/balk-boven.jpg',
+      'balk-links': 'blender/texture/balk-links.jpg',
+      'balk-midden': 'blender/texture/balk-midden.jpg',
+      'balk-rechts': 'blender/texture/balk-rechts.jpg'
+    }
+    
   }
 
 
