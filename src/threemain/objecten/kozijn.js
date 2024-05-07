@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { KozijnParts } from "./FileLoader";
 import { useMenuStore } from "../../server/menustore";
+import { texture } from "three/examples/jsm/nodes/Nodes.js";
 
 export class WindowKozijn {
   constructor(scene) {
@@ -14,17 +15,17 @@ export class WindowKozijn {
       "balk-links",
       "balk-boven",
     ];
+    this.textures = {};
     this.middelBar = ["balk-midden"];
     this.zijBalken = ["balk-links", "balk-rechts"];
     this.bovenOnderBalken = ["balk-boven", "balk-onder"];
     this.scaleFactor = 1000;
     this.LoadWindow();
   }
-
   LoadWindow() {
     this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
-        if (object instanceof THREE.Object3D) {
+        if (object instanceof THREE.Mesh) {
           this.objects[name] = object;
           this.scene.add(object);
         } else {
