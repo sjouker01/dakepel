@@ -121,18 +121,18 @@
 import { useMenuStore } from '../server/menustore';
 import {  watch } from 'vue'
 const store = useMenuStore();
-let maxHoogte = 10000;
-let minHoogte  = 800;
+let max = 10000;
+let min  = 800;
 
 watch(() => store.hoogte, (newHoogte) => {
   newHoogte = Number(newHoogte);
 
-  if (newHoogte > maxHoogte) {
+  if (newHoogte > max) {
    console.log("test")
-    store.setHoogte(maxHoogte);
+    store.setHoogte(max);
   } 
-  else if(newHoogte < minHoogte ){
-    store.setHoogte(minHoogte);
+  else if(newHoogte < min ){
+    store.setHoogte(min);
   }
   else {
     console.log(window.ThreeJs)
@@ -140,6 +140,17 @@ watch(() => store.hoogte, (newHoogte) => {
   }
   
 });
+watch(() => store.breedte, ( newBreedte) =>{
+  newBreedte = Number( newBreedte);
+  if( newBreedte > max){
+    console.log('test');
+    store.setBreedte(max);
+  } else if(newBreedte < min){
+    store.setBreedte(min)
+  } else {
+    window.ThreeJs.myWindow.updateBreedte();
+  }
+} )
 
 
 
