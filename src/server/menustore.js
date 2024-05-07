@@ -22,7 +22,6 @@ actions: {
     },
     setHoogte(hoogte) {
       this.hoogte = Number(hoogte);
-    
     },
     setObject(name, object) {
       this.objects[name] = object; 
