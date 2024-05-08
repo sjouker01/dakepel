@@ -22,12 +22,12 @@
 			"name":"balk-onder",
 			"scale":[
 				1,
-				0.100,
-				0.100
+				0.10000000149011612,
+				0.10000000149011612
 			],
 			"translation":[
 				0,
-				-0.45,
+				-0.44999998807907104,
 				0
 			]
 		},
@@ -35,12 +35,12 @@
 			"mesh":1,
 			"name":"balk-rechts",
 			"scale":[
-				0.100,
+				0.10000000149011612,
 				1,
-				0.100
+				0.10000000149011612
 			],
 			"translation":[
-				0.55,
+				0.550000011920929,
 				0,
 				0
 			]
@@ -49,12 +49,12 @@
 			"mesh":2,
 			"name":"balk-links",
 			"scale":[
-				0.100,
+				0.10000000149011612,
 				1,
-				0.100
+				0.10000000149011612
 			],
 			"translation":[
-				-0.55,
+				-0.550000011920929,
 				0,
 				0
 			]
@@ -64,12 +64,12 @@
 			"name":"balk-boven",
 			"scale":[
 				1,
-				0.100,
-				0.100
+				0.10000000149011612,
+				0.10000000149011612
 			],
 			"translation":[
 				0,
-				0.45,
+				0.44999998807907104,
 				0
 			]
 		},
@@ -77,9 +77,9 @@
 			"mesh":4,
 			"name":"balk-midden",
 			"scale":[
-				0.100,
-				0.800,
-				0.100
+				0.10000000149011612,
+				0.800000011920929,
+				0.10000000149011612
 			]
 		}
 	],
@@ -91,7 +91,7 @@
 				1,
 				1
 			],
-			"name":"wood1.003",
+			"name":"balk-onder",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -119,7 +119,7 @@
 				1,
 				1
 			],
-			"name":"wood1.004",
+			"name":"balk-links",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
@@ -133,7 +133,7 @@
 				1,
 				1
 			],
-			"name":"wood1.005",
+			"name":"balk-boven",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":3
@@ -147,7 +147,7 @@
 				1,
 				1
 			],
-			"name":"wood1.001",
+			"name":"balk-midden",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":4
