@@ -6,11 +6,11 @@ export class KozijnParts {
     this.textureLoader = new THREE.TextureLoader();
     this.objects = {};
     this.textures = {
-      'balk-onder': 'public/blender/texture/balk-onder.jpg',
-      'balk-boven': 'public/blender/texture/balk-boven.jpg',
-      'balk-links': 'public/blender/texture/balk-links.jpg',
-      'balk-midden': 'public/blender/texture/balk-midden.jpg',
-      'balk-rechts': 'public/blender/texture/balk-rechts.jpg'
+      'balk-onder': 'blender/texture/balk-onder.jpg',
+      'balk-boven': 'blender/texture/balk-boven.jpg',
+      'balk-links': 'blender/texture/balk-links.jpg',
+      'balk-midden': 'blender/texture/balk-midden.jpg',
+      'balk-rechts': ' blender/texture/balk-rechts.jpg'
     }
     
   }
