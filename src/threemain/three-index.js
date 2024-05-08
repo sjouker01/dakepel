@@ -46,20 +46,25 @@ export class ThreeJs {
     // lamp keuze
     let light1 = lights[0];
     let light2 = lights[1];
+    let light3 = lights[2];
     // toevoegen aan scene
     this.scene.add(light1);
     this.scene.add(light2);
+    this.scene.add(light3);
     // helpers van lichten
     const helper1 = new THREE.DirectionalLightHelper(light1, 5);
     const helper2 = new THREE.DirectionalLightHelper(light2, 5);
+    const helper3 = new THREE.DirectionalLightHelper(light3, 5);
 
     //onzigbaar
     helper1.visible = false;
     helper2.visible = false;
+    helper3.visible = false;
 
     //toevoegen aan scene
     this.scene.add(helper1);  
     this.scene.add(helper2);
+    this.scene.add(helper3);
 
     // controls toe tevoegen
     this.controls = new OrbitControlsClass(this.camera, this.renderer);
@@ -72,7 +77,7 @@ export class ThreeJs {
     this.scene.add(axesHelper);
 
     // sneltoetsen
-    this.sneltoetsen = new Sneltoetsen(floor, axesHelper, helper1, helper2);
+    this.sneltoetsen = new Sneltoetsen(floor, axesHelper, helper1, helper2, helper3);
     floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();

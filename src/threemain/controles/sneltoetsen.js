@@ -7,7 +7,7 @@
  *  shift + alt + 9 om axses helper aan uit te zetten 
  */
 export class Sneltoetsen {
-    constructor(floor, axesHelper, helper1, helper2){
+    constructor(floor, axesHelper, helper1, helper2,helper3){
         this.isObjectVisible = false;
         this.axesHelperVisible = true;
         this.lampHelpersVisible = false;
@@ -33,6 +33,7 @@ export class Sneltoetsen {
                 this.lampHelpersVisible = !this.lampHelpersVisible;
                 helper1.visible = this.lampHelpersVisible;
                 helper2.visible = this.lampHelpersVisible;
+                helper3.visible = this.lampHelpersVisible;
             }
         });
     }
