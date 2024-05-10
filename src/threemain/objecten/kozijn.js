@@ -25,7 +25,7 @@ export class WindowKozijn {
   LoadWindow() {
     this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
-        if (object instanceof THREE.Mesh) {
+        if (object instanceof THREE.Object3D) {
           this.objects[name] = object;
           this.scene.add(object);
         } else {
@@ -82,6 +82,17 @@ export class WindowKozijn {
   }
 
   MiddleBarUpdate() {
+    this.objects["balk-midden"] = [];
+
+    // Verwijder bestaande middenbalken
+    this.objects["balk-midden"].forEach((balk) => {
+      balk.geometry.dispose();
+      balk.material.dispose();
+      this.scene.remove(balk);
+    });
+    
+    // Maak de array leeg
+    this.objects["balk-midden"] = [];
     const aantalMiddenBalken = Math.max(
       0,
       Math.floor(this.objects["balk-onder"].scale.x) - 1
@@ -91,26 +102,17 @@ export class WindowKozijn {
     const beschikbareBreedte = maxBreendte - 2 * zijBalkAfstand;
     const ruimteTussenObjects = beschikbareBreedte / (aantalMiddenBalken + 1);
     const balkLengte = this.objects["balk-links"].scale.y;
-
     // midde balken toevoegen
     for (let i = 0; i < aantalMiddenBalken; i++) {
       this.KozijnParts.loadObject("balk-midden", (object) => {
         const cloneMiddleBar = object.clone();
         cloneMiddleBar.position.x =
-          -maxBreendte / 2 + zijBalkAfstand + ruimteTussenObjects * (i + 1);
+        -maxBreendte / 2 + zijBalkAfstand + ruimteTussenObjects * (i + 1);
         cloneMiddleBar.scale.y = balkLengte;
         this.objects["balk-midden"].push(cloneMiddleBar);
         this.scene.add(cloneMiddleBar);
       });
     }
     // object reseten
-    this.objects["balk-midden"] = [];
-
-    // Verwijder bestaande middenbalken
-    this.objects["balk-midden"].forEach((balk) => {
-      balk.geometry.dispose();
-      balk.material.dispose();
-      this.scene.remove(balk);
-    });
   }
 }

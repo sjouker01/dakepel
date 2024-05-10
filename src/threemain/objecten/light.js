@@ -5,7 +5,7 @@ export class Lamp {
     this.scene = scene;
 
     const light1 = new THREE.DirectionalLight("white", 1);
-    const light2 = new THREE.DirectionalLight("0xfffff", 1);
+    const light2 = new THREE.DirectionalLight("white", 1);
     const light3 = new THREE.DirectionalLight("white", 1);
     const light4 = new THREE.DirectionalLight("white", 1); // Nieuw licht
     const light5 = new THREE.DirectionalLight("white", 1); // Nieuw licht
