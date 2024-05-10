@@ -24,20 +24,16 @@ export class KozijnParts {
         (gltf) => {
           const storeObjects = (node) => {
             if (node.isMesh) {
-              this.objects[node.name] = node;
+             node.receiveShadow = false
+              this.objects[node.name] = node; 
+              
               if (node.material && this.textures[node.name]) {
                 this.textureLoader.load(
                   this.textures[node.name],
                   (texture) => {
-                    console.log('Texture is succesvol geladen: ', texture);
+                    // console.log('Texture is succesvol geladen: ', texture);
                     node.material.map = texture;
-                    node.material.needsUpdate = true;
-                  },
-                  (xhr) => {
-                    console.log((xhr.loaded / xhr.total * 100) + '% geladen');
-                  },
-                  (error) => {
-                    console.error('Er is een fout opgetreden bij het laden van de textuur: ', error);
+                    node.material.needsUpdate = false;
                   }
                 );
               }
