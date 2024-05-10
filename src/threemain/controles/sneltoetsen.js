@@ -33,6 +33,7 @@ export class Sneltoetsen {
                 this.lampHelpersVisible = !this.lampHelpersVisible;
                 helper1.visible = this.lampHelpersVisible;
                 helper2.visible = this.lampHelpersVisible;
+                // helper3.visible = this.lampHelpersVisible;
             }
         });
     }

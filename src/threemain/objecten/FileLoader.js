@@ -6,11 +6,11 @@ export class KozijnParts {
     this.textureLoader = new THREE.TextureLoader();
     this.objects = {};
     this.textures = {
-      'balk-onder': 'public/blender/texture/balk-onder.jpg',
-      'balk-boven': 'public/blender/texture/balk-boven.jpg',
-      'balk-links': 'public/blender/texture/balk-links.jpg',
-      'balk-midden': 'public/blender/texture/balk-midden.jpg',
-      'balk-rechts': 'public/blender/texture/balk-rechts.jpg'
+      'balk-onder': 'blender/texture/balk-onder.jpg',
+      'balk-boven': 'blender/texture/balk-boven.jpg',
+      'balk-links': 'blender/texture/balk-links.jpg',
+      'balk-midden': 'blender/texture/balk-midden.jpg',
+      'balk-rechts': ' blender/texture/balk-rechts.jpg'
     }
     
   }
@@ -24,20 +24,16 @@ export class KozijnParts {
         (gltf) => {
           const storeObjects = (node) => {
             if (node.isMesh) {
-              this.objects[node.name] = node;
+             node.receiveShadow = false
+              this.objects[node.name] = node; 
+              
               if (node.material && this.textures[node.name]) {
                 this.textureLoader.load(
                   this.textures[node.name],
                   (texture) => {
-                    console.log('Texture is succesvol geladen: ', texture);
+                    // console.log('Texture is succesvol geladen: ', texture);
                     node.material.map = texture;
-                    node.material.needsUpdate = true;
-                  },
-                  (xhr) => {
-                    console.log((xhr.loaded / xhr.total * 100) + '% geladen');
-                  },
-                  (error) => {
-                    console.error('Er is een fout opgetreden bij het laden van de textuur: ', error);
+                    node.material.needsUpdate = false;
                   }
                 );
               }
@@ -82,5 +78,5 @@ export class KozijnParts {
     } else {
       console.error(`Object with name ${name} does not exist`);
     }
-  }
+}
 }
