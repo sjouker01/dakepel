@@ -24,16 +24,16 @@ export class KozijnParts {
         (gltf) => {
           const storeObjects = (node) => {
             if (node.isMesh) {
-             node.receiveShadow = false
-              this.objects[node.name] = node; 
-              
+              node.castShadow = true;
+              node.receiveShadow = true;
+              this.objects[node.name] = node;
               if (node.material && this.textures[node.name]) {
                 this.textureLoader.load(
                   this.textures[node.name],
                   (texture) => {
                     // console.log('Texture is succesvol geladen: ', texture);
                     node.material.map = texture;
-                    node.material.needsUpdate = false;
+                    node.material.needsUpdate = true;
                   }
                 );
               }
