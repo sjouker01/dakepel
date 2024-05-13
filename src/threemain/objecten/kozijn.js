@@ -82,7 +82,10 @@ export class WindowKozijn {
   }
 
   MiddleBarUpdate() {
-    this.objects["balk-midden"] = [];
+    // Controleer of this.objects["balk-midden"] bestaat, zo niet, initialiseer het als een lege array
+    if (!this.objects["balk-midden"]) {
+      this.objects["balk-midden"] = [];
+    }
 
     // Verwijder bestaande middenbalken
     this.objects["balk-midden"].forEach((balk) => {
@@ -90,29 +93,34 @@ export class WindowKozijn {
       balk.material.dispose();
       this.scene.remove(balk);
     });
-    
+
     // Maak de array leeg
     this.objects["balk-midden"] = [];
+
+    // Bereken het aantal middenbalken dat moet worden toegevoegd
     const aantalMiddenBalken = Math.max(
       0,
       Math.floor(this.objects["balk-onder"].scale.x) - 1
     );
+
+    // Bereken de beschikbare breedte voor de middenbalken
     const maxBreendte = this.objects["balk-onder"].scale.x;
     const zijBalkAfstand = this.objects["balk-links"].scale.x;
     const beschikbareBreedte = maxBreendte - 2 * zijBalkAfstand;
     const ruimteTussenObjects = beschikbareBreedte / (aantalMiddenBalken + 1);
     const balkLengte = this.objects["balk-links"].scale.y;
-    // midde balken toevoegen
-    for (let i = 0; i < aantalMiddenBalken; i++) {
-      this.KozijnParts.loadObject("balk-midden", (object) => {
+
+    // Laad het object voor de middenbalk
+    this.KozijnParts.loadObject("balk-midden", (object) => {
+      // Voeg de middenbalken toe
+      for (let i = 0; i < aantalMiddenBalken; i++) {
         const cloneMiddleBar = object.clone();
         cloneMiddleBar.position.x =
-        -maxBreendte / 2 + zijBalkAfstand + ruimteTussenObjects * (i + 1);
+          -maxBreendte / 2 + zijBalkAfstand + ruimteTussenObjects * (i + 1);
         cloneMiddleBar.scale.y = balkLengte;
         this.objects["balk-midden"].push(cloneMiddleBar);
         this.scene.add(cloneMiddleBar);
-      });
-    }
-    // object reseten
+      }
+    });
   }
 }
