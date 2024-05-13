@@ -14,6 +14,10 @@ export class WindowKozijn {
       "balk-rechts",
       "balk-links",
       "balk-boven",
+      "muur-rechts-voorkant",
+      "muur-onder-voorkant",
+      "muur-boven-voorkant",
+      "muur-links-voorkant",
     ];
     this.textures = {};
     this.middelBar = ["balk-midden"];
@@ -21,11 +25,12 @@ export class WindowKozijn {
     this.bovenOnderBalken = ["balk-boven", "balk-onder"];
     this.scaleFactor = 1000;
     this.LoadWindow();
+    console.log(this.objects)
   }
   LoadWindow() {
     this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
-        if (object instanceof THREE.Object3D) {
+        if (object instanceof THREE.Mesh) {
           this.objects[name] = object;
           this.scene.add(object);
         } else {
