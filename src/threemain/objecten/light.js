@@ -5,7 +5,7 @@ export class Lamp {
     this.scene = scene;
 
     const light1 = new THREE.DirectionalLight("white", 1);
-    const light2 = new THREE.DirectionalLight("0xfffff", 1);
+    const light2 = new THREE.DirectionalLight("white", 1);
     const light3 = new THREE.DirectionalLight("white", 1);
     const light4 = new THREE.DirectionalLight("white", 1); // Nieuw licht
     const light5 = new THREE.DirectionalLight("white", 1); // Nieuw licht
@@ -59,17 +59,9 @@ export class Lamp {
     this.light4 = light4; // Bewaar een referentie naar het nieuwe licht
     this.light5 = light5; // Bewaar een referentie naar het nieuwe licht
     
-    const helper = new THREE.DirectionalLightHelper(light1, 5);
-    const helper1 = new THREE.DirectionalLightHelper(light2, 5);
-    const helper2 = new THREE.DirectionalLightHelper(light3, 5);
-    const helper3 = new THREE.DirectionalLightHelper(light4, 5); // Helper voor het nieuwe licht
-    const helper4 = new THREE.DirectionalLightHelper(light5, 5); // Helper voor het nieuwe licht
+ 
     
-    // this.scene.add(helper);
-    // this.scene.add(helper1);
-    // this.scene.add(helper2);
-    this.scene.add(helper3); // Voeg de helper toe aan de scene
-    this.scene.add(helper4); // Voeg de helper toe aan de scene
+
   }
 
   getLight() {
