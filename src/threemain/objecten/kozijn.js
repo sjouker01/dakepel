@@ -18,6 +18,12 @@ export class WindowKozijn {
       "muur-onder-voorkant",
       "muur-boven-voorkant",
       "muur-links-voorkant",
+      "balk-midden-links",
+      "balk-schuin-links",
+      "balk-zijkant-links",
+      "balk-midden-rechts",
+      "balk-schuin-rechts",
+      "balk-zijkant-rechts",
     ];
     this.textures = {};
     this.middelBar = ["balk-midden"];
@@ -33,15 +39,27 @@ export class WindowKozijn {
       "muur-boven-voorkant",
       "muur-onder-voorkant",
     ];
+    this.zijkantLinks = [
+      "balk-midden-links",
+      "balk-schuin-links",
+      "balk-zijkant-links",
+    ];
+    this.zijkantRechts = [
+      "balk-midden-rechts",
+      "balk-schuin-rechts",
+      "balk-zijkant-rechts",
+    ];
     this.scaleFactor = 1000;
     this.LoadWindow();
     console.log(this.objects);
   }
+
   LoadWindow() {
     this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
         if (object instanceof THREE.Mesh) {
           this.objects[name] = object;
+
           this.scene.add(object);
         } else {
           console.error(
@@ -58,10 +76,9 @@ export class WindowKozijn {
 
     this.zijBalken.forEach((bar) => {
       this.objects[bar].scale.y = this.hoogte;
-      if (bar.includes("muur")){
-        this.objects[bar].scale.y +=  0.4
-
-        }
+      if (bar.includes("muur")) {
+        this.objects[bar].scale.y += 0.4;
+      }
     });
 
     this.bovenOnderBalken.forEach((bar) => {
@@ -73,11 +90,10 @@ export class WindowKozijn {
       }
       console.log(richting);
       this.objects[bar].position.y =
-      richting * (this.hoogte / 2 - this.objects[bar].scale.y / 2);
-      if (bar.includes("muur")){
-        this.objects[bar].position.y += richting * 0.2
-
-        }
+        richting * (this.hoogte / 2 - this.objects[bar].scale.y / 2);
+      if (bar.includes("muur")) {
+        this.objects[bar].position.y += richting * 0.2;
+      }
     });
     this.MiddleBarUpdate();
   }
@@ -85,9 +101,8 @@ export class WindowKozijn {
   updateBreedte() {
     this.breedte = this.KozijnStore.breedte / this.scaleFactor;
     this.bovenOnderBalken.forEach((bar) => {
-      this.objects[bar].scale.x = this.breedte ;
+      this.objects[bar].scale.x = this.breedte;
     });
-    
 
     this.zijBalken.forEach((bar) => {
       let richting;
@@ -99,10 +114,9 @@ export class WindowKozijn {
       console.log(richting);
       this.objects[bar].position.x =
         richting * (this.breedte / 2 - this.objects[bar].scale.x / 2);
-        if (bar.includes("muur")){
-          this.objects[bar].position.x += richting * 0.2;
-          
-        }
+      if (bar.includes("muur")) {
+        this.objects[bar].position.x += richting * 0.2;
+      }
     });
     this.MiddleBarUpdate();
   }
@@ -134,7 +148,7 @@ export class WindowKozijn {
     const zijBalkAfstand = this.objects["balk-links"].scale.x;
     const beschikbareBreedte = maxBreendte - 2 * zijBalkAfstand;
     const ruimteTussenObjects = beschikbareBreedte / (aantalMiddenBalken + 1);
-    const balkLengte =   this.objects["balk-links"].scale.y - 0.2;
+    const balkLengte = this.objects["balk-links"].scale.y - 0.2;
 
     // Laad het object voor de middenbalk
     this.KozijnParts.loadObject("balk-midden", (object) => {
@@ -143,10 +157,15 @@ export class WindowKozijn {
         const cloneMiddleBar = object.clone();
         cloneMiddleBar.position.x =
           -maxBreendte / 2 + zijBalkAfstand + ruimteTussenObjects * (i + 1);
-        cloneMiddleBar.scale.y = balkLengte ;
+        cloneMiddleBar.scale.y = balkLengte;
         this.objects["balk-midden"].push(cloneMiddleBar);
         this.scene.add(cloneMiddleBar);
       }
     });
+  }
+
+
+  updateZijKanten(){
+    
   }
 }
