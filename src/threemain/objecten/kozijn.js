@@ -164,8 +164,20 @@ export class WindowKozijn {
     });
   }
 
+  updateZijKanten() {
+    const radianen = this.KozijnStore.graden * (Math.PI / 180);
 
-  updateZijKanten(){
-    
+    this.objectNamen.forEach((object) => {
+      if (
+        this.objects.name === "balk-schuin-rechts" ||
+        this.objects.name === "balk-schuin-links"
+      ) {
+        this.objects.rotation.y = radianen;
+
+        const newLengte = this.KozijnStore.lengte * Math.cos(radianen);
+        this.objects.scale.y = newLengte;
+        console.log("test update")
+      }
+    });
   }
 }

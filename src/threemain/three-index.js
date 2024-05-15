@@ -7,7 +7,7 @@ import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
-import {DirectionalLight } from "three";
+
 let instance = null;
 export class ThreeJs {
   constructor(container) {

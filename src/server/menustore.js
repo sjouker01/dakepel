@@ -1,19 +1,16 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
-import * as THREE from 'three';
+
 
 export const useMenuStore = defineStore("mainstore", {
   state: () => ({
     breedte: "1000",
     hoogte: "1000",
-    graden: "",
-    objects: {}, 
+    graden: "45",
+    objects: {},
     color: "gray",
   }),
 
-
-actions: {
-    
+  actions: {
     showHeader(NewHeader) {
       this.header = NewHeader;
     },
@@ -23,8 +20,12 @@ actions: {
     setHoogte(hoogte) {
       this.hoogte = Number(hoogte);
     },
-    setObject(name, object) {
-      this.objects[name] = object; 
+    setGraden(graden) {
+      this.graden = Number(graden);
     },
-  }
+
+    setObject(name, object) {
+      this.objects[name] = object;
+    },
+  },
 });
