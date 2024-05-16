@@ -12,7 +12,7 @@
         <q-toolbar class="q-col-md-10 q-offset-md-1 flex justify-center">
           <q-input v-model="store.breedte" label="Breedte" type="number" />
           <q-input v-model="store.hoogte" label="Hoogte" type="number" />
-          <q-input v-model="store.graden" label="Graden" />
+          <q-input v-model="store.graden" label="Graden" type="number" />
         </q-toolbar>
       </div>
       <div v-if="store.header === 2" class="sub-header q-mt-md rounded-borders bg-white">
@@ -119,38 +119,43 @@
 
 <script setup>
 import { useMenuStore } from '../server/menustore';
-import {  watch } from 'vue'
+import { watch } from 'vue'
 const store = useMenuStore();
 let max = 10000;
-let min  = 800;
+let min = 800;
 
 watch(() => store.hoogte, (newHoogte) => {
   newHoogte = Number(newHoogte);
 
   if (newHoogte > max) {
-   console.log("test")
+    console.log("test")
     store.setHoogte(max);
-  } 
-  else if(newHoogte < min ){
+  }
+  else if (newHoogte < min) {
     store.setHoogte(min);
   }
   else {
     console.log(window.ThreeJs)
     window.ThreeJs.myWindow.updateHoogte();
   }
-  
+
 });
-watch(() => store.breedte, ( newBreedte) =>{
-  newBreedte = Number( newBreedte);
-  if( newBreedte > max){
+watch(() => store.breedte, (newBreedte) => {
+  newBreedte = Number(newBreedte);
+  if (newBreedte > max) {
     console.log('test');
     store.setBreedte(max);
-  } else if(newBreedte < min){
+  } else if (newBreedte < min) {
     store.setBreedte(min)
   } else {
     window.ThreeJs.myWindow.updateBreedte();
   }
-} )
+});
+watch(() => store.graden, (newGraden) => {
+  newGraden = Number(newGraden);
+  console.log("test")
+  window.ThreeJs.myWindow.updateZijKanten();
+});
 
 
 
