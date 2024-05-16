@@ -165,8 +165,11 @@ export class WindowKozijn {
   }
 
   updateZijKanten() {
-    const radianen = this.KozijnStore.graden * (Math.PI / 180);
+    const balkBoven = this.objectNamen.name("bal")
 
+    const radianen = this.KozijnStore.graden * (Math.PI / 180);
+   
+    console.log("test update")
     this.objectNamen.forEach((object) => {
       if (
         this.objects.name === "balk-schuin-rechts" ||
@@ -176,7 +179,6 @@ export class WindowKozijn {
 
         const newLengte = this.KozijnStore.lengte * Math.cos(radianen);
         this.objects.scale.y = newLengte;
-        console.log("test update")
       }
     });
   }
