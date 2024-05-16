@@ -154,7 +154,7 @@ watch(() => store.breedte, (newBreedte) => {
 watch(() => store.graden, (newGraden) => {
   newGraden = Number(newGraden);
   console.log("test")
-  window.ThreeJs.myWindow.updateZijKanten();
+  window.ThreeJs.myWindow.berekenHoek();
 });
 
 

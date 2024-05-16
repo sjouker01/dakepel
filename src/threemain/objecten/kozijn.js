@@ -163,23 +163,29 @@ export class WindowKozijn {
       }
     });
   }
+  berekenHoek() {
+    
+    // Haal de breedte en hoogte op uit de KozijnStore
+    let lengteA = this.KozijnStore.breedte / this.scaleFactor;
+    let lengteB = this.KozijnStore.hoogte / this.scaleFactor;
+    
+    // Bereken de verhouding
+    let ratio = lengteA / lengteB;
+    
+    // Bereken de arctangens van de verhouding (dit geeft de hoek in radialen)
+    let hoekInRadialen = Math.atan(ratio);
+    
+    // Converteer de hoek naar graden
+    let hoekInGraden = hoekInRadialen * (180 / Math.PI);
+    let bovenBalk = this.objectNamen["balk-zijkant-rechts"];
+    let schuineBalk = this.objectNamen["rechter-schuine-balk"]; // Dit is de schuine balk
+    
+    // Haal de graden uit de KozijnStore en converteer naar radialen
+    let gradenInRadialen = this.KozijnStore.graden * (Math.PI / 180);
 
-  updateZijKanten() {
-    const balkBoven = this.objectNamen.name("bal")
-
-    const radianen = this.KozijnStore.graden * (Math.PI / 180);
-   
-    console.log("test update")
-    this.objectNamen.forEach((object) => {
-      if (
-        this.objects.name === "balk-schuin-rechts" ||
-        this.objects.name === "balk-schuin-links"
-      ) {
-        this.objects.rotation.y = radianen;
-
-        const newLengte = this.KozijnStore.lengte * Math.cos(radianen);
-        this.objects.scale.y = newLengte;
-      }
-    });
-  }
+    bovenBalk.scale.x = lengteA;
+    schuineBalk.rotation.z  = gradenInRadialen; // Gebruik de graden uit de KozijnStore
+    // Update de KozijnStore
+    this.KozijnStore.graden = hoekInGraden;
+}
 }
