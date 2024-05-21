@@ -151,10 +151,13 @@ watch(() => store.breedte, (newBreedte) => {
     window.ThreeJs.myWindow.updateBreedte();
   }
 });
+
+
+
 watch(() => store.graden, (newGraden) => {
   newGraden = Number(newGraden);
   console.log("test")
-  window.ThreeJs.myWindow.berekenHoek();
+  window.ThreeJs.myWindow.berekenHoek(newGraden);
 });
 
 

@@ -39,19 +39,11 @@ export class WindowKozijn {
       "muur-boven-voorkant",
       "muur-onder-voorkant",
     ];
-    this.zijkantLinks = [
-      "balk-midden-links",
-      "balk-schuin-links",
-      "balk-zijkant-links",
-    ];
-    this.zijkantRechts = [
-      "balk-midden-rechts",
-      "balk-schuin-rechts",
-      "balk-zijkant-rechts",
-    ];
+
+    this.bovenBalk = ["balk-zijkant-links", "balk-zijkant-rechts"];
+
     this.scaleFactor = 1000;
     this.LoadWindow();
-    console.log(this.objects);
   }
 
   LoadWindow() {
@@ -163,29 +155,33 @@ export class WindowKozijn {
       }
     });
   }
-  berekenHoek() {
-    
-    // Haal de breedte en hoogte op uit de KozijnStore
-    let lengteA = this.KozijnStore.breedte / this.scaleFactor;
-    let lengteB = this.KozijnStore.hoogte / this.scaleFactor;
-    
-    // Bereken de verhouding
-    let ratio = lengteA / lengteB;
-    
-    // Bereken de arctangens van de verhouding (dit geeft de hoek in radialen)
-    let hoekInRadialen = Math.atan(ratio);
-    
-    // Converteer de hoek naar graden
-    let hoekInGraden = hoekInRadialen * (180 / Math.PI);
-    let bovenBalk = this.objectNamen["balk-zijkant-rechts"];
-    let schuineBalk = this.objectNamen["rechter-schuine-balk"]; // Dit is de schuine balk
-    
-    // Haal de graden uit de KozijnStore en converteer naar radialen
-    let gradenInRadialen = this.KozijnStore.graden * (Math.PI / 180);
 
-    bovenBalk.scale.x = lengteA;
-    schuineBalk.rotation.z  = gradenInRadialen; // Gebruik de graden uit de KozijnStore
-    // Update de KozijnStore
-    this.KozijnStore.graden = hoekInGraden;
-}
+  berekenHoek() {
+    this.graden = (this.KozijnStore.graden * Math.PI) / 180;
+    
+    // Standaard rotatie is 45 graden
+    let rotatie = 0;
+
+    // Pas de rotatie aan op basis van de waarde van 'graden'
+    if (this.graden < 45) {
+      rotatie = rotatie * (1 + (45 - this.graden) / 100);
+    } else if (this.graden > 45) {
+      rotatie = rotatie * (1 - (this.graden - 45) / 100);
+    }
+
+    // Converteer de rotatie naar radialen, omdat Three.js met radialen werkt
+    let nieuweRotatieLinks = (rotatie * Math.PI) / 180;
+    let nieuweRotatieRechts = (-rotatie * Math.PI) / 180;
+
+    this.objects["balk-schuin-links"].rotation.x = nieuweRotatieLinks;
+    this.objects["balk-schuin-rechts"].rotation.y = nieuweRotatieRechts;
+
+    // De lengte van het object ophalen uit het object zelf
+    let huidigeLengte = this.objects["balk-zijkant-links"].scale.x;
+
+ 
+  
+    // De bovenbalk wordt langer of korter op basis van de rotatie
+    this.objects["boven-balk"].scale.x = huidigeLengte;
+  }
 }
