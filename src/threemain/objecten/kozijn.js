@@ -157,30 +157,7 @@ export class WindowKozijn {
   }
 
   berekenHoek() {
-    this.graden = (this.KozijnStore.graden * Math.PI) / 180;
-
-    // Standaard rotatie is 45 graden
-    let huidigeRotatieLinks = this.objects["balk-schuin-links"].rotation.x;
-    let rotatie;
-    // Pas de rotatie aan op basis van de waarde van 'graden'
-    if (this.graden < 45) {
-      huidigeRotatieLinks += 1;
-    } else if (this.graden > 45) {
-      huidigeRotatieLinks -= 1;
-    }
-    huidigeRotatieLinks += rotatie;
-    // huidigeRotatieRechts -= rotatie;
-    // Converteer de rotatie naar radialen, omdat Three.js met radialen werkt
-    let nieuweRotatieLinks = (rotatie * Math.PI) / 180;
-    let nieuweRotatieRechts = (-rotatie * Math.PI) / 180;
-
-    this.objects["balk-schuin-links"].rotation.x = nieuweRotatieLinks;
-    this.objects["balk-schuin-rechts"].rotation.y = nieuweRotatieRechts;
-    console.log(this.objects["balk-schuin-links"]);
-    // De lengte van het object ophalen uit het object zelf
-    let huidigeLengte = this.bovenBalk.scale.x;
-
-    // De bovenbalk wordt langer of korter op basis van de rotatie
-    this.bovenBalk.scale.x = huidigeLengte;
+    const graden = this.KozijnStore.graden;
+    const radialen = graden * (Math.PI / 180);
   }
 }
