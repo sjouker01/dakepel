@@ -18,10 +18,8 @@ export class WindowKozijn {
       "muur-onder-voorkant",
       "muur-boven-voorkant",
       "muur-links-voorkant",
-      "balk-midden-links",
       "balk-schuin-links",
       "balk-zijkant-links",
-      "balk-midden-rechts",
       "balk-schuin-rechts",
       "balk-zijkant-rechts",
     ];
@@ -41,7 +39,7 @@ export class WindowKozijn {
     ];
 
     this.bovenBalk = ["balk-zijkant-links", "balk-zijkant-rechts"];
-
+    this.schuinebalken = ["balk-schuin-rechts", "balk-schuin-links"]; 
     this.scaleFactor = 1000;
     this.LoadWindow();
   }
@@ -157,7 +155,18 @@ export class WindowKozijn {
   }
 
   berekenHoek() {
+    let scalePerGraden = 1.4 / 45;
     const graden = this.KozijnStore.graden;
-    const radialen = graden * (Math.PI / 180);
+    let newscale = graden * scalePerGraden
+    let draaien = graden
+    this.schuinebalken.forEach((bar) => {
+      this.objects[bar].rotation.x = draaien / 100 + 0.5
+    })
+    this.bovenBalk.forEach((bar) =>{
+      this.objects[bar].scale.z = newscale
+      this.objects[bar].position.z =  newscale * 0.5 + 0.1  
+     console.log(this.objects[bar].scale.z)
+    })
+    
   }
 }

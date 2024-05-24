@@ -123,6 +123,8 @@ import { watch } from 'vue'
 const store = useMenuStore();
 let max = 10000;
 let min = 800;
+let maxGraden = 80
+let minGraden = 25
 
 watch(() => store.hoogte, (newHoogte) => {
   newHoogte = Number(newHoogte);
@@ -156,8 +158,13 @@ watch(() => store.breedte, (newBreedte) => {
 
 watch(() => store.graden, (newGraden) => {
   newGraden = Number(newGraden);
-  console.log("test")
+  if (newGraden >maxGraden){
+    store.setGraden(maxGraden)
+  } else if(newGraden < minGraden){
+    store.setGraden(minGraden)
+  }else{
   window.ThreeJs.myWindow.berekenHoek(newGraden);
+  }
 });
 
 
