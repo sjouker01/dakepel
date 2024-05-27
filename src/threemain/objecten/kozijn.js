@@ -39,7 +39,8 @@ export class WindowKozijn {
     ];
 
     this.bovenBalk = ["balk-zijkant-links", "balk-zijkant-rechts"];
-    this.schuinebalken = ["balk-schuin-rechts", "balk-schuin-links"]; 
+    this.schuinebalken = ["balk-schuin-rechts", "balk-schuin-links"];
+
     this.scaleFactor = 1000;
     this.LoadWindow();
   }
@@ -49,7 +50,12 @@ export class WindowKozijn {
       this.KozijnParts.loadObject(name, (object) => {
         if (object instanceof THREE.Mesh) {
           this.objects[name] = object;
-
+          if (
+            object.name === "balk-schuin-rechts" ||
+            object.name === "balk-schuin-links"
+          ) {
+            console.log(object.position.z);
+          }
           this.scene.add(object);
         } else {
           console.error(
@@ -157,16 +163,23 @@ export class WindowKozijn {
   berekenHoek() {
     let scalePerGraden = 1.4 / 45;
     const graden = this.KozijnStore.graden;
-    let newscale = graden * scalePerGraden
-    let draaien = graden
+    let newscale = graden * scalePerGraden;
+    let draaien = graden * (Math.PI / 180); // Converteer graden naar radialen
     this.schuinebalken.forEach((bar) => {
-      this.objects[bar].rotation.x = draaien / 100 + 0.5
-    })
-    this.bovenBalk.forEach((bar) =>{
-      this.objects[bar].scale.z = newscale
-      this.objects[bar].position.z =  newscale * 0.5 + 0.1  
-     console.log(this.objects[bar].scale.z)
-    })
+      let a = this.KozijnStore.hoogte / this.scaleFactor +0.4 ;
+      let b = newscale ;
+      // Pythagoras' theorem: c^2 = a^2 + b^2
+      let c = Math.sqrt(a * a + b * b);
+      this.objects[bar].rotation.x = draaien;
+      console.log(draaien);
+      this.objects[bar].scale.y = c ;
+      this.objects[bar].position.z = c - 1.1;
+    }); 
     
+    this.bovenBalk.forEach((bar) => {
+      this.objects[bar].scale.z = newscale;
+      this.objects[bar].position.z = newscale * 0.5 + 0.1;
+      console.log(this.objects[bar].scale.z);
+    });
   }
 }

@@ -123,7 +123,7 @@ import { watch } from 'vue'
 const store = useMenuStore();
 let max = 10000;
 let min = 800;
-let maxGraden = 80
+let maxGraden = 75
 let minGraden = 25
 
 watch(() => store.hoogte, (newHoogte) => {
