@@ -7,6 +7,7 @@ import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
+import { Driehoek } from "./objecten/driehoek";
 
 let instance = null;
 export class ThreeJs {
@@ -36,6 +37,9 @@ export class ThreeJs {
 
     // store manier om windows teladen
     this.myWindow = new WindowKozijn(this.scene);
+    this.Driehoek = new Driehoek(this.scene);
+    
+   
     
 
     // light object
