@@ -163,7 +163,7 @@ watch(() => store.graden, (newGraden) => {
   } else if(newGraden < minGraden){
     store.setGraden(minGraden)
   }else{
-  window.ThreeJs.myWindow.berekenHoek(newGraden);
+  window.ThreeJs.updateGraden();
   }
 });
 

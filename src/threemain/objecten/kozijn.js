@@ -38,8 +38,7 @@ export class WindowKozijn {
       "muur-onder-voorkant",
     ];
 
-    this.bovenBalk = ["balk-zijkant-links", "balk-zijkant-rechts"];
-    this.schuinebalken = ["balk-schuin-rechts", "balk-schuin-links"];
+
 
     this.scaleFactor = 1000;
     this.LoadWindow();
@@ -49,14 +48,8 @@ export class WindowKozijn {
     this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
         if (object instanceof THREE.Mesh) {
-          this.objects[name] = object;
-          if (
-            object.name === "balk-schuin-rechts" ||
-            object.name === "balk-schuin-links"
-          ) {
-            console.log(object.position.z);
-          }
-          this.scene.add(object);
+          this.objects[name] = object
+          this.scene.add(object)
         } else {
           console.error(
             ` Error: in het laden van ${name} of hij bestaad niet`,

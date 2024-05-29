@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 import { useMenuStore } from "../../server/menustore";
+import{ WindowKozijn} from "./kozijn"
 
 export class Driehoek {
     constructor(scene){
 
         this.store = useMenuStore();
 
-
+        
         
         this.geometrie = new THREE.BufferGeometry();
         this.scaleFactor = 1000
@@ -40,7 +41,7 @@ export class Driehoek {
             0.1, this.hoogte, 0,  // Vertex 11
             -0.1, this.hoogte, 1,   // Vertex 12
 
-            
+
             // schuin driehoek 2
             0.1, 0, 0,  // Vertex 11
             -0.1, 0, 0,  // Vertex 10
@@ -73,14 +74,19 @@ export class Driehoek {
 
 
 
-
     gradenCalculatie(){
-        this.graden = this.store.graden;
+        this.graden = this.store.graden  ;
+        this.hoogte = this.store.hoogte / 1000 +0.4;
+        const radians = this.graden * (Math.PI / 180);
+    
+        this.lengte = this.hoogte * Math.sin(radians) / Math.cos(radians);
 
-  
+        console.log(this.lengte)
+        console.log(this.graden)
+        console.log(radians)
+        // Gebruik graden om de scale te bepalen
+        this.balkenDriehoek.scale.z = this.lengte;
+        console.log(this.balkenDriehoek.scale.z)
         
-
-        
-
     }
 }

@@ -68,6 +68,10 @@ export class ThreeJs {
     // renderen
     this.render();
   }
+  updateGraden(){
+    this.DriehoekLinks.gradenCalculatie()
+    this.DriehoekRechts.gradenCalculatie()
+  }
 
   render() {
     requestAnimationFrame(() => this.render());
