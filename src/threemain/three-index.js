@@ -37,7 +37,14 @@ export class ThreeJs {
 
     // store manier om windows teladen
     this.myWindow = new WindowKozijn(this.scene);
-    this.Driehoek = new Driehoek(this.scene);
+
+
+    // drie hoek 
+    this.DriehoekLinks = new Driehoek(this.scene);
+    this.DriehoekLinks.balkenDriehoek.position.set(0.7,-0.7,0.1)
+    this.DriehoekRechts = new Driehoek(this.scene);
+    this.DriehoekRechts.balkenDriehoek.position.set(-0.7, -0.7, 0.1)
+
     
    
     
