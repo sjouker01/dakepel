@@ -16,8 +16,8 @@ export class Driehoek {
         this.vertices = new Float32Array([
             // links driehoek buitekant
             -0.1, 0, 0,  // Vertex 1
-            -0.1, 1, 0,  // Vertex 2
-            -0.1, 1, 1,   // Vertex 3
+            -0.1, 1, 1,   // Vertex 2
+            -0.1, 1, 0,  // Vertex 3
 
             // rechter buiten kant
             0.1, 0, 0,  // Vertex 4
@@ -31,21 +31,21 @@ export class Driehoek {
             0.1, 1, 1,   // Vertex 6
 
             // rechts boven driehoek
-            -0.1, 1, 0,  // Vertex 7
             0.1, 1, 0,  // Vertex 8
+            -0.1, 1, 0,  // Vertex 7
             0.1, 1, 1,   // Vertex 9
 
 
             //schuin droe hoek 1 
-            0.1, 0, 0,  // Vertex 10
-            0.1, 1, 0,  // Vertex 11
             -0.1, 1, 1,   // Vertex 12
+            0.1, 1, 0,  // Vertex 11
+            0.1, 0, 0,  // Vertex 10
 
 
             // schuin driehoek 2
             0.1, 0, 0,  // Vertex 11
-            -0.1, 0, 0,  // Vertex 10
             -0.1, 1, 1,   // Vertex 12
+            -0.1, 0, 0,  // Vertex 10
         ]);
 
         // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
@@ -55,7 +55,7 @@ export class Driehoek {
 
 
 
-        this.meshMateriaal = new THREE.MeshStandardMaterial({ color:0x9acd32,  side: THREE.DoubleSide });
+        this.meshMateriaal = new THREE.MeshStandardMaterial({ color:0x9acd32 , } );
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
         this.balkenDriehoek.scale.set(1,this.hoogte,1)
 
@@ -79,7 +79,7 @@ export class Driehoek {
         this.graden = this.store.graden  ;
         this.hoogte = this.store.hoogte / 1000 +0.4;
         const radians = this.graden * (Math.PI / 180);
-    
+        this.breedte = this.store.breedte / this.scaleFactor;
         this.lengte = this.hoogte * Math.sin(radians) / Math.cos(radians);
 
         console.log(this.lengte)
@@ -88,10 +88,16 @@ export class Driehoek {
         // Gebruik graden om de scale te bepalen
         this.balkenDriehoek.scale.y = this.hoogte     
         this.balkenDriehoek.position.y = -this.hoogte + this.hoogte /2     
-        
-        console.log(this.balkenDriehoek.scale.z)
-        console.log(this.balkenDriehoek.scale.y)
-        console.log(this.balkenDriehoek.scale.x)
-        
+        this.balkenDriehoek.scale.z = this.lengte 
+        let richting
+        if(this.balkenDriehoek.position.x > 0){
+            richting = 1 
+        }  else {
+            richting =  -1 
+        }
+        this.balkenDriehoek.position.x =
+        richting * (this.breedte / 2  +0.1);
     }
+
+
 }

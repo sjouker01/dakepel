@@ -44,7 +44,8 @@ export class ThreeJs {
     this.DriehoekLinks.balkenDriehoek.position.set(0.7,-0.7,0.1)
     this.DriehoekRechts = new Driehoek(this.scene);
     this.DriehoekRechts.balkenDriehoek.position.set(-0.7, -0.7, 0.1)
-
+    this.DriehoekLinks.gradenCalculatie()
+    this.DriehoekRechts.gradenCalculatie()
     
    
     

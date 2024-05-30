@@ -121,7 +121,7 @@
 import { useMenuStore } from '../server/menustore';
 import { watch } from 'vue'
 const store = useMenuStore();
-let max = 10000;
+let max = 5000;
 let min = 800;
 let maxGraden = 75
 let minGraden = 25
@@ -152,6 +152,7 @@ watch(() => store.breedte, (newBreedte) => {
   } else if (newBreedte < min) {
     store.setBreedte(min)
   } else {
+    window.ThreeJs.updateGraden();
     window.ThreeJs.myWindow.updateBreedte();
   }
 });
