@@ -8,6 +8,7 @@ import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
 import { Driehoek } from "./objecten/driehoek";
+import {Roof} from './objecten/dak';
 
 let instance = null;
 export class ThreeJs {
