@@ -18,12 +18,10 @@ export class WindowKozijn {
       "muur-onder-voorkant",
       "muur-boven-voorkant",
       "muur-links-voorkant",
-      "balk-midden-links",
-      "balk-schuin-links",
-      "balk-zijkant-links",
-      "balk-midden-rechts",
-      "balk-schuin-rechts",
-      "balk-zijkant-rechts",
+      // "balk-schuin-links",
+      // "balk-zijkant-links",
+      // "balk-schuin-rechts",
+      // "balk-zijkant-rechts",
     ];
     this.textures = {};
     this.middelBar = ["balk-midden"];
@@ -39,28 +37,19 @@ export class WindowKozijn {
       "muur-boven-voorkant",
       "muur-onder-voorkant",
     ];
-    this.zijkantLinks = [
-      "balk-midden-links",
-      "balk-schuin-links",
-      "balk-zijkant-links",
-    ];
-    this.zijkantRechts = [
-      "balk-midden-rechts",
-      "balk-schuin-rechts",
-      "balk-zijkant-rechts",
-    ];
+
+
+
     this.scaleFactor = 1000;
     this.LoadWindow();
-    console.log(this.objects);
   }
 
   LoadWindow() {
     this.objectNamen.forEach((name) => {
       this.KozijnParts.loadObject(name, (object) => {
         if (object instanceof THREE.Mesh) {
-          this.objects[name] = object;
-
-          this.scene.add(object);
+          this.objects[name] = object
+          this.scene.add(object)
         } else {
           console.error(
             ` Error: in het laden van ${name} of hij bestaad niet`,
@@ -164,22 +153,6 @@ export class WindowKozijn {
     });
   }
 
-  updateZijKanten() {
-    const balkBoven = this.objectNamen.name("bal")
 
-    const radianen = this.KozijnStore.graden * (Math.PI / 180);
-   
-    console.log("test update")
-    this.objectNamen.forEach((object) => {
-      if (
-        this.objects.name === "balk-schuin-rechts" ||
-        this.objects.name === "balk-schuin-links"
-      ) {
-        this.objects.rotation.y = radianen;
-
-        const newLengte = this.KozijnStore.lengte * Math.cos(radianen);
-        this.objects.scale.y = newLengte;
-      }
-    });
-  }
 }
+ 

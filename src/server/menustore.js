@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useMenuStore = defineStore("mainstore", {
   state: () => ({
-    breedte: "1000",
+    breedte: "1200",
     hoogte: "1000",
     graden: "45",
     objects: {},

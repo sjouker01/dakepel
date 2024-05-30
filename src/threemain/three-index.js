@@ -7,6 +7,7 @@ import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
+import { Driehoek } from "./objecten/driehoek";
 
 let instance = null;
 export class ThreeJs {
@@ -36,6 +37,17 @@ export class ThreeJs {
 
     // store manier om windows teladen
     this.myWindow = new WindowKozijn(this.scene);
+
+
+    // drie hoek 
+    this.DriehoekLinks = new Driehoek(this.scene);
+    this.DriehoekLinks.balkenDriehoek.position.set(0.7,-0.7,0.1)
+    this.DriehoekRechts = new Driehoek(this.scene);
+    this.DriehoekRechts.balkenDriehoek.position.set(-0.7, -0.7, 0.1)
+    this.DriehoekLinks.gradenCalculatie()
+    this.DriehoekRechts.gradenCalculatie()
+    
+   
     
 
     // light object
@@ -56,6 +68,10 @@ export class ThreeJs {
     floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();
+  }
+  updateGraden(){
+    this.DriehoekLinks.gradenCalculatie()
+    this.DriehoekRechts.gradenCalculatie()
   }
 
   render() {

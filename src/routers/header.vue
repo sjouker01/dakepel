@@ -121,8 +121,10 @@
 import { useMenuStore } from '../server/menustore';
 import { watch } from 'vue'
 const store = useMenuStore();
-let max = 10000;
+let max = 5000;
 let min = 800;
+let maxGraden = 75
+let minGraden = 25
 
 watch(() => store.hoogte, (newHoogte) => {
   newHoogte = Number(newHoogte);
@@ -137,6 +139,8 @@ watch(() => store.hoogte, (newHoogte) => {
   else {
     console.log(window.ThreeJs)
     window.ThreeJs.myWindow.updateHoogte();
+    window.ThreeJs.updateGraden();
+    
   }
 
 });
@@ -148,13 +152,22 @@ watch(() => store.breedte, (newBreedte) => {
   } else if (newBreedte < min) {
     store.setBreedte(min)
   } else {
+    window.ThreeJs.updateGraden();
     window.ThreeJs.myWindow.updateBreedte();
   }
 });
+
+
+
 watch(() => store.graden, (newGraden) => {
   newGraden = Number(newGraden);
-  console.log("test")
-  window.ThreeJs.myWindow.updateZijKanten();
+  if (newGraden >maxGraden){
+    store.setGraden(maxGraden)
+  } else if(newGraden < minGraden){
+    store.setGraden(minGraden)
+  }else{
+  window.ThreeJs.updateGraden();
+  }
 });
 
 
