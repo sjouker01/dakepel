@@ -139,6 +139,8 @@ watch(() => store.hoogte, (newHoogte) => {
   else {
     console.log(window.ThreeJs)
     window.ThreeJs.myWindow.updateHoogte();
+    window.ThreeJs.updateGraden();
+    
   }
 
 });
