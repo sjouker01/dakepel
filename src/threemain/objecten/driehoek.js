@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { useMenuStore } from "../../server/menustore";
 import{ WindowKozijn} from "./kozijn"
+import { ThreeJs } from '../three-index';
 
 export class Driehoek {
     constructor(scene){
@@ -38,14 +39,14 @@ export class Driehoek {
 
             //schuin droe hoek 1 
             -0.1, 1, 1,   // Vertex 12
-            0.1, 1, 0,  // Vertex 11
             0.1, 0, 0,  // Vertex 10
+            0.1, 1, 0,  // Vertex 11
 
 
             // schuin driehoek 2
+            -0.1, 0, 0,  // Vertex 10
             0.1, 0, 0,  // Vertex 11
             -0.1, 1, 1,   // Vertex 12
-            -0.1, 0, 0,  // Vertex 10
         ]);
 
         // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
@@ -55,7 +56,7 @@ export class Driehoek {
 
 
 
-        this.meshMateriaal = new THREE.MeshStandardMaterial({ color:0x9acd32 , } );
+        this.meshMateriaal = new THREE.MeshStandardMaterial({ color:0x9acd32 , side: THREE.DoubleSide } );
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
         this.balkenDriehoek.scale.set(1,this.hoogte,1)
 
