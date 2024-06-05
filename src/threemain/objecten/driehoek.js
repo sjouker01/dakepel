@@ -13,6 +13,7 @@ export class Driehoek {
         this.geometrie = new THREE.BufferGeometry();
         this.scaleFactor = 1000
         this.hoogte = (this.store.hoogte/ this.scaleFactor)  + 0.4;
+        
       
         this.vertices = new Float32Array([
             // links driehoek buitekant
@@ -20,13 +21,13 @@ export class Driehoek {
             -0.1, 1, 1,   // Vertex 2
             -0.1, 1, 0,  // Vertex 3
 
-            // rechter buiten kant
+            // // rechter buiten kant
             0.1, 0, 0,  // Vertex 4
             0.1, 1, 0,  // Vertex 5
             0.1, 1, 1,   // Vertex 6
 
             
-            // links boven driehoek
+            // // links boven driehoek
             -0.1, 1, 0,  // Vertex 4
             -0.1, 1, 1,  // Vertex 5
             0.1, 1, 1,   // Vertex 6
@@ -38,25 +39,25 @@ export class Driehoek {
 
 
             //schuin droe hoek 1 
-            -0.1, 1, 1,   // Vertex 12
             0.1, 0, 0,  // Vertex 10
-            0.1, 1, 0,  // Vertex 11
+            0.1, 1, 1,  // Vertex 11
+            -0.1, 0, 0,   // Vertex 12
 
 
             // schuin driehoek 2
             -0.1, 0, 0,  // Vertex 10
-            0.1, 0, 0,  // Vertex 11
+            0.1, 1, 1,  // Vertex 11
             -0.1, 1, 1,   // Vertex 12
         ]);
 
         // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
-        this.geometrie.setAttribute('position', new THREE.BufferAttribute(this.vertices, 3,  true));
+        this.geometrie.setAttribute('position', new THREE.BufferAttribute(this.vertices, 3,  true ));
+
+        
 
 
 
-
-
-        this.meshMateriaal = new THREE.MeshStandardMaterial({ color:0x9acd32 , side: THREE.DoubleSide } );
+        this.meshMateriaal = new THREE.MeshBasicMaterial({ color:0x0000  } );
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
         this.balkenDriehoek.scale.set(1,this.hoogte,1)
 
@@ -79,7 +80,7 @@ export class Driehoek {
     gradenCalculatie(){
         this.graden = this.store.graden  ;
         this.hoogte = this.store.hoogte / 1000 +0.4;
-        const radians = this.graden * (Math.PI / 180);
+        const radians = (90 - this.graden ) * (Math.PI / 180);
         this.breedte = this.store.breedte / this.scaleFactor;
         this.lengte = this.hoogte * Math.sin(radians) / Math.cos(radians);
 

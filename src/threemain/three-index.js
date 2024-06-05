@@ -48,7 +48,7 @@ export class ThreeJs {
     this.DriehoekLinks.gradenCalculatie()
     this.DriehoekRechts.gradenCalculatie()
     
-   
+   this.dak = new Roof(this.scene)
     
 
     // light object

@@ -122,6 +122,7 @@ import { useMenuStore } from '../server/menustore';
 import { watch } from 'vue'
 const store = useMenuStore();
 let max = 5000;
+// breedte 6500
 let min = 800;
 let maxGraden = 75
 let minGraden = 25
