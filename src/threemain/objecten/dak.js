@@ -11,7 +11,7 @@ export class Roof {
         this.scene = scene 
         this.geometry = new THREE.BoxGeometry( 2,0.1 ,2)
 
-        this.hoogt = this.store.hoogt
+        this.hoogte = this.store.hoogte
         this.width = this.breedte   
         this.materiaal = new THREE.MeshBasicMaterial({color: 0x0000})
 

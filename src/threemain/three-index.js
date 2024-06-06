@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { floorObject } from "./world/floor";
 import { WindowKozijn } from "./objecten/kozijn";
 import { BackgroundColor } from "./world/background";
-import { OrbitControlsClass } from "./controles/control";
 import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
@@ -24,15 +23,15 @@ export class ThreeJs {
     // size maken
     this.size = new Sizes();
     // camera maken
-    this.camera = new Camera(this.size.width, this.size.height);
     // position van camera
-
+    
     // groote van scherm doen
     window.addEventListener("resize", () => this.onWindowResize(), false);
     this.renderer = new THREE.WebGLRenderer({ canvas: container });
     this.renderer.setSize(this.size.width, this.size.height);
     document.body.appendChild(this.renderer.domElement);
-
+    
+    this.camera = new Camera(this.size.width, this.size.height ,this.renderer);
     // object van de vloer
     const floor = new floorObject(this.scene);
 
@@ -42,9 +41,9 @@ export class ThreeJs {
 
     // drie hoek 
     this.DriehoekLinks = new Driehoek(this.scene);
-    this.DriehoekLinks.balkenDriehoek.position.set(0.7,-0.7,0.1)
+    this.DriehoekLinks.balkenDriehoek.position.set(5.7,-1.7,0.1)
     this.DriehoekRechts = new Driehoek(this.scene);
-    this.DriehoekRechts.balkenDriehoek.position.set(-0.7, -0.7, 0.1)
+    this.DriehoekRechts.balkenDriehoek.position.set(-5.7, -1.7, 0.1)
     this.DriehoekLinks.gradenCalculatie()
     this.DriehoekRechts.gradenCalculatie()
     
@@ -55,7 +54,7 @@ export class ThreeJs {
     this.lamp = new Lamp(this.scene); // Instantieer de Lamp klasse
 
     // controls toe tevoegen
-    this.controls = new OrbitControlsClass(this.camera, this.renderer);
+    // this.controls = new OrbitControlsClass(this.camera, this.ren derer);
     // achtergrond maken
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
@@ -77,9 +76,9 @@ export class ThreeJs {
 
   render() {
     requestAnimationFrame(() => this.render());
-    this.controls.update();
+    this.camera.update();
 
-    this.renderer.render(this.scene, this.camera.instand);
+    this.renderer.render(this.scene, this.camera.camera);
   }
   onWindowResize() {
     this.camera.instand.aspect = window.innerWidth / window.innerHeight;

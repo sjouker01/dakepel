@@ -49,30 +49,32 @@ export class Driehoek {
             0.1, 1, 1,  // Vertex 11
             -0.1, 1, 1,   // Vertex 12
         ]);
-
+        this.balkLinksVoorKant = new THREE.BoxGeometry(0.2,  1.4,0.2)
+        this.balkRechtsVoorKant = new THREE.BoxGeometry(-0.2,  1.4,0.2)
+        
         // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
         this.geometrie.setAttribute('position', new THREE.BufferAttribute(this.vertices, 3,  true ));
-
         
-
-
-
+        
+        
+        
+        
         this.meshMateriaal = new THREE.MeshBasicMaterial({ color:0x0000  } );
+        this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant , this.meshMateriaal)
+        this.meshmaken2 = new THREE.Mesh(this.balkRechtsVoorKant , this.meshMateriaal)
+
+
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
+        this.meshmaken.position.set(0.9,0,0)
+        this.meshmaken2.position.set(-0.9,0,0)
         this.balkenDriehoek.scale.set(1,this.hoogte,1)
 
 
-        // Verbind de overeenkomstige punten van de twee driehoeken
-   
 
-
-        // Maak een groep en voeg de driehoeken en de verbindingslijn toe
-        this.groep = new THREE.Group();
-        this.groep.add(this.balkenDriehoek);
       
 
         // Voeg de groep toe aan de scene
-        scene.add(this.groep);
+        scene.add(this.balkenDriehoek , this.meshmaken ,this.meshmaken2);
     }
 
 
@@ -98,7 +100,7 @@ export class Driehoek {
             richting =  -1 
         }
         this.balkenDriehoek.position.x =
-        richting * (this.breedte / 2  +0.1);
+        richting * (this.breedte / 2  +0.3);
     }
 
 
