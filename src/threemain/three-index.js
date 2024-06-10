@@ -35,10 +35,6 @@ export class ThreeJs {
     // object van de vloer
     const floor = new floorObject(this.scene);
 
-    // store manier om windows teladen
-    this.myWindow = new WindowKozijn(this.scene);
-
-
     // drie hoek 
     this.DriehoekLinks = new Driehoek(this.scene);
     this.DriehoekLinks.balkenDriehoek.position.set(5.7,-1.7,0.1)
@@ -49,6 +45,10 @@ export class ThreeJs {
     
    this.dak = new Roof(this.scene)
     
+    // store manier om windows teladen
+    this.myWindow = new WindowKozijn(this.scene);
+
+
 
     // light object
     this.lamp = new Lamp(this.scene); // Instantieer de Lamp klasse

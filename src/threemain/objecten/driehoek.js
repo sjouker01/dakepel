@@ -46,7 +46,7 @@ export class Driehoek {
 
             // schuin driehoek 2
             -0.1, 0, 0,  // Vertex 10
-            0.1, 1, 1,  // Vertex 11
+            0.1, 1, 1,  // Vertex 11 f
             -0.1, 1, 1,   // Vertex 12
         ]);
         this.balkLinksVoorKant = new THREE.BoxGeometry(0.2,  1.4,0.2)
@@ -60,8 +60,8 @@ export class Driehoek {
         
         
         this.meshMateriaal = new THREE.MeshBasicMaterial({ color:0x0000  } );
-        this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant , this.meshMateriaal)
         this.meshmaken2 = new THREE.Mesh(this.balkRechtsVoorKant , this.meshMateriaal)
+        this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant , this.meshMateriaal)
 
 
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
@@ -74,7 +74,7 @@ export class Driehoek {
       
 
         // Voeg de groep toe aan de scene
-        scene.add(this.balkenDriehoek , this.meshmaken ,this.meshmaken2);
+        scene.add( this.meshmaken ,this.meshmaken2 ,this.balkenDriehoek ,);
     }
 
 
