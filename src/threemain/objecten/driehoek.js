@@ -13,7 +13,7 @@ export class Driehoek {
         this.geometrie = new THREE.BufferGeometry();
         this.scaleFactor = 1000
         this.hoogte = (this.store.hoogte/ this.scaleFactor)  + 0.4;
-        
+        this.group = new THREE.Group()
       
         this.vertices = new Float32Array([
             // links driehoek buitekant
@@ -49,8 +49,8 @@ export class Driehoek {
             0.1, 1, 1,  // Vertex 11 f
             -0.1, 1, 1,   // Vertex 12
         ]);
-        this.balkLinksVoorKant = new THREE.BoxGeometry(0.2,  1.4,0.2)
-        this.balkRechtsVoorKant = new THREE.BoxGeometry(-0.2,  1.4,0.2)
+        this.balkLinksVoorKant = new THREE.BoxGeometry(0.2,  1,0.2)
+        
         
         // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
         this.geometrie.setAttribute('position', new THREE.BufferAttribute(this.vertices, 3,  true ));
@@ -60,21 +60,21 @@ export class Driehoek {
         
         
         this.meshMateriaal = new THREE.MeshBasicMaterial({ color:0x0000  } );
-        this.meshmaken2 = new THREE.Mesh(this.balkRechtsVoorKant , this.meshMateriaal)
         this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant , this.meshMateriaal)
+        this.meshmaken2 = new THREE.Mesh(this.balkRechtsVoorKant , this.meshMateriaal)
 
 
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
-        this.meshmaken.position.set(0.9,0,0)
-        this.meshmaken2.position.set(-0.9,0,0)
+        this.meshmaken.position.set(0,0,0)
+      
         this.balkenDriehoek.scale.set(1,this.hoogte,1)
 
 
-
+        this.group.add(this.meshmaken , this.balkenDriehoek)
       
 
         // Voeg de groep toe aan de scene
-        scene.add( this.meshmaken ,this.meshmaken2 ,this.balkenDriehoek ,);
+        scene.add( this.group);
     }
 
 
@@ -85,21 +85,22 @@ export class Driehoek {
         const radians = (90 - this.graden ) * (Math.PI / 180);
         this.breedte = this.store.breedte / this.scaleFactor;
         this.lengte = this.hoogte * Math.sin(radians) / Math.cos(radians);
-
+        this.store.lengte = this.lengte * this.scaleFactor
         console.log(this.lengte)
         console.log(this.graden)
         console.log(radians)
         // Gebruik graden om de scale te bepalen
         this.balkenDriehoek.scale.y = this.hoogte     
+        this.meshmaken.scale.y = this.hoogte;     
         this.balkenDriehoek.position.y = -this.hoogte + this.hoogte /2     
         this.balkenDriehoek.scale.z = this.lengte 
         let richting
-        if(this.balkenDriehoek.position.x > 0){
+        if(this.group.position.x > 0){
             richting = 1 
         }  else {
             richting =  -1 
         }
-        this.balkenDriehoek.position.x =
+        this.group.position.x =
         richting * (this.breedte / 2  +0.3);
     }
 

@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useMenuStore = defineStore("mainstore", {
   state: () => ({
     breedte: "1200",
+    lengte: "1000",
     hoogte: "1000",
     graden: "45",
     objects: {},

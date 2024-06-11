@@ -37,14 +37,14 @@ export class ThreeJs {
 
     // drie hoek 
     this.DriehoekLinks = new Driehoek(this.scene);
-    this.DriehoekLinks.balkenDriehoek.position.set(5.7,-1.7,0.1)
+    this.DriehoekLinks.group.position.set(-1,0,0)
     this.DriehoekRechts = new Driehoek(this.scene);
-    this.DriehoekRechts.balkenDriehoek.position.set(-5.7, -1.7, 0.1)
+    this.DriehoekRechts.group.position.set(1,0, 0)
     this.DriehoekLinks.gradenCalculatie()
     this.DriehoekRechts.gradenCalculatie()
     
    this.dak = new Roof(this.scene)
-    
+    this.dak.dakGrotenScaling();
     // store manier om windows teladen
     this.myWindow = new WindowKozijn(this.scene);
 
@@ -72,6 +72,7 @@ export class ThreeJs {
   updateGraden(){
     this.DriehoekLinks.gradenCalculatie()
     this.DriehoekRechts.gradenCalculatie()
+    this.dak.dakGrotenScaling()
   }
 
   render() {
