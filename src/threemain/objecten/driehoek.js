@@ -61,7 +61,7 @@ export class Driehoek {
         
         this.meshMateriaal = new THREE.MeshBasicMaterial({ color:0x0000  } );
         this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant , this.meshMateriaal)
-        this.meshmaken2 = new THREE.Mesh(this.balkRechtsVoorKant , this.meshMateriaal)
+        
 
 
         this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
