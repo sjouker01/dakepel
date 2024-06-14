@@ -28,5 +28,8 @@ export const useMenuStore = defineStore("mainstore", {
     setObject(name, object) {
       this.objects[name] = object;
     },
+    setColor(color){
+      this.color = color;
+    } 
   },
 });

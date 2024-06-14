@@ -33,11 +33,11 @@
                   <q-item-label>Color Options</q-item-label>
                 </q-item-section>
                 <q-item-section horizontal>
-                  <q-btn flat dense label="Red" color="red" />
-                  <q-btn flat dense label="Blue" color="blue" />
-                  <q-btn flat dense lnabel="Green" color="green" />
-                  <q-btn flat dense label="Yellow" color="yellow" />
-                  <q-btn flat dense label="Purple" color="purple" />
+                  <q-btn flat dense label="Red" color="red" @click="store.setColor('red')" />
+                  <q-btn flat dense label="Blue" color="blue" @click="store.setColor('blue')" />
+                  <q-btn flat dense label="Green" color="green" @click="store.setColor('green')" />
+                  <q-btn flat dense label="Gray" color="gray" @click="store.setColor('gray')" />
+                  <q-btn flat dense label="Purple" color="purple" @click="store.setColor('purple')" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -126,6 +126,11 @@ let max = 5000;
 let min = 800;
 let maxGraden = 75
 let minGraden = 25
+
+
+watch(() => store.color, () => {
+  window.ThreeJs.updateGraden();
+});
 
 watch(() => store.hoogte, (newHoogte) => {
   newHoogte = Number(newHoogte);
