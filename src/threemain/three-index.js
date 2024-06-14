@@ -37,16 +37,14 @@ export class ThreeJs {
 
     // drie hoek 
     this.DriehoekLinks = new Driehoek(this.scene);
-    this.DriehoekLinks.laadEnPasTextureToe()
-
+  
 
     this.DriehoekLinks.group.position.set(-1,0,0)
     this.DriehoekRechts = new Driehoek(this.scene);
-    this.DriehoekRechts.laadEnPasTextureToe()
+
  
 
-    console.log(this.DriehoekLinks.laadEnPasTextureToe())
-    console.log(this.DriehoekRechts.laadEnPasTextureToe())
+  
     this.DriehoekRechts.group.position.set(1,0, 0)
     this.DriehoekLinks.gradenCalculatie()
     this.DriehoekRechts.gradenCalculatie()
@@ -72,7 +70,7 @@ export class ThreeJs {
     this.scene.add(axesHelper);
 
     // sneltoetsen
-    this.sneltoetsen = new Sneltoetsen(floor, axesHelper);
+    this.sneltoetsen = new Sneltoetsen(floor, axesHelper, this.lamp);
     floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();
@@ -82,6 +80,7 @@ export class ThreeJs {
     this.DriehoekRechts.gradenCalculatie()
     this.DriehoekLinks.updateColor();
     this.DriehoekRechts.updateColor();
+    this.myWindow.updateColor1()
     this.dak.dakGrotenScaling()
     
 

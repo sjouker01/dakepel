@@ -37,24 +37,64 @@ export class WindowKozijn {
       "muur-boven-voorkant",
       "muur-onder-voorkant",
     ];
+    
+    this.updateColor1();
+    this.buitenbalken = [
+      " muur-rechts-voorkant",
+      "muur-links-voorkant",
+      "muur-boven-voorkant",
+      "muur-onder-voorkant"
+    ]
 
-
-
+    this.baseColor = this.updateColor1.newColor
     this.scaleFactor = 1000;
     this.LoadWindow();
   }
 
+  updateColor1() {
+    
+      const newColor = this.KozijnStore.color;
+      // Update de kleur van meshmaken
+      if (this.meshmaken && this.meshmaken.material) {
+        this.meshmaken.material.color.set(newColor);
+      }
+    
+      // Update de kleur van elk object in buitebalken
+      if (Array.isArray(this.buitenbalken)) {
+        this.buitenbalken.forEach(balk => {
+          if (balk && balk.material) {
+            balk.material.color.set(newColor);
+          }
+        });
+      }
+    }
+
+  
   LoadWindow() {
+    // Zorg ervoor dat updateColor1 is aangeroepen om de nieuwe kleur in te stellen
+    this.updateColor1();
+  
+    this.objectsNoMat = [
+      "muur-rechts-voorkant",
+      "muur-links-voorkant",
+      "muur-boven-voorkant",
+      "muur-onder-voorkant"
+    ].map(name => name.trim()); // Verwijder witruimte
+  
     this.objectNamen.forEach((name) => {
-      this.KozijnParts.loadObject(name, (object) => {
+      this.KozijnParts.loadObject(name.trim(), (object) => { // Verwijder witruimte
         if (object instanceof THREE.Mesh) {
-          this.objects[name] = object
-          this.scene.add(object)
+          this.objects[name] = object;
+          this.scene.add(object);
+  
+          if (this.objectsNoMat.includes(name)) {
+            // Gebruik de nieuwe kleur van updateColor1
+            const newColor = this.updateColor1.newColor
+            const material = new THREE.MeshStandardMaterial({ color: newColor });
+            object.material = material;
+          }
         } else {
-          console.error(
-            ` Error: in het laden van ${name} of hij bestaad niet`,
-            object
-          );
+          console.error(`Error: in het laden van ${name} of hij bestaat niet`, object);
         }
       });
     });
@@ -86,6 +126,8 @@ export class WindowKozijn {
     });
     this.MiddleBarUpdate();
   }
+
+
 
   updateBreedte() {
     this.breedte = this.KozijnStore.breedte / this.scaleFactor;

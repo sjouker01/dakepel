@@ -123,6 +123,7 @@ import { watch } from 'vue'
 const store = useMenuStore();
 let max = 5000;
 // breedte 6500
+let maxHoogte = 2500
 let min = 800;
 let maxGraden = 75
 let minGraden = 25
@@ -130,14 +131,15 @@ let minGraden = 25
 
 watch(() => store.color, () => {
   window.ThreeJs.updateGraden();
+  
 });
 
 watch(() => store.hoogte, (newHoogte) => {
   newHoogte = Number(newHoogte);
 
-  if (newHoogte > max) {
+  if (newHoogte > maxHoogte) {
     console.log("test")
-    store.setHoogte(max);
+    store.setHoogte(maxHoogte);
   }
   else if (newHoogte < min) {
     store.setHoogte(min);

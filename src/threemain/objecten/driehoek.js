@@ -3,6 +3,7 @@ import { useMenuStore } from "../../server/menustore";
 import { WindowKozijn } from "./kozijn";
 import { ThreeJs } from "../three-index";
 import { Mutation } from "quasar";
+import { texture } from "three/examples/jsm/nodes/Nodes.js";
 
 export class Driehoek {
   constructor(scene) {
@@ -109,9 +110,14 @@ export class Driehoek {
 
 
     this.updateColor();
-    this.balkenDriehoek = new THREE.Mesh(this.geometrie);
+    
+    const Texture = this.textureLoader.load("../blender/walll.jpg");
+    Texture.wrapS = THREE.RepeatWrapping
+    Texture.wrapT = THREE.RepeatWrapping
 
-
+    this.material = new THREE.MeshBasicMaterial({ map: Texture})
+    this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.material);
+    
     this.balkenDriehoek.position.z = 0.1;
 
     this.balkenDriehoek.scale.set(1, this.hoogte, 1);
@@ -121,33 +127,8 @@ export class Driehoek {
     // Voeg de groep toe aan de scene
     scene.add(this.group);
   }
-  laadEnPasTextureToe() {
-    // Controleer of de textuur al is toegepast
-    if (this.textureIsToegepast) {
-      console.log(
-        "Textuur is al toegepast op een andere instantie van balkenDriehoek."
-      );
-      return; // Stop de functie als de textuur al is toegepast
-    }
 
-    this.textureLoader.load(
-      "../blender/walll.jpg", // Correct pad zonder extra spaties
-      (texture) => {
-        const materiaal = new THREE.MeshBasicMaterial({ map: texture });
-        this.balkenDriehoek.material = materiaal;
-        console.log(this.balkenDriehoek);
-
-        this.textureIsToegepast = true; // Update deze eigenschap nadat de textuur is toegepast
-      },
-      undefined,
-      (error) => {
-        console.error(
-          "Er is een fout opgetreden bij het laden van de textuur:",
-          error
-        );
-      }
-    );
-  }
+   
 
   updateColor() {
     const newColor = this.store.color;
@@ -159,6 +140,7 @@ export class Driehoek {
   gradenCalculatie() {
     this.graden = this.store.graden;
     this.hoogte = this.store.hoogte / 1000 + 0.4;
+    this.balkenDriehoek.material.map.repeat.y = this.hoogte * 1
     const radians = (90 - this.graden) * (Math.PI / 180);
     this.breedte = this.store.breedte / this.scaleFactor;
     this.lengte = (this.hoogte * Math.sin(radians)) / Math.cos(radians);
