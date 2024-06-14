@@ -3,6 +3,7 @@ import { useMenuStore } from "../../server/menustore";
 import{ WindowKozijn} from "./kozijn"
 import { ThreeJs } from '../three-index';
 
+
 export class Driehoek {
     constructor(scene){
 
@@ -49,24 +50,46 @@ export class Driehoek {
             0.1, 1, 1,  // Vertex 11 f
             -0.1, 1, 1,   // Vertex 12
         ]);
+
+        this.uvs = new Float32Array([
+            // Assuming each face of the geometry maps evenly to the texture
+            // For simplicity, using a linear mapping from bottom to top vertices
+            
+            // links driehoek buitekant (left triangle outside)
+            0.5, 0,  // Vertex 1
+            0, 1,  // Vertex 2
+            0, 1,  // Vertex 3
+        
+            // rechter buiten kant (right side outside)
+            0.5, 0,  // Vertex 4
+            0, 1,  // Vertex 5
+            0, 1,  // Vertex 6
+        
+          
+        ]);
         this.balkLinksVoorKant = new THREE.BoxGeometry(0.2,  1,0.2)
         
-        
+        this.textureLoader = new THREE.TextureLoader();
+
         // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
         this.geometrie.setAttribute('position', new THREE.BufferAttribute(this.vertices, 3,  true ));
+        this.geometrie.setAttribute('uv', new THREE.BufferAttribute(this.uvs, 2,  true ));
+        
+     
+       
+        
+        this.textureIsToegepast = false; // Voeg deze regel toe
         
         
-        
-        
-        
-        this.meshMateriaal = new THREE.MeshBasicMaterial({ color:0x0000  } );
-        this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant , this.meshMateriaal)
-        
-
-
-        this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.meshMateriaal);
-        this.meshmaken.position.set(0,0,0)
       
+        this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant )
+        
+
+
+        this.balkenDriehoek = new THREE.Mesh(this.geometrie);
+        this.balkenDriehoek.position.z = 0.1
+    
+        
         this.balkenDriehoek.scale.set(1,this.hoogte,1)
 
 
@@ -76,6 +99,30 @@ export class Driehoek {
         // Voeg de groep toe aan de scene
         scene.add( this.group);
     }
+ laadEnPasTextureToe() {
+        // Controleer of de textuur al is toegepast
+        if (this.textureIsToegepast) {
+            console.log("Textuur is al toegepast op een andere instantie van balkenDriehoek.");
+            return; // Stop de functie als de textuur al is toegepast
+        }
+
+        this.textureLoader.load(
+            '../blender/walll.jpg', // Correct pad zonder extra spaties
+            (texture) => {
+                const materiaal = new THREE.MeshBasicMaterial({ map: texture });
+                this.balkenDriehoek.material = materiaal;
+                console.log(this.balkenDriehoek);
+
+                this.textureIsToegepast = true; // Update deze eigenschap nadat de textuur is toegepast
+            },
+            undefined,
+            (error) => {
+                console.error('Er is een fout opgetreden bij het laden van de textuur:', error);
+            }
+        );
+    }
+    
+
 
 
 
