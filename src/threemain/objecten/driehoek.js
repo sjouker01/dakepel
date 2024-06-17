@@ -106,10 +106,10 @@ export class Driehoek {
 
     this.textureIsToegepast = false; // Voeg deze regel toe
 
-    this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant);
-
-
-    this.updateColor();
+    
+    
+     this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
+    this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant, this.balkMaterial);
     
     const Texture = this.textureLoader.load("../blender/walll.jpg");
     Texture.wrapS = THREE.RepeatWrapping
@@ -117,7 +117,7 @@ export class Driehoek {
 
     this.material = new THREE.MeshBasicMaterial({ map: Texture})
     this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.material);
-    
+    this.updateColor();
     this.balkenDriehoek.position.z = 0.1;
 
     this.balkenDriehoek.scale.set(1, this.hoogte, 1);
@@ -131,9 +131,12 @@ export class Driehoek {
    
 
   updateColor() {
-    const newColor = this.store.color;
+    const newColor = new THREE.Color(this.store.color);
+    console.log(newColor);
+
     if (this.meshmaken && this.meshmaken.material) {
       this.meshmaken.material.color.set(newColor);
+      console.log(this.meshmaken.material)
     }
   }
 

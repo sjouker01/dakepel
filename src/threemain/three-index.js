@@ -7,7 +7,7 @@ import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
 import { Driehoek } from "./objecten/driehoek";
-import {Roof} from './objecten/dak';
+import { Roof } from "./objecten/dak";
 
 let instance = null;
 export class ThreeJs {
@@ -24,44 +24,37 @@ export class ThreeJs {
     this.size = new Sizes();
     // camera maken
     // position van camera
-    
+
     // groote van scherm doen
     window.addEventListener("resize", () => this.onWindowResize(), false);
     this.renderer = new THREE.WebGLRenderer({ canvas: container });
     this.renderer.setSize(this.size.width, this.size.height);
     document.body.appendChild(this.renderer.domElement);
-    
-    this.camera = new Camera(this.size.width, this.size.height ,this.renderer);
+
+    this.camera = new Camera(this.size.width, this.size.height, this.renderer);
     // object van de vloer
     const floor = new floorObject(this.scene);
 
-    // drie hoek 
+    // drie hoek
     this.DriehoekLinks = new Driehoek(this.scene);
-  
 
-    this.DriehoekLinks.group.position.set(-1,0,0)
+    this.DriehoekLinks.group.position.set(-1, 0, 0);
     this.DriehoekRechts = new Driehoek(this.scene);
 
- 
+    this.DriehoekRechts.group.position.set(1, 0, 0);
+    this.DriehoekLinks.gradenCalculatie();
+    this.DriehoekRechts.gradenCalculatie();
 
-  
-    this.DriehoekRechts.group.position.set(1,0, 0)
-    this.DriehoekLinks.gradenCalculatie()
-    this.DriehoekRechts.gradenCalculatie()
-    
-   this.dak = new Roof(this.scene)
+    this.dak = new Roof(this.scene);
     this.dak.dakGrotenScaling();
     // store manier om windows teladen
+
     this.myWindow = new WindowKozijn(this.scene);
-
-
+    
 
     // light object
     this.lamp = new Lamp(this.scene); // Instantieer de Lamp klasse
 
-    // controls toe tevoegen
-    // this.controls = new OrbitControlsClass(this.camera, this.ren derer);
-    // achtergrond maken
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
 
@@ -75,15 +68,15 @@ export class ThreeJs {
     // renderen
     this.render();
   }
-  updateGraden(){
-    this.DriehoekLinks.gradenCalculatie()
-    this.DriehoekRechts.gradenCalculatie()
+  updateColorThree(){
+    this.myWindow.updateColorKozijn();
+  }
+  updateGraden() {
+    this.DriehoekLinks.gradenCalculatie();
+    this.DriehoekRechts.gradenCalculatie();
     this.DriehoekLinks.updateColor();
     this.DriehoekRechts.updateColor();
-    this.myWindow.updateColor1()
-    this.dak.dakGrotenScaling()
-    
-
+    this.dak.dakGrotenScaling();
   }
 
   render() {

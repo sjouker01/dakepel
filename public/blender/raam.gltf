@@ -198,6 +198,14 @@
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
+		},
+		{
+			"doubleSided":true,
+			"name":"geen",
+			"pbrMetallicRoughness":{
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
 		}
 	],
 	"meshes":[
@@ -280,7 +288,8 @@
 						"NORMAL":18,
 						"TEXCOORD_0":19
 					},
-					"indices":7
+					"indices":7,
+					"material":5
 				}
 			]
 		},
@@ -293,7 +302,8 @@
 						"NORMAL":21,
 						"TEXCOORD_0":22
 					},
-					"indices":7
+					"indices":7,
+					"material":5
 				}
 			]
 		},
@@ -306,7 +316,8 @@
 						"NORMAL":24,
 						"TEXCOORD_0":25
 					},
-					"indices":7
+					"indices":7,
+					"material":5
 				}
 			]
 		},
@@ -319,7 +330,8 @@
 						"NORMAL":27,
 						"TEXCOORD_0":28
 					},
-					"indices":7
+					"indices":7,
+					"material":5
 				}
 			]
 		}

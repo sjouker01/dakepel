@@ -8,7 +8,7 @@ export const useMenuStore = defineStore("mainstore", {
     hoogte: "1000",
     graden: "45",
     objects: {},
-    color: "gray",
+    color: "White",
   }),
 
   actions: {

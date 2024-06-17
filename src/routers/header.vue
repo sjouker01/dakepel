@@ -131,7 +131,7 @@ let minGraden = 25
 
 watch(() => store.color, () => {
   window.ThreeJs.updateGraden();
-  
+  window.ThreeJs.updateColorThree();
 });
 
 watch(() => store.hoogte, (newHoogte) => {
