@@ -33,11 +33,11 @@
                   <q-item-label>Color Options</q-item-label>
                 </q-item-section>
                 <q-item-section horizontal>
-                  <q-btn flat dense label="Red" color="red" @click="store.setColor('red')" />
-                  <q-btn flat dense label="Blue" color="blue" @click="store.setColor('blue')" />
-                  <q-btn flat dense label="Green" color="green" @click="store.setColor('green')" />
-                  <q-btn flat dense label="Gray" color="gray" @click="store.setColor('gray')" />
-                  <q-btn flat dense label="Purple" color="purple" @click="store.setColor('purple')" />
+                  <q-btn flat dense label="Red" color="blue" @click="store.setColor('red')" />
+                  <q-btn flat dense label="Marine" color="blue" @click="store.setColor(0x032f67)" />
+                  <q-btn flat dense label="Green" color="blue" @click="store.setColor(0x1b4d3f)" />
+                  <q-btn flat dense label="gray" color="blue" @click="store.setColor(0xdcdcdc)" />
+                  <q-btn flat dense label="Brown" color="blue" @click="store.setColor(	0x5C4033)" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -59,7 +59,7 @@
                 </q-item-section>
                 <q-item-section horizontal>
                   <q-btn flat dense label="Red" color="red" @click="store.setColor('red')" />
-                  <q-btn flat dense label="Blue" color="blue" @click="store.setColor('blue')" />
+                  <q-btn flat dense label="Marine" color="blue" @click="store.setColor('blue')" />
                   <q-btn flat dense label="Green" color="green" @click="store.setColor('green')" />
                   <q-btn flat dense label="Gray" color="gray" @click="store.setColor('gray')" />
                   <q-btn flat dense label="Purple" color="purple" @click="store.setColor('purple')" />
