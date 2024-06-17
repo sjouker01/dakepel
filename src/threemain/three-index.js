@@ -2,13 +2,12 @@ import * as THREE from "three";
 import { floorObject } from "./world/floor";
 import { WindowKozijn } from "./objecten/kozijn";
 import { BackgroundColor } from "./world/background";
-import { OrbitControlsClass } from "./controles/control";
 import { Camera } from "./camfile/camera";
 import { Sizes } from "./camfile/sizes";
 import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
 import { Driehoek } from "./objecten/driehoek";
-import {Roof} from './objecten/dak';
+import { Roof } from "./objecten/dak";
 
 let instance = null;
 export class ThreeJs {
@@ -24,7 +23,6 @@ export class ThreeJs {
     // size maken
     this.size = new Sizes();
     // camera maken
-    this.camera = new Camera(this.size.width, this.size.height);
     // position van camera
 
     // groote van scherm doen
@@ -33,30 +31,30 @@ export class ThreeJs {
     this.renderer.setSize(this.size.width, this.size.height);
     document.body.appendChild(this.renderer.domElement);
 
+    this.camera = new Camera(this.size.width, this.size.height, this.renderer);
     // object van de vloer
     const floor = new floorObject(this.scene);
 
-    // store manier om windows teladen
-    this.myWindow = new WindowKozijn(this.scene);
-
-
-    // drie hoek 
+    // drie hoek
     this.DriehoekLinks = new Driehoek(this.scene);
-    this.DriehoekLinks.balkenDriehoek.position.set(0.7,-0.7,0.1)
+
+    this.DriehoekLinks.group.position.set(-1, 0, 0);
     this.DriehoekRechts = new Driehoek(this.scene);
-    this.DriehoekRechts.balkenDriehoek.position.set(-0.7, -0.7, 0.1)
-    this.DriehoekLinks.gradenCalculatie()
-    this.DriehoekRechts.gradenCalculatie()
-    
-   
+
+    this.DriehoekRechts.group.position.set(1, 0, 0);
+    this.DriehoekLinks.gradenCalculatie();
+    this.DriehoekRechts.gradenCalculatie();
+
+    this.dak = new Roof(this.scene);
+    this.dak.dakGrotenScaling();
+    // store manier om windows teladen
+
+    this.myWindow = new WindowKozijn(this.scene);
     
 
     // light object
     this.lamp = new Lamp(this.scene); // Instantieer de Lamp klasse
 
-    // controls toe tevoegen
-    this.controls = new OrbitControlsClass(this.camera, this.renderer);
-    // achtergrond maken
     const background = new BackgroundColor(this.scene);
     background.setSceneBackgroudColor();
 
@@ -65,21 +63,27 @@ export class ThreeJs {
     this.scene.add(axesHelper);
 
     // sneltoetsen
-    this.sneltoetsen = new Sneltoetsen(floor, axesHelper);
+    this.sneltoetsen = new Sneltoetsen(floor, axesHelper, this.lamp);
     floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();
   }
-  updateGraden(){
-    this.DriehoekLinks.gradenCalculatie()
-    this.DriehoekRechts.gradenCalculatie()
+  updateColorThree(){
+    this.myWindow.updateColorKozijn();
+  }
+  updateGraden() {
+    this.DriehoekLinks.gradenCalculatie();
+    this.DriehoekRechts.gradenCalculatie();
+    this.DriehoekLinks.updateColor();
+    this.DriehoekRechts.updateColor();
+    this.dak.dakGrotenScaling();
   }
 
   render() {
     requestAnimationFrame(() => this.render());
-    this.controls.update();
+    this.camera.update();
 
-    this.renderer.render(this.scene, this.camera.instand);
+    this.renderer.render(this.scene, this.camera.camera);
   }
   onWindowResize() {
     this.camera.instand.aspect = window.innerWidth / window.innerHeight;
