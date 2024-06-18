@@ -84,8 +84,7 @@ export class Driehoek {
 
     this.uvs = new Float32Array([
       // links driehoek buitekant (left triangle outside)
-      0.5, 0,
-       0, 1, 0, 1,
+      0.5, 0, 0, 1, 0, 1,
 
       // rechter buiten kant (right side outside)
       0.5, 0, 0, 1, 0, 1,
@@ -104,21 +103,26 @@ export class Driehoek {
       new THREE.BufferAttribute(this.uvs, 2, true)
     );
 
-    this.textureIsToegepast = false; // Voeg deze regel toe
+    this.textureIsToegepast = true; // Voeg deze regel toe
 
-    
-    
-     this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
+    this.balkMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
     this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant, this.balkMaterial);
-    
-    const Texture = this.textureLoader.load("../blender/walll.jpg");
-    Texture.wrapS = THREE.RepeatWrapping
-    Texture.wrapT = THREE.RepeatWrapping
 
-    this.material = new THREE.MeshBasicMaterial({ map: Texture})
+    const Texture = this.textureLoader.load("../blender/walll.jpg");
+    Texture.wrapS = THREE.RepeatWrapping;
+    Texture.wrapT = THREE.RepeatWrapping;
+
+    const normalMap = this.textureLoader.load("../blender/NormalMap.png"); // Zorg ervoor dat je het juiste pad naar je normal map opgeeft
+    normalMap.wrapS = THREE.RepeatWrapping;
+    normalMap.wrapT = THREE.RepeatWrapping;
+    this.material = new THREE.MeshStandardMaterial({
+      map: Texture, // De diffuse map
+      normalMap: normalMap, // De normal map
+    });
+    
     this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.material);
     this.updateColor();
-    this.balkenDriehoek.position.z = 0.1;
+    this.balkenDriehoek.position.z = 0.1; 
 
     this.balkenDriehoek.scale.set(1, this.hoogte, 1);
 
@@ -128,22 +132,20 @@ export class Driehoek {
     scene.add(this.group);
   }
 
-   
-
   updateColor() {
     const newColor = new THREE.Color(this.store.color);
     console.log(newColor);
 
     if (this.meshmaken && this.meshmaken.material) {
       this.meshmaken.material.color.set(newColor);
-      console.log(this.meshmaken.material)
+      console.log(this.meshmaken.material);
     }
   }
 
   gradenCalculatie() {
     this.graden = this.store.graden;
     this.hoogte = this.store.hoogte / 1000 + 0.4;
-    this.balkenDriehoek.material.map.repeat.y = this.hoogte * 1
+    this.balkenDriehoek.material.map.repeat.y = this.hoogte * 1;
     const radians = (90 - this.graden) * (Math.PI / 180);
     this.breedte = this.store.breedte / this.scaleFactor;
     this.lengte = (this.hoogte * Math.sin(radians)) / Math.cos(radians);
