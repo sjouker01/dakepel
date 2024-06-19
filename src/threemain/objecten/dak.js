@@ -24,7 +24,7 @@ export class Roof {
     const hoogte = this.store.hoogte / this.scaleFactor ;
     const breedte = this.store.breedte / this.scaleFactor ;
     const lengte = this.store.lengte / this.scaleFactor ;
-
+    
     // x = breedte
     this.dak.scale.x = breedte + 1.2;
 
