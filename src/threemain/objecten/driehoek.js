@@ -112,9 +112,7 @@ export class Driehoek {
     Texture.wrapS = THREE.RepeatWrapping;
     Texture.wrapT = THREE.RepeatWrapping;
 
-    // const normalMap = this.textureLoader.load("../blender/NormalMap.png"); // Zorg ervoor dat je het juiste pad naar je normal map opgeeft
-    // normalMap.wrapS = THREE.RepeatWrapping;
-    // normalMap.wrapT = THREE.RepeatWrapping;
+
     this.material = new THREE.MeshStandardMaterial({
       map: Texture, // De diffuse map
       // normalMap: normalMap   , // De normal map
