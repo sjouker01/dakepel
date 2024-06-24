@@ -1,9 +1,7 @@
 import * as THREE from "three";
 import { useMenuStore } from "../../server/menustore";
-import { WindowKozijn } from "./kozijn";
-import { ThreeJs } from "../three-index";
-import { Mutation } from "quasar";
-import { texture } from "three/examples/jsm/nodes/Nodes.js";
+
+
 
 export class Driehoek {
   constructor(scene) {
@@ -16,12 +14,8 @@ export class Driehoek {
 
     this.vertices = new Float32Array([
       // links driehoek buitekant
-      -0.1,
-      0,
-      0, // Vertex 1
-      -0.1,
-      1,
-      1, // Vertex 2
+      -0.1, 0,  0, // Vertex 1
+    -0.1, 1, 1, // Vertex 2
       -0.1,
       1,
       0, // Vertex 3
@@ -81,7 +75,7 @@ export class Driehoek {
       1,
       1, // Vertex 12
     ]);
-
+    
     this.uvs = new Float32Array([
       // links driehoek buitekant (left triangle outside)
       0.5, 0,
@@ -104,10 +98,11 @@ export class Driehoek {
       new THREE.BufferAttribute(this.uvs, 2, true)
     );
 
-    this.textureIsToegepast = false; // Voeg deze regel toe
+    this.textureIsToegepast = false;
 
-    
-    
+
+
+
      this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
     this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant, this.balkMaterial);
     
@@ -119,10 +114,10 @@ export class Driehoek {
     this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.material);
     this.updateColor();
     this.balkenDriehoek.position.z = 0.1;
-
+  
     this.balkenDriehoek.scale.set(1, this.hoogte, 1);
 
-    this.group.add(this.meshmaken, this.balkenDriehoek);
+    this.group.add(this.meshmaken, this.balkenDriehoek , );
 
     // Voeg de groep toe aan de scene
     scene.add(this.group);

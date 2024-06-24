@@ -8,6 +8,7 @@ import { Lamp } from "./objecten/light";
 import { Sneltoetsen } from "./controles/sneltoetsen";
 import { Driehoek } from "./objecten/driehoek";
 import { Roof } from "./objecten/dak";
+import { insidewall } from "./objecten/binnemur";
 
 let instance = null;
 export class ThreeJs {
@@ -44,6 +45,12 @@ export class ThreeJs {
     this.DriehoekRechts.group.position.set(1, 0, 0);
     this.DriehoekLinks.gradenCalculatie();
     this.DriehoekRechts.gradenCalculatie();
+    this.insidewall = new insidewall(this.scene);
+    this.insidewall.gradenCalculatie1();
+
+
+
+
 
     this.dak = new Roof(this.scene);
     this.dak.dakGrotenScaling();
@@ -64,6 +71,7 @@ export class ThreeJs {
 
     // sneltoetsen
     this.sneltoetsen = new Sneltoetsen(floor, axesHelper, this.lamp);
+    axesHelper.visible = false;
     floor.mesh.visible = this.sneltoetsen.isObjectVisible;
     // renderen
     this.render();
@@ -77,6 +85,7 @@ export class ThreeJs {
     this.DriehoekLinks.updateColor();
     this.DriehoekRechts.updateColor();
     this.dak.dakGrotenScaling();
+    this.insidewall.gradenCalculatie1();
   }
 
   render() {

@@ -9,7 +9,7 @@
 export class Sneltoetsen {
     constructor(floor, axesHelper, helper1, helper2){
         this.isObjectVisible = false;
-        this.axesHelperVisible = true;
+        this.axesHelperVisible = false;
         this.lampHelpersVisible = false;
         
 
