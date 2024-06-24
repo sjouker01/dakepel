@@ -54,6 +54,8 @@ export class ThreeJs {
 
     this.dak = new Roof(this.scene);
     this.dak.dakGrotenScaling();
+    this.dak.addCubeVoorKant();
+    this.dak.addCubezijKant();
     // store manier om windows teladen
 
     this.myWindow = new WindowKozijn(this.scene);
@@ -86,6 +88,8 @@ export class ThreeJs {
     this.DriehoekRechts.updateColor();
     this.dak.dakGrotenScaling();
     this.insidewall.gradenCalculatie1();
+    this.dak.addCubeVoorKant();
+    this.dak.addCubezijKant();
   }
 
   render() {
