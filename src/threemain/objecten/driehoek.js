@@ -1,9 +1,7 @@
 import * as THREE from "three";
 import { useMenuStore } from "../../server/menustore";
-import { WindowKozijn } from "./kozijn";
-import { ThreeJs } from "../three-index";
-import { Mutation } from "quasar";
-import { texture } from "three/examples/jsm/nodes/Nodes.js";
+
+
 
 export class Driehoek {
   constructor(scene) {
@@ -16,12 +14,8 @@ export class Driehoek {
 
     this.vertices = new Float32Array([
       // links driehoek buitekant
-      -0.1,
-      0,
-      0, // Vertex 1
-      -0.1,
-      1,
-      1, // Vertex 2
+      -0.1, 0,  0, // Vertex 1
+    -0.1, 1, 1, // Vertex 2
       -0.1,
       1,
       0, // Vertex 3
@@ -81,7 +75,7 @@ export class Driehoek {
       1,
       1, // Vertex 12
     ]);
-
+    
     this.uvs = new Float32Array([
       // links driehoek buitekant (left triangle outside)
       0.5, 0,
@@ -93,6 +87,7 @@ export class Driehoek {
     this.balkLinksVoorKant = new THREE.BoxGeometry(0.2, 1, 0.2);
 
     this.textureLoader = new THREE.TextureLoader();
+
     // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
     this.geometrie.setAttribute(
       "position",
@@ -103,35 +98,32 @@ export class Driehoek {
       new THREE.BufferAttribute(this.uvs, 2, true)
     );
 
-    
-    this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
+    this.textureIsToegepast = false;
+
+
+
+
+     this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
     this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant, this.balkMaterial);
     
     const Texture = this.textureLoader.load("../blender/walll.jpg");
-    Texture.wrapS = THREE.RepeatWrapping;
-    Texture.wrapT = THREE.RepeatWrapping;
-    const normalMap = this.textureLoader.load("../blender/NormalMap.png")
-    normalMap.wrapS = THREE.RepeatWrapping;
-    normalMap.wrapT = THREE.RepeatWrapping;
+    Texture.wrapS = THREE.RepeatWrapping
+    Texture.wrapT = THREE.RepeatWrapping
 
-
-
-    this.material = new THREE.MeshStandardMaterial({
-      map: Texture, // De diffuse map
-      normalMap: normalMap   , // De normal map
-    });
-    
+    this.material = new THREE.MeshBasicMaterial({ map: Texture})
     this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.material);
     this.updateColor();
-    this.balkenDriehoek.position.z = 0.1; 
-
+    this.balkenDriehoek.position.z = 0.1;
+  
     this.balkenDriehoek.scale.set(1, this.hoogte, 1);
 
-    this.group.add(this.meshmaken, this.balkenDriehoek);
+    this.group.add(this.meshmaken, this.balkenDriehoek , );
 
     // Voeg de groep toe aan de scene
     scene.add(this.group);
   }
+
+   
 
   updateColor() {
     const newColor = new THREE.Color(this.store.color);
@@ -139,14 +131,14 @@ export class Driehoek {
 
     if (this.meshmaken && this.meshmaken.material) {
       this.meshmaken.material.color.set(newColor);
-      console.log(this.meshmaken.material);
+      console.log(this.meshmaken.material)
     }
   }
 
   gradenCalculatie() {
     this.graden = this.store.graden;
     this.hoogte = this.store.hoogte / 1000 + 0.4;
-    this.balkenDriehoek.material.map.repeat.y = this.hoogte * 1;
+    this.balkenDriehoek.material.map.repeat.y = this.hoogte * 1
     const radians = (90 - this.graden) * (Math.PI / 180);
     this.breedte = this.store.breedte / this.scaleFactor;
     this.lengte = (this.hoogte * Math.sin(radians)) / Math.cos(radians);
