@@ -84,7 +84,8 @@ export class Driehoek {
 
     this.uvs = new Float32Array([
       // links driehoek buitekant (left triangle outside)
-      0.5, 0, 0, 1, 0, 1,
+      0.5, 0,
+       0, 1, 0, 1,
 
       // rechter buiten kant (right side outside)
       0.5, 0, 0, 1, 0, 1,
@@ -92,7 +93,6 @@ export class Driehoek {
     this.balkLinksVoorKant = new THREE.BoxGeometry(0.2, 1, 0.2);
 
     this.textureLoader = new THREE.TextureLoader();
-
     // Maak een nieuw attribuut voor de vertices en voeg het toe aan de geometrie
     this.geometrie.setAttribute(
       "position",
@@ -103,19 +103,22 @@ export class Driehoek {
       new THREE.BufferAttribute(this.uvs, 2, true)
     );
 
-    this.textureIsToegepast = true; // Voeg deze regel toe
-
-    this.balkMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+    
+    this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
     this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant, this.balkMaterial);
-
+    
     const Texture = this.textureLoader.load("../blender/walll.jpg");
     Texture.wrapS = THREE.RepeatWrapping;
     Texture.wrapT = THREE.RepeatWrapping;
+    const normalMap = this.textureLoader.load("../blender/NormalMap.png")
+    normalMap.wrapS = THREE.RepeatWrapping;
+    normalMap.wrapT = THREE.RepeatWrapping;
+
 
 
     this.material = new THREE.MeshStandardMaterial({
       map: Texture, // De diffuse map
-      // normalMap: normalMap   , // De normal map
+      normalMap: normalMap   , // De normal map
     });
     
     this.balkenDriehoek = new THREE.Mesh(this.geometrie, this.material);
