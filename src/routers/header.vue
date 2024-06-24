@@ -34,8 +34,8 @@
                 </q-item-section>
                 <q-item-section horizontal>
                   <q-btn flat dense label="Red" color="blue" @click="store.setColor('red')" />
-                  <q-btn flat dense label="Marine" color="blue" @click="store.setColor(0x032f67)" />
-                  <q-btn flat dense label="Green" color="blue" @click="store.setColor(0x1b4d3f)" />
+                  <q-btn flat dense label="baby- blue" color="blue" @click="store.setColor(0x89CFF0)" />
+                  <q-btn flat dense label="Green" color="blue" @click="store.setColor(0x50C878)" />
                   <q-btn flat dense label="gray" color="blue" @click="store.setColor(0xdcdcdc)" />
                   <q-btn flat dense label="Brown" color="blue" @click="store.setColor(	0x5C4033)" />
                 </q-item-section>

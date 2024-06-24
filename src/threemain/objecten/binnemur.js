@@ -29,14 +29,16 @@ export class insidewall {
         this.mesh1 = new THREE.Mesh(geometry1, material1);
         this.mesh2 = new THREE.Mesh(geometry2, material2);
         this.mesh1.position.x = 0.01;
-        this.mesh2.position.x = 1.59;
+        
         this.mesh1.position.z = 0.1;
         this.mesh2.position.z = 0.1;
+      
 
         // Ensure this.store.hoogte is defined and has a sensible default.
         this.scaleFactor = 1000;
         this.hoogte = this.store.hoogte / this.scaleFactor;
-      
+        this.breedte = this.store.breedte / this.scaleFactor;
+
 
         this.group.add(this.mesh1, this.mesh2 );
 
@@ -52,14 +54,16 @@ export class insidewall {
         this.breedte = this.store.breedte / this.scaleFactor;
         this.lengte = (this.hoogte * Math.sin(radians)) / Math.cos(radians);
         this.store.lengte = this.lengte * this.scaleFactor;
-     
+      
         // Gebruik graden om de scale te bepalen
         this.mesh1.scale.y = this.hoogte;
         this.mesh2.scale.y = this.hoogte;
         this.mesh1.position.y = -this.hoogte + this.hoogte / 2;
         this.mesh2.position.y = -this.hoogte + this.hoogte / 2;
+        this.mesh2.position.x = this.breedte +0.39
         this.mesh1.scale.z = this.lengte;
         this.mesh2.scale.z = this.lengte;
+     
         let richting;
         if (this.group.position.x > 0) {
           richting = 1;
