@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 export const useMenuStore = defineStore("mainstore", {
   state: () => ({
     breedte: "1200",
@@ -9,6 +8,7 @@ export const useMenuStore = defineStore("mainstore", {
     graden: "45",
     objects: {},
     color: "White ",
+    textureName: "gray"
   }),
 
   actions: {
@@ -28,8 +28,13 @@ export const useMenuStore = defineStore("mainstore", {
     setObject(name, object) {
       this.objects[name] = object;
     },
-    setColor(color){
+    setColor(color) {
       this.color = color;
-    } 
+    },
+
+    // In actions:
+    setTextureName(textureName) {
+      this.textureName = textureName;
+    },  
   },
 });

@@ -75,28 +75,24 @@ export class Roof {
    this.voorkant.scale.set(this.breedte, 1, 1) 
   }
 
-  zijkantscaling(){
+  zijkantscaling() {
     this.lengte = this.store.lengte / this.scaleFactor;
-
     this.breedte = this.store.breedte / this.scaleFactor;
-
-    this.zijkant.scale.z = this.lengte + 0.7
-    this.cubezijkantrechts.scale.z = this.lengte + 0.7
-
-    let richting;
+  
+    this.zijkant.scale.z = this.lengte + 0.7;
+    this.cubezijkantrechts.scale.z = this.lengte + 0.7;
+  
+    let richtingZijkant;
     if (this.zijkant.position.x > 0) {
-      richting = 1;
+      richtingZijkant = 1;
     } else {
-      richting = -1;
+      richtingZijkant = -1;
     }
-    this.zijkant.position.x = richting * (this.breedte / 2 + 0.8);
-    let richting1;
-    if (this.cubezijkantrechts.position.x > 0) {
-      richting1 = 1;
-    } else {
-      richting1 = -1;
-    }
-    this.cubezijkantrechts.position.x = richting / (-this.breedte * 2 + 1.7 );
+    this.zijkant.position.x = richtingZijkant * (this.breedte / 2 + 0.8);
+  
+    // Tegenovergestelde richting voor cubezijkantrechts
+    let richtingCubeZijkantRechts = -richtingZijkant; // Dit keert de richting om
+    this.cubezijkantrechts.position.x = richtingCubeZijkantRechts * (this.breedte / 2 + 0.8);
   }
 
 }
