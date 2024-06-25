@@ -5,37 +5,94 @@ export class Roof {
   constructor(scene) {
     this.store = useMenuStore();
     this.scene = scene;
-    this.geometry = new THREE.BoxGeometry(1.1, 0.3, 1.1);
+    this.group = new THREE.Group();
+
+    this.geometry = new THREE.BoxGeometry(1, 0.3, 1);
 
     this.hoogte = this.store.hoogte;
     this.width = this.breedte;
+    //materiaal dak
     this.materiaal = new THREE.MeshStandardMaterial({ color: 0x0000 });
 
     this.dak = new THREE.Mesh(this.geometry, this.materiaal);
 
-    this.scaleFactor = 1000;
-    
+    this.materiaal1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
-    this.scene.add(this.dak);
+    // rechts zijkant
+
+    const cuberechts = new THREE.BoxGeometry(0.1, 0.4 , 1);
+
+    this.cubezijkantrechts = new THREE.Mesh(cuberechts, this.materiaal1);
+    // zij kant cube dak
+    const cubezijkant = new THREE.BoxGeometry(0.1, 0.4, 1);
+
+
+    this.zijkant = new THREE.Mesh(cubezijkant, this.materiaal1);
+    // voor kant cube
+    const balkvoorkant = new THREE.BoxGeometry(1, 0.4, 0.1);
+
+    this.materiaal1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
+
+    // Maak de mesh
+    this.voorkant = new THREE.Mesh(balkvoorkant, this.materiaal1);
+    // scalefactor om te delen
+    this.scaleFactor = 1000;
+    // locatie voorkant
+    this.voorkant.position.y = 0.9;
+    this.voorkant.position.z = -0.4;
+    // locatie zijkant
+    this.zijkant.position.y = 0.9;
+    this.zijkant.position.x = 1.4;
+    this.zijkant.position.z = 0.6;
+
+    // locatie balk rechts
+    this.cubezijkantrechts.position.y = 0.9;
+    this.cubezijkantrechts.position.z = 0.6;
+    this.cubezijkantrechts.position.x = -1.4
+    // group add
+    this.group.add(this.dak, this.zijkant, this.voorkant,  this.cubezijkantrechts);
+
+    this.scene.add(this.group);
   }
 
   dakGrotenScaling() {
-    
-    const hoogte = this.store.hoogte / this.scaleFactor ;
-    const breedte = this.store.breedte / this.scaleFactor ;
-    const lengte = this.store.lengte / this.scaleFactor ;
-    
+    const hoogte = this.store.hoogte / this.scaleFactor;
+    const breedte = this.store.breedte / this.scaleFactor;
+    const lengte = this.store.lengte / this.scaleFactor;
+
     // x = breedte
-    this.dak.scale.x = breedte + 1.2;
+    this.dak.scale.x = breedte + 1.5;
 
     // y is hoogte
     this.dak.position.y = hoogte / 2 + 0.35;
-    
 
     //z is lengte
     this.dak.scale.z = lengte + 0.4;
-    this.dak.position.z = lengte /2  - 0.1;
+    this.dak.position.z = lengte / 2 - 0.15;
+  }
+  addCubeVoorKant() {
+    this.breedte = this.store.breedte / this.scaleFactor + 1.6;
+   this.voorkant.scale.set(this.breedte, 1, 1) 
   }
 
- 
+  zijkantscaling() {
+    this.lengte = this.store.lengte / this.scaleFactor;
+    this.breedte = this.store.breedte / this.scaleFactor;
+  
+    this.zijkant.scale.z = this.lengte + 0.7;
+    this.cubezijkantrechts.scale.z = this.lengte + 0.7;
+  
+    let richtingZijkant;
+    if (this.zijkant.position.x > 0) {
+      richtingZijkant = 1;
+    } else {
+      richtingZijkant = -1;
+    }
+    this.zijkant.position.x = richtingZijkant * (this.breedte / 2 + 0.8);
+  
+    // Tegenovergestelde richting voor cubezijkantrechts
+    let richtingCubeZijkantRechts = -richtingZijkant; // Dit keert de richting om
+    this.cubezijkantrechts.position.x = richtingCubeZijkantRechts * (this.breedte / 2 + 0.8);
+  }
+
 }

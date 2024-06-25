@@ -101,7 +101,14 @@ export class Driehoek {
     this.textureIsToegepast = false;
 
 
-
+    this.textureLoader = new THREE.TextureLoader();
+    // Stel een initiële texture state in, bijvoorbeeld 'red-wall.jpg'
+    this.newTextureName = [
+      "blue-wall.jpg",
+      "gray-wall.jpg",
+    ]
+    // Aanname: balkenDriehoek is al gedefinieerd
+    
 
      this.balkMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF})
     this.meshmaken = new THREE.Mesh(this.balkLinksVoorKant, this.balkMaterial);
@@ -127,11 +134,11 @@ export class Driehoek {
 
   updateColor() {
     const newColor = new THREE.Color(this.store.color);
-    console.log(newColor);
+
 
     if (this.meshmaken && this.meshmaken.material) {
       this.meshmaken.material.color.set(newColor);
-      console.log(this.meshmaken.material)
+
     }
   }
 
@@ -143,9 +150,7 @@ export class Driehoek {
     this.breedte = this.store.breedte / this.scaleFactor;
     this.lengte = (this.hoogte * Math.sin(radians)) / Math.cos(radians);
     this.store.lengte = this.lengte * this.scaleFactor;
-    console.log(this.lengte);
-    console.log(this.graden);
-    console.log(radians);
+
     // Gebruik graden om de scale te bepalen
     this.balkenDriehoek.scale.y = this.hoogte;
     this.meshmaken.scale.y = this.hoogte;
@@ -159,4 +164,31 @@ export class Driehoek {
     }
     this.group.position.x = richting * (this.breedte / 2 + 0.3);
   }
+  updateTexture() {
+    const store = useMenuStore(); // Gebruik de store binnen de methode
+    switch (store.textureName) {
+      case 'gray':
+        // Laad de rode texture
+        this.material.map = new THREE.TextureLoader().load('../blender/gray-wall.jpg');
+        break;
+      case 'blue':
+        // Laad de blauwe texture
+        this.material.map = new THREE.TextureLoader().load('../blender/blue-wall.jpg');
+        break;
+      case 'green':
+        // Laad de groene texture
+        this.material.map = new THREE.TextureLoader().load('../blender/green-wall.jpg');
+        break;
+      case 'red':
+        // Laad de groene texture
+        this.material.map = new THREE.TextureLoader().load('../blender/red-wall.jpg');
+        break;
+      // Voeg meer cases toe voor andere kleuren
+      default:
+        // Optioneel: een standaard texture als geen van de cases overeenkomt
+        this.material.map = new THREE.TextureLoader().load('../blender/gray-wall.jpg');
+    }
+    this.material.needsUpdate = true; // Zorg ervoor dat de texture update
+  }
+
 }

@@ -45,6 +45,10 @@ export class ThreeJs {
     this.DriehoekRechts.group.position.set(1, 0, 0);
     this.DriehoekLinks.gradenCalculatie();
     this.DriehoekRechts.gradenCalculatie();
+    this.DriehoekLinks.updateTexture();
+    this.DriehoekRechts.updateTexture();
+
+
     this.insidewall = new insidewall(this.scene);
     this.insidewall.gradenCalculatie1();
 
@@ -54,6 +58,9 @@ export class ThreeJs {
 
     this.dak = new Roof(this.scene);
     this.dak.dakGrotenScaling();
+    this.dak.addCubeVoorKant(); 
+    this.dak.zijkantscaling(); 
+    
     // store manier om windows teladen
 
     this.myWindow = new WindowKozijn(this.scene);
@@ -76,8 +83,12 @@ export class ThreeJs {
     // renderen
     this.render();
   }
+  
   updateColorThree(){
-    this.myWindow.updateColorKozijn();
+    this.myWindow.updateColorKozijn(); // Bestaande logica
+    // Update textures op basis van de nieuwe kozijnkleur
+    this.DriehoekLinks.updateTexture();
+    this.DriehoekRechts.updateTexture();
   }
   updateGraden() {
     this.DriehoekLinks.gradenCalculatie();
@@ -86,6 +97,9 @@ export class ThreeJs {
     this.DriehoekRechts.updateColor();
     this.dak.dakGrotenScaling();
     this.insidewall.gradenCalculatie1();
+    this.dak.addCubeVoorKant();
+    this.dak.zijkantscaling();
+
   }
 
   render() {
