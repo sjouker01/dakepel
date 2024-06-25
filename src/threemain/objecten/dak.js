@@ -7,7 +7,7 @@ export class Roof {
     this.scene = scene;
     this.group = new THREE.Group();
 
-    this.geometry = new THREE.BoxGeometry(1.1, 0.3, 1.1);
+    this.geometry = new THREE.BoxGeometry(1, 0.3, 1);
 
     this.hoogte = this.store.hoogte;
     this.width = this.breedte;
@@ -20,16 +20,16 @@ export class Roof {
 
     // rechts zijkant
 
-    const cuberechts = new THREE.BoxGeometry(0.1, 0.4 , 2.1);
+    const cuberechts = new THREE.BoxGeometry(0.1, 0.4 , 1);
 
     this.cubezijkantrechts = new THREE.Mesh(cuberechts, this.materiaal1);
     // zij kant cube dak
-    const cubezijkant = new THREE.BoxGeometry(0.1, 0.4, 2.1);
+    const cubezijkant = new THREE.BoxGeometry(0.1, 0.4, 1);
 
 
     this.zijkant = new THREE.Mesh(cubezijkant, this.materiaal1);
     // voor kant cube
-    const balkvoorkant = new THREE.BoxGeometry(2.7, 0.4, 0.1);
+    const balkvoorkant = new THREE.BoxGeometry(1, 0.4, 0.1);
 
     this.materiaal1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
@@ -61,15 +61,42 @@ export class Roof {
     const lengte = this.store.lengte / this.scaleFactor;
 
     // x = breedte
-    this.dak.scale.x = breedte + 1.2;
+    this.dak.scale.x = breedte + 1.5;
 
     // y is hoogte
     this.dak.position.y = hoogte / 2 + 0.35;
 
     //z is lengte
     this.dak.scale.z = lengte + 0.4;
-    this.dak.position.z = lengte / 2 - 0.1;
+    this.dak.position.z = lengte / 2 - 0.15;
   }
-  addCubeVoorKant() {}
+  addCubeVoorKant() {
+    this.breedte = this.store.breedte / this.scaleFactor + 1.6;
+   this.voorkant.scale.set(this.breedte, 1, 1) 
+  }
+
+  zijkantscaling(){
+    this.lengte = this.store.lengte / this.scaleFactor;
+
+    this.breedte = this.store.breedte / this.scaleFactor;
+
+    this.zijkant.scale.z = this.lengte + 0.7
+    this.cubezijkantrechts.scale.z = this.lengte + 0.7
+
+    let richting;
+    if (this.zijkant.position.x > 0) {
+      richting = 1;
+    } else {
+      richting = -1;
+    }
+    this.zijkant.position.x = richting * (this.breedte / 2 + 0.8);
+    let richting1;
+    if (this.cubezijkantrechts.position.x > 0) {
+      richting1 = 1;
+    } else {
+      richting1 = -1;
+    }
+    this.cubezijkantrechts.position.x = richting / (-this.breedte * 2 + 1.7 );
+  }
 
 }
