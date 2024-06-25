@@ -11,18 +11,46 @@ export class Roof {
 
     this.hoogte = this.store.hoogte;
     this.width = this.breedte;
+    //materiaal dak
     this.materiaal = new THREE.MeshStandardMaterial({ color: 0x0000 });
 
     this.dak = new THREE.Mesh(this.geometry, this.materiaal);
-    const cubeGeometry = new THREE.BoxGeometry(0.1, 0.4, 1);
 
     this.materiaal1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
-    this.zijkant = new THREE.Mesh(cubeGeometry, this.materiaal1);
+    // rechts zijkant
 
+    const cuberechts = new THREE.BoxGeometry(0.1, 0.4 , 2.1);
+
+    this.cubezijkantrechts = new THREE.Mesh(cuberechts, this.materiaal1);
+    // zij kant cube dak
+    const cubezijkant = new THREE.BoxGeometry(0.1, 0.4, 2.1);
+
+
+    this.zijkant = new THREE.Mesh(cubezijkant, this.materiaal1);
+    // voor kant cube
+    const balkvoorkant = new THREE.BoxGeometry(2.7, 0.4, 0.1);
+
+    this.materiaal1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
+
+    // Maak de mesh
+    this.voorkant = new THREE.Mesh(balkvoorkant, this.materiaal1);
+    // scalefactor om te delen
     this.scaleFactor = 1000;
+    // locatie voorkant
+    this.voorkant.position.y = 0.9;
+    this.voorkant.position.z = -0.4;
+    // locatie zijkant
+    this.zijkant.position.y = 0.9;
+    this.zijkant.position.x = 1.4;
+    this.zijkant.position.z = 0.6;
 
-    this.group.add(this.dak, this.zijkant);
+    // locatie balk rechts
+    this.cubezijkantrechts.position.y = 0.9;
+    this.cubezijkantrechts.position.z = 0.6;
+    this.cubezijkantrechts.position.x = -1.4
+    // group add
+    this.group.add(this.dak, this.zijkant, this.voorkant,  this.cubezijkantrechts);
 
     this.scene.add(this.group);
   }
@@ -42,40 +70,6 @@ export class Roof {
     this.dak.scale.z = lengte + 0.4;
     this.dak.position.z = lengte / 2 - 0.1;
   }
-  addCubeVoorKant() {
-    // Gebruik dezelfde schaalfactoren als dak voor consistentie
-    const hoogte = this.store.hoogte / this.scaleFactor;
-    const breedte = this.store.breedte / this.scaleFactor + 0.35; // Toegevoegde 1.2 zoals bij dak
-    const lengte = this.store.lengte / this.scaleFactor + 0.4; // Toegevoegde 0.4 zoals bij dak
+  addCubeVoorKant() {}
 
-    // Pas de berekening van breedte1 aan om de schaalfactor van dak te gebruiken
-    const breedte1 = breedte + 1.15; // Mogelijk aanpassen afhankelijk van de gewenste grootte
-
-    // Creëer de geometrie met de aangepaste breedte
-    const cubeGeometry = new THREE.BoxGeometry(breedte1, 0.4, 0.1);
-
-    // Gebruik hetzelfde materiaal als voor het dak of maak een nieuw materiaal
-    this.materiaal1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
-
-    // Maak de mesh
-    const cube = new THREE.Mesh(cubeGeometry, this.materiaal1);
-
-    // Pas de positie aan op basis van de nieuwe schaalfactoren
-    cube.position.y = 0.85;
-    cube.position.z = -0.4;
-
-    // Voeg de mesh toe aan de scène
-    this.scene.add(cube);
-  }
-
-  addCubezijKant() {
-    const hoogte = this.store.hoogte / this.scaleFactor;
-    const basisBreedte = this.store.breedte / this.scaleFactor;
-    const lengte = this.store.lengte / this.scaleFactor;
-this.zijkant.scale.z = lengte
-    this.zijkant.position.y = 0.85;
-    this.zijkant.position.z = 0.65;
-    this.zijkant.position.x = lengte ;
-
-  }
 }
