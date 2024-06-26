@@ -4,11 +4,11 @@ export class Lamp {
   constructor(scene) {
     this.scene = scene;
 
-    const light1 = new THREE.DirectionalLight("white", 0.5);
-    const light2 = new THREE.DirectionalLight("white", 0.5);
-    const light3 = new THREE.DirectionalLight("white", 0.5);
-    const light4 = new THREE.DirectionalLight("white", 0.5); // Nieuw licht
-    const light5 = new THREE.DirectionalLight("white", 0.5); // Nieuw licht
+    const light1 = new THREE.DirectionalLight("white", 1);
+    const light2 = new THREE.DirectionalLight("white", 1);
+    const light3 = new THREE.DirectionalLight("white", 1);
+    const light4 = new THREE.DirectionalLight("white", 1); // Nieuw licht
+    const light5 = new THREE.DirectionalLight("white", 1); // Nieuw licht
     
     light1.position.set(0, 6, 5);
     light2.position.set(0, 6, -5);

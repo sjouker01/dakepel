@@ -163,28 +163,34 @@ export class Driehoek {
   }
   updateTexture() {
     const store = useMenuStore(); // Gebruik de store binnen de methode
+    let texturePath;
     switch (store.textureName) {
       case 'gray':
-        // Laad de rode texture
-        this.material.map = new THREE.TextureLoader().load('../blender/gray-wall.jpg');
+        texturePath = '../blender/gray-wall.jpg';
         break;
       case 'blue':
-        // Laad de blauwe texture
-        this.material.map = new THREE.TextureLoader().load('../blender/blue-wall.jpg');
+        texturePath = '../blender/blue-wall.jpg';
         break;
       case 'green':
-        // Laad de groene texture
-        this.material.map = new THREE.TextureLoader().load('../blender/green-wall.jpg');
+        texturePath = '../blender/green-wall.jpg';
         break;
       case 'hout':
-        // Laad de groene texture
-        this.material.map = new THREE.TextureLoader().load('../blender/hout-wall.jpg');
+        texturePath = '../blender/hout-wall.jpg';
         break;
-      // Voeg meer cases toe voor andere kleuren
       default:
-        // Optioneel: een standaard texture als geen van de cases overeenkomt
-        this.material.map = new THREE.TextureLoader().load('../blender/hout-wall.jpg');
+        texturePath = '../blender/hout-wall.jpg';
     }
+  
+    const texture = new THREE.TextureLoader().load(texturePath, (tex) => {
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      // Pas de repeat aan op basis van de hoogte en lengte van het object
+      
+      tex.repeat.y = this.hoogte * 1
+      tex.needsUpdate = true;
+    });
+  
+    this.material.map = texture;
     this.material.needsUpdate = true; // Zorg ervoor dat de texture update
   }
 

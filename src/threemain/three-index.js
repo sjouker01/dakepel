@@ -64,6 +64,7 @@ export class ThreeJs {
     // store manier om windows teladen
 
     this.myWindow = new WindowKozijn(this.scene);
+    this.myWindow.glassUpdate();
     
 
     // light object
@@ -99,6 +100,7 @@ export class ThreeJs {
     this.insidewall.gradenCalculatie1();
     this.dak.addCubeVoorKant();
     this.dak.zijkantscaling();
+    this.myWindow.glassUpdate();
 
   }
 
