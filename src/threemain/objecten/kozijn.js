@@ -43,7 +43,21 @@ export class WindowKozijn {
       "muur-onder-voorkant"
     ]
 
-    
+    this.glassWindow = new THREE.PlaneGeometry(1, 1); // De afmetingen kunnen aangepast worden
+    this.materialGlass = new THREE.MeshPhongMaterial({
+      color: 0x555555, // Donkerdere kleur toevoegen
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0.9,
+      opacity: 0.4, // Minder doorzichtig maken
+      transparent: true,
+      side: THREE.DoubleSide
+    }); 
+
+    this.glass = new THREE.Mesh(this.glassWindow, this.materialGlass);
+
+
+    this.scene.add(this.glass)
     this.updateColorKozijn()
  
     this.scaleFactor = 1000;
@@ -182,5 +196,15 @@ export class WindowKozijn {
     });
   }
   
+
+  glassUpdate(){
+    this.hoogte = this.KozijnStore.hoogte / this.scaleFactor;
+    this.breedte = this.KozijnStore.breedte / this.scaleFactor;
+
+
+    this.glass.scale.x = this.breedte ;
+
+    this.glass.scale.y = this.hoogte;
+  }
   
 }

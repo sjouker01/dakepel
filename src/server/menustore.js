@@ -8,7 +8,7 @@ export const useMenuStore = defineStore("mainstore", {
     graden: "45",
     objects: {},
     color: "White ",
-    textureName: "gray"
+    textureName: "hout"
   }),
 
   actions: {

@@ -41,51 +41,42 @@
             <q-list>
               <q-item clickable v-close-popup>
                 <q-item-section>
-                  <q-item-label>Material Options</q-item-label>
-                </q-item-section>
-                <q-item-section horizontal>
-                  <q-btn flat dense label="hout" color="brown" />
-                  <q-btn flat dense label="triplex" color="grey" />
-                </q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup>
-                <q-item-section>
-                  <q-item-label>Color Options</q-item-label>
+                  <q-item-label>kleur opties  </q-item-label>
                 </q-item-section>
                 <q-item-section horizontal>
                   <q-btn
                     flat
                     dense
-                    label="Red"
-                    color="blue"
+                    label="rood"
+                    color="red"
                     @click="store.setColor('red')"
                   />
                   <q-btn
                     flat
                     dense
-                    label="baby- blue"
+                    label="baby-blauw"
                     color="blue"
                     @click="store.setColor(0x89cff0)"
                   />
                   <q-btn
                     flat
                     dense
-                    label="Green"
-                    color="blue"
+                    label="Groen"
+                    color="green"
                     @click="store.setColor(0x50c878)"
                   />
                   <q-btn
                     flat
                     dense
-                    label="gray"
-                    color="blue"
+                    label="wit"
+                    color="black"
                     @click="store.setColor(0xdcdcdc)"
                   />
                   <q-btn
                     flat
                     dense
-                    label="Brown"
-                    color="blue"
+                    label="Bruin"
+                    color="brown"
                     @click="store.setColor(0x5c4033)"
                   />
                 </q-item-section>
@@ -99,25 +90,17 @@
             class="dropdown-btn"
           >
             <q-list>
-              <q-item clickable v-close-popup>
-                <q-item-section>
-                  <q-item-label>Material Options</q-item-label>
-                </q-item-section>
-                <q-item-section horizontal>
-                  <q-btn flat dense label="Hardhout" color="brown" />
-                  <q-btn flat dense label="Plastic" color="grey" />
-                </q-item-section>
-              </q-item>
+             
               <q-item clickable v-close-popup>
                 <q-item-section>
                   <q-item-label>Color Options</q-item-label>
                 </q-item-section>
                 <q-item-section horizontal>
                   
-                  <q-btn flat   color="blue" @click="store.setTextureName('red')">Red</q-btn>
+                  <q-btn flat   color="brown" @click="store.setTextureName('hout')">spar-hout</q-btn>
                   <q-btn flat    color="blue" @click="store.setTextureName('blue')">Blauw</q-btn>
-                  <q-btn flat    color="blue" @click="store.setTextureName('green')">Green</q-btn>
-                  <q-btn flat   color="blue" @click="store.setTextureName('gray')">gray</q-btn>
+                  <q-btn flat    color="green" @click="store.setTextureName('green')">Green</q-btn>
+                  <q-btn flat   color="black" @click="store.setTextureName('gray')">gray</q-btn>
                 </q-item-section>
               </q-item>
             </q-list>
