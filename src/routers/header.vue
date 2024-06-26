@@ -114,7 +114,7 @@
                 </q-item-section>
                 <q-item-section horizontal>
                   
-                  <q-btn flat   color="blue" @click="store.setTextureName('red')">Red</q-btn>
+                  <q-btn flat   color="blue" @click="store.setTextureName('hout')">spar-hout</q-btn>
                   <q-btn flat    color="blue" @click="store.setTextureName('blue')">Blauw</q-btn>
                   <q-btn flat    color="blue" @click="store.setTextureName('green')">Green</q-btn>
                   <q-btn flat   color="blue" @click="store.setTextureName('gray')">gray</q-btn>

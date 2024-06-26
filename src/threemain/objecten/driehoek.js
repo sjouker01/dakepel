@@ -103,10 +103,7 @@ export class Driehoek {
 
     this.textureLoader = new THREE.TextureLoader();
     // Stel een initiële texture state in, bijvoorbeeld 'red-wall.jpg'
-    this.newTextureName = [
-      "blue-wall.jpg",
-      "gray-wall.jpg",
-    ]
+
     // Aanname: balkenDriehoek is al gedefinieerd
     
 
@@ -179,14 +176,14 @@ export class Driehoek {
         // Laad de groene texture
         this.material.map = new THREE.TextureLoader().load('../blender/green-wall.jpg');
         break;
-      case 'red':
+      case 'hout':
         // Laad de groene texture
-        this.material.map = new THREE.TextureLoader().load('../blender/red-wall.jpg');
+        this.material.map = new THREE.TextureLoader().load('../blender/hout-wall.jpg');
         break;
       // Voeg meer cases toe voor andere kleuren
       default:
         // Optioneel: een standaard texture als geen van de cases overeenkomt
-        this.material.map = new THREE.TextureLoader().load('../blender/gray-wall.jpg');
+        this.material.map = new THREE.TextureLoader().load('../blender/hout-wall.jpg');
     }
     this.material.needsUpdate = true; // Zorg ervoor dat de texture update
   }
